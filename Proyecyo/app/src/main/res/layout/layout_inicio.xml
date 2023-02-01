@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/principalContenedor"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ActividadInicio">
+
+    <ImageView
+        android:id="@+id/imagenFondo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/fondo" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/contenedorPrincipal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/contenedorTitulo"
+            android:layout_width="340dp"
+            android:layout_height="98dp"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imagenLogo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/logo" />
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="120dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:id="@+id/contenedorFacturacion"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="120dp"
+                android:layout_marginBottom="410dp"
+                android:orientation="vertical"
+                android:textAlignment="center"
+                app:flow_horizontalAlign="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/tituloFacturacion"
+                    style="@style/tituloNegrita"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/facturacion" />
+
+                <TextView
+                    android:id="@+id/textoPendiente"
+                    style="@style/texto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pendiente" />
+
+                <TextView
+                    android:id="@+id/textoFacturas"
+                    style="@style/negrita"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/facturas" />
+
+                <TextView
+                    android:id="@+id/textoNumerosFacturas"
+                    style="@style/texto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Provisional" />
+
+                <TextView
+                    android:id="@+id/textoFacturasAbono"
+                    style="@style/negrita"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/facAbono" />
+
+                <TextView
+                    android:id="@+id/textoNumeroAbono"
+                    style="@style/texto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Provisional" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/contenedorVentas"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="170dp"
+                android:layout_marginEnd="120dp"
+                android:layout_marginBottom="180dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/contenedorFacturacion">
+
+                <TextView
+                    android:id="@+id/tituloVentas"
+                    style="@style/tituloNegrita"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ventas" />
+
+                <TextView
+                    android:id="@+id/textoPendiente3"
+                    style="@style/texto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pendiente" />
+
+                <TextView
+                    android:id="@+id/textoPresupuesto"
+                    style="@style/negrita"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/presupuestoas" />
+
+                <TextView
+                    android:id="@+id/textoNumerosFacturas2"
+                    style="@style/texto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Provisional" />
+
+                <TextView
+                    android:id="@+id/textoPedidos"
+                    style="@style/negrita"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pedidos" />
+
+                <TextView
+                    android:id="@+id/textoNumerosFacturas3"
+                    style="@style/texto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Provisional" />
+
+                <TextView
+                    android:id="@+id/textoAlbaranes"
+                    style="@style/negrita"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/albaranes" />
+
+                <TextView
+                    android:id="@+id/textoNumerosFacturas4"
+                    style="@style/texto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Provisional" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/contenedorCompras"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="380dp"
+                android:layout_marginEnd="120dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/tituloCompras"
+                    style="@style/tituloNegrita"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/compras" />
+
+                <TextView
+                    android:id="@+id/textoPendiente4"
+                    style="@style/texto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pendiente" />
+
+                <TextView
+                    android:id="@+id/textoPedidosCompras"
+                    style="@style/negrita"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pedidos" />
+
+                <TextView
+                    android:id="@+id/textoNumerosFacturas5"
+                    style="@style/texto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Provisional" />
+
+                <TextView
+                    android:id="@+id/textoAlbaranesCompras"
+                    style="@style/negrita"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/albaranes" />
+
+                <TextView
+                    android:id="@+id/textoNumerosFacturas6"
+                    style="@style/texto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Provisional" />
+
+                <TextView
+                    android:id="@+id/textoFacturasCompras"
+                    style="@style/negrita"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/facturas" />
+
+                <TextView
+                    android:id="@+id/textoNumerosFacturas7"
+                    style="@style/texto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Provisional" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imagenFolio"
+                android:layout_width="50dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="28dp"
+                android:layout_marginEnd="36dp"
+                android:src="@drawable/file_document"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imagenEtiqueta"
+                android:layout_width="50dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="169dp"
+                android:layout_marginEnd="36dp"
+                android:src="@drawable/tag"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imagenFolio" />
+
+            <ImageView
+                android:id="@+id/imagenCarrito"
+                android:layout_width="50dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="126dp"
+                android:layout_marginEnd="36dp"
+                android:src="@drawable/cart"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imagenEtiqueta" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
