@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">ProyectoFinal</string>
+    <string name="tituloInicioSesion">INICIA SESIÓN</string>
+    <string name="correo">Correo Electronico</string>
+    <string name="contrasena">Contraseña</string>
+    <string name="iniciar">Iniciar sensión</string>
+    <string name="registrarse">Registrarte</string>
+    <string name="registrate">Registrate</string>
+    <string name="atras">Atras</string>
+    <string name="contrasenaOtra">Vuelve a poner tu contraseña</string>
+    <string name="nacimiento">Fecha de nacimiento</string>
+
+    <string name="facturacion">Facturación</string>
+    <string name="pendiente">Pendiente</string>
+    <string name="facturas">Facturas</string>
+    <string name="facAbono">Facturas de abono</string>
+    <string name="ventas">Ventas</string>
+    <string name="presupuestoas">Presupuestos</string>
+    <string name="pedidos">Pedidos</string>
+    <string name="albaranes">Albaranes</string>
+    <string name="compras">Compras</string>
+
 </resources>
