@@ -1,4 +1,4 @@
-package recyclers.catalogo
+package com.example.proyectofinal
 
 import android.view.View
 import android.widget.ImageButton

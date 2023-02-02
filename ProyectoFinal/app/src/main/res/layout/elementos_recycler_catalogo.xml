@@ -31,6 +31,8 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="77dp"
         android:backgroundTint="#FFFFFF"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
         app:layout_constraintEnd_toStartOf="@+id/botonEliminar"
         app:layout_constraintTop_toBottomOf="@+id/textoCliente"
         app:srcCompat="@drawable/lapid_editar" />
@@ -42,6 +44,8 @@
         android:layout_marginTop="77dp"
         android:layout_marginEnd="73dp"
         android:backgroundTint="#FFFFFF"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
         app:layout_constraintEnd_toStartOf="@+id/imagenEuro"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/papelera" />
