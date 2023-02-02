@@ -21,7 +21,7 @@ class ActividadInicio : AppCompatActivity() {
 
         when(item.itemId){
             R.id.catalogo->{
-                setContentView(R.layout.layout_registro)
+                setContentView(R.layout.layout_catalogo)
             }
             R.id.inicio->{
                 setContentView(R.layout.layout_inicio)
