@@ -19,5 +19,9 @@
     <string name="pedidos">Pedidos</string>
     <string name="albaranes">Albaranes</string>
     <string name="compras">Compras</string>
+    <string name="title_activity_actividad_inicio_prueba">ActividadInicioPrueba</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 
 </resources>

@@ -9,7 +9,7 @@ import android.widget.Button
 class ActividadPrincipal : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        supportActionBar?.hide()
+
         setContentView(R.layout.layout_primera)
 
         val botonIrAInico: Button =findViewById<Button>(R.id.botonIniciarSesion)

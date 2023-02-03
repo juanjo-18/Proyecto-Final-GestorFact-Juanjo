@@ -1,33 +1,37 @@
 package com.example.proyectofinal
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ImageButton
 
 class ActividadInicio : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.hide()
         setContentView(R.layout.layout_inicio)
-    }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_desplegable,menu)
-        return super.onCreateOptionsMenu(menu)
-    }
+        val botonIrAInicio:ImageButton=findViewById<ImageButton>(R.id.botonIrAInicio)
+        val botonIrACatalogo:ImageButton=findViewById<ImageButton>(R.id.botonIrACatalogo)
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-
-        when(item.itemId){
-            R.id.catalogo->{
-                setContentView(R.layout.layout_catalogo)
-            }
-            R.id.inicio->{
-                setContentView(R.layout.layout_inicio)
-            }
+        botonIrAInicio.setOnClickListener{
+            val intent: Intent = Intent(
+                this,ActividadInicio::class.java
+            )
+            this.startActivity(intent)
 
         }
-        return super.onOptionsItemSelected(item)
+
+        botonIrACatalogo.setOnClickListener{
+            val intent: Intent = Intent(
+                this,ActividadCatalogo::class.java
+            )
+            this.startActivity(intent)
+
+        }
+
     }
+
 }

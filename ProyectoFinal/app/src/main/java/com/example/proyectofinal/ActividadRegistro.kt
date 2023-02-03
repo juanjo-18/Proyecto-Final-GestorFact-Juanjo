@@ -8,7 +8,6 @@ import android.widget.Button
 class ActividadRegistro : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        supportActionBar?.hide()
         setContentView(R.layout.layout_registro)
 
         val botonIrAIniciar: Button =findViewById<Button>(R.id.botonIniciarSesion)
