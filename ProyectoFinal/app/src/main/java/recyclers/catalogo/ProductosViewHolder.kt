@@ -1,10 +1,11 @@
-package com.example.proyectofinal
+package recyclers.catalogo
 
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.proyectofinal.R
 
 class ProductosViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val iconoStock: ImageView by lazy{ view.findViewById<ImageView>(R.id.imagenStock) }

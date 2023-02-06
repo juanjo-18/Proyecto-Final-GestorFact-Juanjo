@@ -7,6 +7,7 @@ import android.widget.ImageButton
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import clases.Producto
+import recyclers.catalogo.ProductosAdapter
 
 class ActividadCatalogo : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

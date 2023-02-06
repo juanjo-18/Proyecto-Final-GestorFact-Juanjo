@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ProyectoFinal</string>
+    <string name="app_name">GestorFacT</string>
     <string name="tituloInicioSesion">INICIA SESIÓN</string>
     <string name="correo">Correo Electronico</string>
     <string name="contrasena">Contraseña</string>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/principalContenedor"
@@ -14,311 +14,345 @@
         android:scaleType="centerCrop"
         android:src="@drawable/fondo" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/contenedorPrincipal"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:id="@+id/contenedorTitulo"
-            android:layout_width="340dp"
-            android:layout_height="98dp"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/imagenLogo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/logo" />
-        </LinearLayout>
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginTop="95dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="60dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:id="@+id/contenedorPrincipal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <LinearLayout
-                android:id="@+id/contenedorFacturacion"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="50dp"
-                android:layout_marginEnd="120dp"
+                android:id="@+id/contenedorTitulo"
+                android:layout_width="340dp"
+                android:layout_height="98dp"
                 android:orientation="vertical"
-                android:textAlignment="center"
-                app:flow_horizontalAlign="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/imagenLogo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/logo" />
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="100dp"
+                android:layout_marginTop="60dp"
+                android:layout_marginEnd="45dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/tituloFacturacion"
-                    style="@style/tituloNegrita"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/facturacion" />
+                <LinearLayout
+                    android:id="@+id/contenedorFacturacion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginEnd="120dp"
+                    android:orientation="vertical"
+                    android:textAlignment="center"
+                    app:flow_horizontalAlign="center"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/textoPendiente"
-                    style="@style/texto"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/pendiente" />
+                    <TextView
+                        android:id="@+id/tituloFacturacion"
+                        style="@style/tituloNegrita"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/facturacion" />
 
-                <TextView
-                    android:id="@+id/textoFacturas"
-                    style="@style/negrita"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/facturas" />
+                    <TextView
+                        android:id="@+id/textoPendiente"
+                        style="@style/texto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pendiente" />
 
-                <TextView
-                    android:id="@+id/textoNumerosFacturas"
-                    style="@style/texto"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Provisional" />
+                    <TextView
+                        android:id="@+id/textoFacturas"
+                        style="@style/negrita"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/facturas" />
 
-                <TextView
-                    android:id="@+id/textoFacturasAbono"
-                    style="@style/negrita"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/facAbono" />
+                    <TextView
+                        android:id="@+id/textoNumerosFacturas"
+                        style="@style/texto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Provisional" />
 
-                <TextView
-                    android:id="@+id/textoNumeroAbono"
-                    style="@style/texto"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Provisional" />
+                    <TextView
+                        android:id="@+id/textoFacturasAbono"
+                        style="@style/negrita"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/facAbono" />
 
-                <TextView
-                    android:id="@+id/tituloVentas"
-                    style="@style/tituloNegrita"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/ventas" />
+                    <TextView
+                        android:id="@+id/textoNumeroAbono"
+                        style="@style/texto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Provisional" />
 
-                <TextView
-                    android:id="@+id/textoPendiente3"
-                    style="@style/texto"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/pendiente" />
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/textoPresupuesto"
-                    style="@style/negrita"
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/presupuestoas" />
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="180dp"
+                    android:layout_marginEnd="120dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/textoNumerosFacturas2"
-                    style="@style/texto"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Provisional" />
+                    <TextView
+                        android:id="@+id/tituloVentas"
+                        style="@style/tituloNegrita"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ventas" />
 
-                <TextView
-                    android:id="@+id/textoPedidos"
-                    style="@style/negrita"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/pedidos" />
+                    <TextView
+                        android:id="@+id/textoPendiente3"
+                        style="@style/texto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pendiente" />
 
-                <TextView
-                    android:id="@+id/textoNumerosFacturas3"
-                    style="@style/texto"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Provisional" />
+                    <TextView
+                        android:id="@+id/textoPresupuesto"
+                        style="@style/negrita"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/presupuestoas" />
 
-                <TextView
-                    android:id="@+id/textoAlbaranes"
-                    style="@style/negrita"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/albaranes" />
+                    <TextView
+                        android:id="@+id/textoNumerosFacturas2"
+                        style="@style/texto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Provisional" />
 
-                <TextView
-                    android:id="@+id/textoNumerosFacturas4"
-                    style="@style/texto"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Provisional" />
+                    <TextView
+                        android:id="@+id/textoPedidos"
+                        style="@style/negrita"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pedidos" />
 
-                <TextView
-                    android:id="@+id/tituloCompras"
-                    style="@style/tituloNegrita"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/compras" />
+                    <TextView
+                        android:id="@+id/textoNumerosFacturas3"
+                        style="@style/texto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Provisional" />
 
-                <TextView
-                    android:id="@+id/textoPendiente4"
-                    style="@style/texto"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/pendiente" />
+                    <TextView
+                        android:id="@+id/textoAlbaranes"
+                        style="@style/negrita"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/albaranes" />
 
-                <TextView
-                    android:id="@+id/textoPedidosCompras"
-                    style="@style/negrita"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/pedidos" />
+                    <TextView
+                        android:id="@+id/textoNumerosFacturas4"
+                        style="@style/texto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Provisional" />
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/textoNumerosFacturas5"
-                    style="@style/texto"
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Provisional" />
+                    android:layout_marginTop="420dp"
+                    android:layout_marginEnd="120dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/textoAlbaranesCompras"
-                    style="@style/negrita"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/albaranes" />
+                    <TextView
+                        android:id="@+id/tituloCompras"
+                        style="@style/tituloNegrita"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/compras" />
 
-                <TextView
-                    android:id="@+id/textoNumerosFacturas6"
-                    style="@style/texto"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Provisional" />
+                    <TextView
+                        android:id="@+id/textoPendiente4"
+                        style="@style/texto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pendiente" />
 
-                <TextView
-                    android:id="@+id/textoFacturasCompras"
-                    style="@style/negrita"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/facturas" />
+                    <TextView
+                        android:id="@+id/textoPedidosCompras"
+                        style="@style/negrita"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pedidos" />
 
-                <TextView
-                    android:id="@+id/textoNumerosFacturas7"
-                    style="@style/texto"
-                    android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/textoNumerosFacturas5"
+                        style="@style/texto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Provisional" />
+
+                    <TextView
+                        android:id="@+id/textoAlbaranesCompras"
+                        style="@style/negrita"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/albaranes" />
+
+                    <TextView
+                        android:id="@+id/textoNumerosFacturas6"
+                        style="@style/texto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Provisional" />
+
+                    <TextView
+                        android:id="@+id/textoFacturasCompras"
+                        style="@style/negrita"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/facturas" />
+
+                    <TextView
+                        android:id="@+id/textoNumerosFacturas7"
+                        style="@style/texto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Provisional" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/imagenFolio"
+                    android:layout_width="50dp"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="60dp"
+                    android:layout_marginEnd="36dp"
+                    android:src="@drawable/file_document"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imagenEtiqueta"
+                    android:layout_width="50dp"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="132dp"
+                    android:layout_marginEnd="36dp"
+                    android:src="@drawable/tag"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imagenFolio" />
+
+                <ImageView
+                    android:id="@+id/imagenCarrito"
+                    android:layout_width="50dp"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="192dp"
+                    android:layout_marginEnd="36dp"
+                    android:src="@drawable/cart"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imagenEtiqueta" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="19dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+                <ImageButton
+                    android:id="@+id/botonIrAInicio"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Provisional" />
+                    android:layout_weight="1"
+                    android:minWidth="48dp"
+                    android:minHeight="48dp"
+                    app:srcCompat="@drawable/casa" />
+
+                <ImageButton
+                    android:id="@+id/botonIrACatalogo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:minWidth="48dp"
+                    android:minHeight="48dp"
+                    app:srcCompat="@drawable/libro" />
+
+                <ImageButton
+                    android:id="@+id/imageButton3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:minWidth="48dp"
+                    android:minHeight="48dp"
+                    app:srcCompat="@drawable/cliente" />
+
+                <ImageButton
+                    android:id="@+id/imageButton4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:minWidth="48dp"
+                    android:minHeight="48dp"
+                    app:srcCompat="@drawable/tag" />
+
+                <ImageButton
+                    android:id="@+id/imageButton5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:minWidth="48dp"
+                    android:minHeight="48dp"
+                    app:srcCompat="@drawable/file_document" />
+
+                <ImageButton
+                    android:id="@+id/imageButton6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:minWidth="48dp"
+                    android:minHeight="48dp"
+                    app:srcCompat="@drawable/cart" />
+
+                <ImageButton
+                    android:id="@+id/imageButton7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:minWidth="48dp"
+                    android:minHeight="48dp"
+                    app:srcCompat="@drawable/informe" />
+
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/imagenFolio"
-                android:layout_width="50dp"
-                android:layout_height="45dp"
-                android:layout_marginTop="28dp"
-                android:layout_marginEnd="36dp"
-                android:src="@drawable/file_document"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/imagenEtiqueta"
-                android:layout_width="50dp"
-                android:layout_height="45dp"
-                android:layout_marginTop="169dp"
-                android:layout_marginEnd="36dp"
-                android:src="@drawable/tag"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imagenFolio" />
-
-            <ImageView
-                android:id="@+id/imagenCarrito"
-                android:layout_width="50dp"
-                android:layout_height="45dp"
-                android:layout_marginTop="126dp"
-                android:layout_marginEnd="36dp"
-                android:src="@drawable/cart"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imagenEtiqueta" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
-
-            <ImageButton
-                android:id="@+id/botonIrAInicio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:minWidth="48dp"
-                android:minHeight="48dp"
-                app:srcCompat="@drawable/casa" />
-
-            <ImageButton
-                android:id="@+id/botonIrACatalogo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:minWidth="48dp"
-                android:minHeight="48dp"
-                app:srcCompat="@drawable/libro" />
-
-            <ImageButton
-                android:id="@+id/imageButton3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:minWidth="48dp"
-                android:minHeight="48dp"
-                app:srcCompat="@drawable/cliente" />
-
-            <ImageButton
-                android:id="@+id/imageButton4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:minWidth="48dp"
-                android:minHeight="48dp"
-                app:srcCompat="@drawable/tag" />
-
-            <ImageButton
-                android:id="@+id/imageButton5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:minWidth="48dp"
-                android:minHeight="48dp"
-                app:srcCompat="@drawable/file_document" />
-
-            <ImageButton
-                android:id="@+id/imageButton6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:minWidth="48dp"
-                android:minHeight="48dp"
-                app:srcCompat="@drawable/cart" />
-
-            <ImageButton
-                android:id="@+id/imageButton7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:minWidth="48dp"
-                android:minHeight="48dp"
-                app:srcCompat="@drawable/informe" />
-
-        </LinearLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

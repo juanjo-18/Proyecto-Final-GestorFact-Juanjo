@@ -1,9 +1,10 @@
-package com.example.proyectofinal
+package recyclers.catalogo
 
 import android.app.Activity
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import clases.Producto
+import com.example.proyectofinal.R
 
 class ProductosAdapter (val actividadMadre: Activity, val datos:ArrayList<Producto>) : RecyclerView.Adapter<ProductosViewHolder>() {
 

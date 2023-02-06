@@ -8,7 +8,7 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.proyectofinal"
+        applicationId "com.example.GestorFacT"
         minSdk 24
         targetSdk 33
         versionCode 1
