@@ -6,28 +6,30 @@ import android.os.Bundle
 import android.widget.ImageButton
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import clases.Cliente
 import clases.Producto
 import recyclers.catalogo.ProductosAdapter
+import recyclers.clientes.ClientesAdapter
 
-class ActividadCatalogo : AppCompatActivity() {
+class ActividadCliente : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.layout_catalogo)
+        setContentView(R.layout.layout_cliente)
 
-        val valores = arrayListOf<Producto>()
+        val valores = arrayListOf<Cliente>()
         for (i in 100 downTo 1) {
-            var producto: Producto = Producto()
-            valores.add(producto)
+            var cliente: Cliente = Cliente()
+            valores.add(cliente)
         }
-        val recyclerView: RecyclerView =findViewById<RecyclerView>(R.id.reciclerCatalogo)
-        recyclerView.adapter= ProductosAdapter(this,valores)
+        val recyclerView: RecyclerView =findViewById<RecyclerView>(R.id.reciclerCliente)
+        recyclerView.adapter= ClientesAdapter(this,valores)
         val staggeredManager: StaggeredGridLayoutManager = StaggeredGridLayoutManager(1,
             StaggeredGridLayoutManager.VERTICAL)
         staggeredManager.gapStrategy= StaggeredGridLayoutManager.GAP_HANDLING_NONE
         recyclerView.layoutManager=staggeredManager
 
-        val botonIrAInicio: ImageButton =findViewById<ImageButton>(R.id.botonIrAInicioDesdeCatalogo)
-        val botonIrACliente: ImageButton =findViewById<ImageButton>(R.id.botonIrAClientesDesdeCatalogo)
+        val botonIrAInicio: ImageButton =findViewById<ImageButton>(R.id.botonIrAInicioDesdeCliente)
+        val botonIrACatalogo: ImageButton =findViewById<ImageButton>(R.id.botonIrACatalogoDesdeCliente)
 
         botonIrAInicio.setOnClickListener{
             val intent: Intent = Intent(
@@ -37,13 +39,12 @@ class ActividadCatalogo : AppCompatActivity() {
 
         }
 
-        botonIrACliente.setOnClickListener{
+        botonIrACatalogo.setOnClickListener{
             val intent: Intent = Intent(
-                this,ActividadCliente::class.java
+                this,ActividadCatalogo::class.java
             )
             this.startActivity(intent)
 
         }
     }
-
 }

@@ -11,20 +11,21 @@ class ActividadInicio : AppCompatActivity() {
         supportActionBar?.hide()
         setContentView(R.layout.layout_inicio)
 
-        val botonIrAInicio:ImageButton=findViewById<ImageButton>(R.id.botonIrAInicio)
-        val botonIrACatalogo:ImageButton=findViewById<ImageButton>(R.id.botonIrACatalogo)
+        val botonIrACliente:ImageButton=findViewById<ImageButton>(R.id.botonIrACLienteDesdeInicio)
+        val botonIrACatalogo:ImageButton=findViewById<ImageButton>(R.id.botonIrACatalogoDesdeInicio)
 
-        botonIrAInicio.setOnClickListener{
+
+        botonIrACatalogo.setOnClickListener{
             val intent: Intent = Intent(
-                this,ActividadInicio::class.java
+                this,ActividadCatalogo::class.java
             )
             this.startActivity(intent)
 
         }
 
-        botonIrACatalogo.setOnClickListener{
+        botonIrACliente.setOnClickListener{
             val intent: Intent = Intent(
-                this,ActividadCatalogo::class.java
+                this,ActividadCliente::class.java
             )
             this.startActivity(intent)
 

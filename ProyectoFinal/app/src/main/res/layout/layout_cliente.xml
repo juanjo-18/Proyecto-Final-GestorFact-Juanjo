@@ -2,27 +2,27 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/marcoFondoCatalogo"
+    android:id="@+id/marcoFondoCliente"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     android:backgroundTint="#000000"
-    tools:context=".ActividadCatalogo">
+    tools:context=".ActividadCliente">
 
     <ImageView
-        android:id="@+id/imagenFondoCatalogo"
+        android:id="@+id/imagenFondoCliente"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
         app:srcCompat="@drawable/fondo" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/contenedorPrincipalCatalogo"
+        android:id="@+id/contenedorPrincipalCliente"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/contenedorTituloCatalogo"
+            android:id="@+id/contenedorTituloCliente"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -38,7 +38,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <EditText
-                android:id="@+id/buscadorCatalogo"
+                android:id="@+id/buscadorCliente"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -49,7 +49,7 @@
                 android:inputType="textPersonName" />
 
             <ImageButton
-                android:id="@+id/botonBuscadorCatalogo"
+                android:id="@+id/imagenBuscadorCliente"
                 android:layout_width="70dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"
@@ -58,70 +58,70 @@
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/reciclerCatalogo"
+            android:id="@+id/reciclerCliente"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="1dp"
             android:layout_marginBottom="40dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/contenedorTituloCatalogo"
+            app:layout_constraintEnd_toStartOf="@+id/contenedorTituloCliente"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/contenedorTituloCatalogo" >
+            app:layout_constraintTop_toBottomOf="@+id/contenedorTituloCliente" >
 
         </androidx.recyclerview.widget.RecyclerView>
 
         <LinearLayout
-            android:id="@+id/contenedorMenuBotonesCatalogo"
+            android:id="@+id/contenedorMenuBotonesCliente"
             android:layout_width="match_parent"
             android:layout_height="43dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/reciclerCatalogo">
+            app:layout_constraintTop_toBottomOf="@+id/reciclerCliente">
 
             <ImageButton
-                android:id="@+id/botonIrAInicioDesdeCatalogo"
+                android:id="@+id/botonIrAInicioDesdeCliente"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/casa" />
 
             <ImageButton
-                android:id="@+id/botonIrACatalogoDesdeCatalogo"
+                android:id="@+id/botonIrACatalogoDesdeCliente"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/libro" />
 
             <ImageButton
-                android:id="@+id/botonIrAClientesDesdeCatalogo"
+                android:id="@+id/imageButton3DesdeCliente"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/cliente" />
 
             <ImageButton
-                android:id="@+id/imageButton4DesdeCatalogo"
+                android:id="@+id/imageButton4DesdeCliente"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/tag" />
 
             <ImageButton
-                android:id="@+id/imageButton5DesdeCatalogo"
+                android:id="@+id/imageButton5DesdeCliente"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/file_document" />
 
             <ImageButton
-                android:id="@+id/imageButton6DesdeCatalogo"
+                android:id="@+id/imageButton6DesdeCliente"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/cart" />
 
             <ImageButton
-                android:id="@+id/imageButton7DesdeCatalogo"
+                android:id="@+id/imageButton7DesdeCliente"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

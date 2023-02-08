@@ -288,7 +288,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
                 <ImageButton
-                    android:id="@+id/botonIrAInicio"
+                    android:id="@+id/botonIrAInicioDesdeInicio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -297,7 +297,7 @@
                     app:srcCompat="@drawable/casa" />
 
                 <ImageButton
-                    android:id="@+id/botonIrACatalogo"
+                    android:id="@+id/botonIrACatalogoDesdeInicio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -306,7 +306,7 @@
                     app:srcCompat="@drawable/libro" />
 
                 <ImageButton
-                    android:id="@+id/imageButton3"
+                    android:id="@+id/botonIrACLienteDesdeInicio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -315,7 +315,7 @@
                     app:srcCompat="@drawable/cliente" />
 
                 <ImageButton
-                    android:id="@+id/imageButton4"
+                    android:id="@+id/imageButton4DesdeInicio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -324,7 +324,7 @@
                     app:srcCompat="@drawable/tag" />
 
                 <ImageButton
-                    android:id="@+id/imageButton5"
+                    android:id="@+id/imageButton5DesdeInicio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -333,7 +333,7 @@
                     app:srcCompat="@drawable/file_document" />
 
                 <ImageButton
-                    android:id="@+id/imageButton6"
+                    android:id="@+id/imageButton6DesdeInicio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
