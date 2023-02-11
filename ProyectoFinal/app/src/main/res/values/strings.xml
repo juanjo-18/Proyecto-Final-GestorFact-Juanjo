@@ -19,9 +19,11 @@
     <string name="pedidos">Pedidos</string>
     <string name="albaranes">Albaranes</string>
     <string name="compras">Compras</string>
-    <string name="title_activity_actividad_inicio_prueba">ActividadInicioPrueba</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="editarProducto">Editar Producto:</string>
+    <string name="referencia">Referencia</string>
+    <string name="nombre">Nombre</string>
+    <string name="precioBase">Precio base</string>
+    <string name="codigoProducto">Codigo producto</string>
+    <string name="stock">Stock</string>
 
 </resources>

@@ -1,18 +1,30 @@
 package com.example.proyectofinal
 
+import android.app.SearchManager
+import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MotionEvent
 import android.widget.ImageButton
+import android.widget.SearchView
+import android.widget.SearchView.OnQueryTextListener
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import clases.Producto
 import recyclers.catalogo.ProductosAdapter
 
-class ActividadCatalogo : AppCompatActivity() {
+class ActividadCatalogo : AppCompatActivity(),SearchView.OnQueryTextListener  {
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.layout_catalogo)
+
+
 
         val valores = arrayListOf<Producto>()
         for (i in 100 downTo 1) {
@@ -44,6 +56,18 @@ class ActividadCatalogo : AppCompatActivity() {
             this.startActivity(intent)
 
         }
+
+
+
     }
 
+
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        TODO("Not yet implemented")
+    }
 }

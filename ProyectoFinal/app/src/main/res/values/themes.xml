@@ -14,8 +14,22 @@
     </style>
 
     <style name="textoElementos">
-        <item name='android:textSize'>16sp</item>
+        <item name='android:textSize'>18sp</item>
         <item name='android:textStyle'>bold</item>
+    </style>
+
+    <style name="panelEditar" >
+        <item name="android:background">@color/azulOscuroTransparente</item>
+        <item name="android:layout_margin">20dp</item>
+        <item name="android:padding">15dp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="tituloParaEditar" >
+        <item name="android:textAlignment">center</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">34sp</item>
+        <item name="android:textColor">@color/amarilloTituloDark</item>
     </style>
 
     <style name="titulo" >
