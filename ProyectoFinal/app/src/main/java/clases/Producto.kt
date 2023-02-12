@@ -38,8 +38,12 @@ class Producto: Parcelable {
 
     }
 
-    override fun toString(): String {
+     fun getName(): String {
         return nombre + ""
+    }
+
+    override fun toString(): String {
+        return nombre+""
     }
 
      fun getNumeroSerie(): String{

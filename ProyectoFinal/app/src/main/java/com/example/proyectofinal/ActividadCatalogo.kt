@@ -18,6 +18,7 @@ import clases.Producto
 import recyclers.catalogo.ProductosAdapter
 
 class ActividadCatalogo : AppCompatActivity(),SearchView.OnQueryTextListener  {
+    /*val textoBuscar:SearchView=findViewById(R.id.buscadorDeProductos)*/
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,17 +58,21 @@ class ActividadCatalogo : AppCompatActivity(),SearchView.OnQueryTextListener  {
 
         }
 
+        /*
+        textoBuscar.setOnQueryTextListener(this)
 
+         */
 
     }
 
 
 
     override fun onQueryTextSubmit(query: String?): Boolean {
-        TODO("Not yet implemented")
+     return false
     }
 
     override fun onQueryTextChange(newText: String?): Boolean {
-        TODO("Not yet implemented")
+
+        return false
     }
 }
