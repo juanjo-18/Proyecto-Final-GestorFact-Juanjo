@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import clases.Producto
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import recyclers.catalogo.ProductosAdapter
 
 class ActividadCatalogo : AppCompatActivity(),SearchView.OnQueryTextListener  {
@@ -56,6 +57,14 @@ class ActividadCatalogo : AppCompatActivity(),SearchView.OnQueryTextListener  {
             )
             this.startActivity(intent)
 
+        }
+
+        val botonIrAnadirCliente:FloatingActionButton=findViewById(R.id.botonAñadirProducto)
+        botonIrAnadirCliente.setOnClickListener{
+            val intent:Intent=Intent(
+                this,ActividadAnadirProducto::class.java
+            )
+            this.startActivity(intent)
         }
 
         /*

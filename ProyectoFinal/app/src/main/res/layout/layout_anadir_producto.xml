@@ -5,22 +5,22 @@
     android:id="@+id/contenedorFondoAñadirProducto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ActividadEditarProducto">
+    tools:context=".ActividadAnadirProducto">
 
     <ImageView
-        android:id="@+id/fondoEditarProductos"
+        android:id="@+id/fondoAñadirProductos"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
         app:srcCompat="@drawable/engranajes" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/contenedorPrincipalEditarProducto"
+        android:id="@+id/contenedorPrincipalAñadirProducto"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/contenedorTituloEditarProducto"
+            android:id="@+id/contenedorTituloAñadirProducto"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -30,80 +30,79 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/textoEditarUsuario"
+                android:id="@+id/textoAñadirUsuario"
                 style="@style/tituloParaEditar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/editarProducto" />
+                android:text="@string/anadirProducto" />
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/contenedorCamposEditarProducto"
+            android:id="@+id/contenedorCamposAñadirProducto"
             style="@style/panelEditar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/contenedorTituloEditarProducto">
+            app:layout_constraintTop_toBottomOf="@+id/contenedorTituloAñadirProducto">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/contenedorCampoReferenciaProductoEditar"
+                android:id="@+id/contenedorCampoReferenciaProductoAñadir"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="5dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/campoReferenciaProductoEditarEditar"
+                    android:id="@+id/campoReferenciaProductoEditarAñadir"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/referencia" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/contenedorCampoNombreProductoEditar"
+                android:id="@+id/contenedorCampoNombreProductoAñadir"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/campoNombreProductoEditar"
+                    android:id="@+id/campoNombreProductoAñadir"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/nombre" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/contenedorCampoPrecioEditar"
+                android:id="@+id/contenedorCampoPrecioAñadir"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/campoPrecioProductoEditar"
+                    android:id="@+id/campoPrecioProductoAñadir"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/precioBase" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/contenedorCampoStockEditar"
+                android:id="@+id/contenedorCampoStockAñadir"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/campoStockEditar"
+                    android:id="@+id/campoStockAñandir"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/stock" />
-
             </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
 
         <ImageButton
-            android:id="@+id/botonTerminadoEdicionProducto"
+            android:id="@+id/botonTerminadoAñadiendoProducto"
             android:layout_width="82dp"
             android:layout_height="67dp"
             android:layout_marginEnd="16dp"

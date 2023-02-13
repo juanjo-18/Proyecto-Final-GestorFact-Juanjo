@@ -25,5 +25,6 @@
     <string name="precioBase">Precio base</string>
     <string name="codigoProducto">Codigo producto</string>
     <string name="stock">Stock</string>
+    <string name="anadirProducto">Añadir producto</string>
 
 </resources>
