@@ -26,5 +26,8 @@
     <string name="codigoProducto">Codigo producto</string>
     <string name="stock">Stock</string>
     <string name="anadirProducto">Añadir producto</string>
+    <string name="registroFallido">Registro fallido</string>
+    <string name="rellenarCampos">Tienes que rellenar todos los campos</string>
+    <string name="ok">Ok</string>
 
 </resources>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    style="@style/panel"
+    android:layout_height="wrap_content"
+    android:rotationX="0"
+    android:rotationY="0"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tituloDialogo"
+        style="@style/titulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SOY UN PLACEHOLDER DE TITULO" />
+
+    <TextView
+        android:id="@+id/mensajeDialogo"
+        style="@style/textoElementos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SOY UN PLACEHOLDER DE MENSAJE" />
+
+    <Button
+        android:id="@+id/botonDialogo"
+        style="@style/textoElementos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SOY UN PLACEHOLDER DE BOTÓN" />
+</LinearLayout>
