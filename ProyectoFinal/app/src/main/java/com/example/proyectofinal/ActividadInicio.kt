@@ -4,15 +4,27 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
+import android.widget.Toast
+import clases.Cliente
+import clases.Usuario
+import com.example.proyectofinal.databinding.LayoutInicioBinding
+import com.google.firebase.firestore.FirebaseFirestore
+import emergentes.Alerta
+import java.time.LocalDate
 
 class ActividadInicio : AppCompatActivity() {
+
+    private lateinit var binding: LayoutInicioBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        supportActionBar?.hide()
-        setContentView(R.layout.layout_inicio)
+        binding = LayoutInicioBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val botonIrACliente:ImageButton=findViewById<ImageButton>(R.id.botonIrACLienteDesdeInicio)
-        val botonIrACatalogo:ImageButton=findViewById<ImageButton>(R.id.botonIrACatalogoDesdeInicio)
+        val botonIrACliente: ImageButton =
+            findViewById<ImageButton>(R.id.botonIrACLienteDesdeInicio)
+        val botonIrACatalogo: ImageButton =
+            findViewById<ImageButton>(R.id.botonIrACatalogoDesdeInicio)
 
 
         botonIrACatalogo.setOnClickListener{

@@ -93,25 +93,6 @@
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
-                android:id="@+id/textoRepetirContraseña"
-                style="@style/subTitulo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/contrasenaOtra" />
-
-            <EditText
-                android:id="@+id/campoContraseñaOtraVez"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:ems="10"
-                android:gravity="center"
-                android:inputType="textPassword"
-                android:minHeight="48dp"
-                tools:ignore="SpeakableTextPresentCheck" />
-
-            <TextView
                 android:id="@+id/textoRepetirContraseña2"
                 style="@style/subTitulo"
                 android:layout_width="match_parent"
@@ -119,15 +100,53 @@
                 android:gravity="center"
                 android:text="@string/nacimiento" />
 
-            <EditText
-                android:id="@+id/campoFecha"
+            <LinearLayout
+                android:id="@+id/layoutFoto"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:ems="10"
-                android:inputType="date"
-                android:minHeight="48dp"
-                tools:ignore="SpeakableTextPresentCheck" />
+                android:layout_height="80dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/botonCambiarFoto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:text="@string/cambiarFoto"
+                    android:textSize="17sp" />
+
+                <ImageView
+                    android:id="@+id/imagenPerfilUsuario"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="3"
+
+                    app:srcCompat="@drawable/usuario" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layoutFecha"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textoFecha"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/fechaNacimiento" />
+
+                <Button
+                    android:id="@+id/botonCambiarFecha"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/cambiar"
+                    android:textSize="17sp" />
+            </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout
@@ -173,5 +192,6 @@
                 android:layout_weight="1" />
 
         </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

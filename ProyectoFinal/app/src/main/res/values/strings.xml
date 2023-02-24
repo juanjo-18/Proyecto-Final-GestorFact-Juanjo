@@ -29,5 +29,15 @@
     <string name="registroFallido">Registro fallido</string>
     <string name="rellenarCampos">Tienes que rellenar todos los campos</string>
     <string name="ok">Ok</string>
+    <string name="cambiarFoto">Cambiar Foto</string>
+    <string name="cambiar">Cambiar</string>
+    <string name="fechaNacimiento">Fecha de nacimiento</string>
+    <string name="registradoConExito">Te has registrado con exito.</string>
+    <string name="fechaValida">Tienes que poner una fecha valida</string>
+    <string name="noPermisoCamar">No tienes permisos de la camara</string>
+    <string name="tienesQueSerMayorEdad">Tienes que ser mayor de edad</string>
+    <string name="noPermisoCamara">No tienes permisos de la camara</string>
+    <string name="nuestraApp">Esta es nuestra aplicacion</string>
+    <string name="bienvenido">Bienvenido</string>
 
 </resources>
