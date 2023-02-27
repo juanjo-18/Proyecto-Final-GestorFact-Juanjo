@@ -71,4 +71,7 @@
         <item name="android:textSize">26sp</item>
         <item name="android:textColor">@color/verdeOscuro</item>
     </style>
+    <style name="contenedores" >
+        <item name="android:textSize">18dp</item>
+    </style>
 </resources>

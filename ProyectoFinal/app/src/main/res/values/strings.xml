@@ -39,5 +39,13 @@
     <string name="noPermisoCamara">No tienes permisos de la camara</string>
     <string name="nuestraApp">Esta es nuestra aplicacion</string>
     <string name="bienvenido">Bienvenido</string>
+    <string name="anadirCliente">Añadir cliente</string>
+    <string name="email">Email</string>
+    <string name="nif">NIF</string>
+    <string name="telefono">Telefono</string>
+    <string name="direccion">Dirección</string>
+    <string name="localidad">Localidad</string>
+    <string name="provincia">Provincia</string>
+    <string name="codigoPostal">Codigo postal</string>
 
 </resources>

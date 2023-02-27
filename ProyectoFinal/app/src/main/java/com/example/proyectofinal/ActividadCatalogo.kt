@@ -59,8 +59,8 @@ class ActividadCatalogo : AppCompatActivity(),SearchView.OnQueryTextListener  {
 
         }
 
-        val botonIrAnadirCliente:FloatingActionButton=findViewById(R.id.botonAñadirProducto)
-        botonIrAnadirCliente.setOnClickListener{
+        val botonIrAnadirProducto:FloatingActionButton=findViewById(R.id.botonAñadirProducto)
+        botonIrAnadirProducto.setOnClickListener{
             val intent:Intent=Intent(
                 this,ActividadAnadirProducto::class.java
             )

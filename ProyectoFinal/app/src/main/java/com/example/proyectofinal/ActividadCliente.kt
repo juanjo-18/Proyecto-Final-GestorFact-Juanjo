@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import clases.Cliente
 import clases.Producto
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import recyclers.catalogo.ProductosAdapter
 import recyclers.clientes.ClientesAdapter
 
@@ -27,6 +28,15 @@ class ActividadCliente : AppCompatActivity() {
             StaggeredGridLayoutManager.VERTICAL)
         staggeredManager.gapStrategy= StaggeredGridLayoutManager.GAP_HANDLING_NONE
         recyclerView.layoutManager=staggeredManager
+
+
+        val botonIrAnadirCliente: FloatingActionButton =findViewById(R.id.botonAnadirCliente)
+        botonIrAnadirCliente.setOnClickListener{
+            val intent:Intent=Intent(
+                this,ActividadAnadirCliente::class.java
+            )
+            this.startActivity(intent)
+        }
 
         val botonIrAInicio: ImageButton =findViewById<ImageButton>(R.id.botonIrAInicioDesdeCliente)
         val botonIrACatalogo: ImageButton =findViewById<ImageButton>(R.id.botonIrACatalogoDesdeCliente)
