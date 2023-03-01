@@ -1,10 +1,14 @@
 package recyclers.clientes
 
 import android.app.Activity
+import android.content.Intent
+import android.os.Bundle
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import clases.Cliente
 import clases.Producto
+import com.example.proyectofinal.ActividadEditarCliente
+import com.example.proyectofinal.ActividadEditarProducto
 import com.example.proyectofinal.R
 import recyclers.catalogo.ProductosViewHolder
 
@@ -26,7 +30,11 @@ class ClientesAdapter (val actividadMadre: Activity, val datos:ArrayList<Cliente
         }
 
         holder.botonEditar.setOnClickListener {
-            //tengo que hacerlo
+            val intent: Intent = Intent(actividadMadre, ActividadEditarCliente::class.java)
+            val bundle: Bundle = Bundle()
+            bundle.putParcelable("cliente",cliente)
+            intent.putExtras(bundle)
+            actividadMadre.startActivity(intent)
         }
     }
 

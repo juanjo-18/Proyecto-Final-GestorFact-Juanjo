@@ -1,5 +1,6 @@
 package com.example.proyectofinal
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -29,6 +30,12 @@ class ActividadEditarProducto : AppCompatActivity() {
 
 
             }
+        }
+        binding.botonTerminadoEdicionProducto.setOnClickListener{
+            val intent: Intent = Intent(
+                this,ActividadCatalogo::class.java
+            )
+            this.startActivity(intent)
         }
 
     }

@@ -29,7 +29,7 @@ class ActividadCatalogo : AppCompatActivity(),SearchView.OnQueryTextListener  {
 
 
         val valores = arrayListOf<Producto>()
-        for (i in 100 downTo 1) {
+        for (i in 3 downTo 1) {
             var producto: Producto = Producto()
             valores.add(producto)
         }

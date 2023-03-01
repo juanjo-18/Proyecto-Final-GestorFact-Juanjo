@@ -10,7 +10,7 @@ class Producto: Parcelable {
     lateinit var referencia:String
     var nombre:String?
     var precio:Int=0
-    var cantidad:Int=-1
+    var cantidad:Int=0
 
     constructor(parcel: Parcel) : this() {
         referencia = parcel.readString()!!

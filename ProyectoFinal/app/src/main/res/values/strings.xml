@@ -47,5 +47,6 @@
     <string name="localidad">Localidad</string>
     <string name="provincia">Provincia</string>
     <string name="codigoPostal">Codigo postal</string>
+    <string name="editarCliente">Editar cliente</string>
 
 </resources>
