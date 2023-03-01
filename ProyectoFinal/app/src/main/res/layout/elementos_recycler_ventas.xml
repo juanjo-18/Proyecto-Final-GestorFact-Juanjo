@@ -30,10 +30,31 @@
             android:layout_height="wrap_content"
             android:text="TextView" />
 
+        <LinearLayout
+            android:id="@+id/contenedorBotones"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/botonEditarVenta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/lapid_editar" />
+
+            <ImageButton
+                android:id="@+id/botonBorrarVenta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/papelera" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/botonCrearFactura"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="3"
@@ -51,7 +72,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="20dp"
             android:text="TextView" />
 
         <TextView
@@ -59,7 +80,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="20dp"
             android:text="TextView" />
     </LinearLayout>
 </LinearLayout>
