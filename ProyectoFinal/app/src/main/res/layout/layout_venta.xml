@@ -2,27 +2,27 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/marcoFondoCatalogo"
+    android:id="@+id/marcoFondoVenta"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"s
+    android:layout_height="match_parent"
     android:background="#FFFFFF"
     android:backgroundTint="#000000"
-    tools:context=".ActividadCatalogo">
+    tools:context=".ActividadVenta">
 
     <ImageView
-        android:id="@+id/imagenFondoCatalogo"
+        android:id="@+id/imagenFondoVenta"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
         app:srcCompat="@drawable/fondo" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/contenedorPrincipalCatalogo"
+        android:id="@+id/contenedorPrincipalVenta"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/contenedorTituloCatalogo"
+            android:id="@+id/contenedorTituloVenta"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -36,7 +36,7 @@
                 android:layout_weight="1">
 
                 <SearchView
-                    android:id="@+id/buscadorDeProductos"
+                    android:id="@+id/buscadorDeAlbaranes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="1dp"
@@ -46,7 +46,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ImageButton
-                android:id="@+id/botonBuscadorCatalogo"
+                android:id="@+id/botonBuscadorAlbaranes"
                 android:layout_width="70dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"
@@ -55,70 +55,70 @@
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/reciclerCatalogo"
+            android:id="@+id/reciclerVenta"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="1dp"
             android:layout_marginBottom="40dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/contenedorTituloCatalogo"
+            app:layout_constraintEnd_toStartOf="@+id/contenedorTituloVenta"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/contenedorTituloCatalogo" >
+            app:layout_constraintTop_toBottomOf="@+id/contenedorTituloVenta" >
 
         </androidx.recyclerview.widget.RecyclerView>
 
         <LinearLayout
-            android:id="@+id/contenedorMenuBotonesCatalogo"
+            android:id="@+id/contenedorMenuBotonesVenta"
             android:layout_width="match_parent"
             android:layout_height="43dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/reciclerCatalogo">
+            app:layout_constraintTop_toBottomOf="@+id/reciclerVenta">
 
             <ImageButton
-                android:id="@+id/botonIrAInicioDesdeCatalogo"
+                android:id="@+id/botonIrAInicioDesdeVenta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/casa" />
 
             <ImageButton
-                android:id="@+id/botonIrACatalogoDesdeCatalogo"
+                android:id="@+id/botonIrACatalogoDesdeVenta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/libro" />
 
             <ImageButton
-                android:id="@+id/botonIrAClientesDesdeCatalogo"
+                android:id="@+id/botonIrAClientesDesdeVenta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/cliente" />
 
             <ImageButton
-                android:id="@+id/imageButton4DesdeCatalogo"
+                android:id="@+id/imageButton4DesdeVenta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/tag" />
 
             <ImageButton
-                android:id="@+id/imageButton5DesdeCatalogo"
+                android:id="@+id/imageButton5DesdeVenta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/file_document" />
 
             <ImageButton
-                android:id="@+id/imageButton6DesdeCatalogo"
+                android:id="@+id/imageButton6DesdeVenta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/cart" />
 
             <ImageButton
-                android:id="@+id/imageButton7DesdeCatalogo"
+                android:id="@+id/imageButton7DesdeVenta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -132,7 +132,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
             android:clickable="true"
-            app:layout_constraintBottom_toTopOf="@+id/contenedorMenuBotonesCatalogo"
+            app:layout_constraintBottom_toTopOf="@+id/contenedorMenuBotonesVenta"
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@android:drawable/ic_menu_add" />
     </androidx.constraintlayout.widget.ConstraintLayout>
