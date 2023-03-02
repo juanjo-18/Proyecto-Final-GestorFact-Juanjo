@@ -42,13 +42,13 @@ class ActividadCatalogo : AppCompatActivity(),SearchView.OnQueryTextListener  {
 
         val botonIrAInicio: ImageButton =findViewById<ImageButton>(R.id.botonIrAInicioDesdeCatalogo)
         val botonIrACliente: ImageButton =findViewById<ImageButton>(R.id.botonIrAClientesDesdeCatalogo)
+        val botonIrAVenta: ImageButton =findViewById<ImageButton>(R.id.botonIrAVentaDesdeCatalogo)
 
         botonIrAInicio.setOnClickListener{
             val intent: Intent = Intent(
                 this,ActividadInicio::class.java
             )
             this.startActivity(intent)
-
         }
 
         botonIrACliente.setOnClickListener{
@@ -56,7 +56,13 @@ class ActividadCatalogo : AppCompatActivity(),SearchView.OnQueryTextListener  {
                 this,ActividadCliente::class.java
             )
             this.startActivity(intent)
+        }
 
+        botonIrAVenta.setOnClickListener{
+            val intent: Intent = Intent(
+                this,ActividadVenta::class.java
+            )
+            this.startActivity(intent)
         }
 
         val botonIrAnadirProducto:FloatingActionButton=findViewById(R.id.botonAñadirProducto)
@@ -66,6 +72,8 @@ class ActividadCatalogo : AppCompatActivity(),SearchView.OnQueryTextListener  {
             )
             this.startActivity(intent)
         }
+
+
 
         /*
         textoBuscar.setOnQueryTextListener(this)

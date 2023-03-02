@@ -12,7 +12,7 @@ class AlbaranesViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val nombreCliente: TextView by lazy{ view.findViewById<TextView>(R.id.textoNombreClienteVenta)}
     val botonEditar: ImageButton by lazy{ view.findViewById<ImageButton>(R.id.botonEditarVenta) }
     val botonBorrar: ImageButton by lazy{ view.findViewById<ImageButton>(R.id.botonBorrarVenta) }
-    val referencia: TextView by lazy{ view.findViewById<TextView>(R.id.textoReferenciaVenta)}
+    val titulo: TextView by lazy{ view.findViewById<TextView>(R.id.textoReferenciaVenta)}
     val fecha:TextView by lazy { view.findViewById<TextView>(R.id.textoFechaVenta) }
     val precio: TextView by lazy{ view.findViewById<TextView>(R.id.textoPrecioVenta)}
     val estado: TextView by lazy{ view.findViewById<TextView>(R.id.textoPendienteVenta)}

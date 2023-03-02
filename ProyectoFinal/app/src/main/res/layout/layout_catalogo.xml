@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/marcoFondoCatalogo"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"s
+    android:layout_height="match_parent"
     android:background="#FFFFFF"
     android:backgroundTint="#000000"
     tools:context=".ActividadCatalogo">
@@ -97,7 +97,7 @@
                 app:srcCompat="@drawable/cliente" />
 
             <ImageButton
-                android:id="@+id/imageButton4DesdeCatalogo"
+                android:id="@+id/botonIrAVentaDesdeCatalogo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

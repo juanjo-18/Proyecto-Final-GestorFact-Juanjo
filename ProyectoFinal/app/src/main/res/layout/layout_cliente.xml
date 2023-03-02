@@ -93,14 +93,14 @@
                 app:srcCompat="@drawable/libro" />
 
             <ImageButton
-                android:id="@+id/imageButton3DesdeCliente"
+                android:id="@+id/sin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/cliente" />
 
             <ImageButton
-                android:id="@+id/imageButton4DesdeCliente"
+                android:id="@+id/botonIrAVentaDedeCliente"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
