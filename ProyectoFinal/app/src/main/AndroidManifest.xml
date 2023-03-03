@@ -18,6 +18,9 @@
         android:theme="@style/Theme.ProyectoFinal"
         tools:targetApi="31">
         <activity
+            android:name=".ActividadAnadirVenta"
+            android:exported="false" />
+        <activity
             android:name=".ActividadVenta"
             android:exported="false" />
         <activity

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import clases.Albaran
 import clases.ItemSpacingDecoration
 import clases.Producto
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import recyclers.albaranes.AlbaranesAdapter
 import recyclers.catalogo.ProductosAdapter
 
@@ -33,6 +34,15 @@ class ActividadVenta : AppCompatActivity() {
         val spacingInPixels = resources.getDimensionPixelSize(R.dimen.item_spacing)
         val itemSpacingDecoration = ItemSpacingDecoration(spacingInPixels)
         recyclerView.addItemDecoration(itemSpacingDecoration)
+
+
+        val botonIrAnadirVenta: FloatingActionButton =findViewById(R.id.botonAnadirVenta)
+        botonIrAnadirVenta.setOnClickListener{
+            val intent:Intent=Intent(
+                this,ActividadAnadirVenta::class.java
+            )
+            this.startActivity(intent)
+        }
 
         val botonIrAInicio: ImageButton =findViewById<ImageButton>(R.id.botonIrAInicioDesdeVenta)
         val botonIrACliente: ImageButton =findViewById<ImageButton>(R.id.botonIrAClientesDesdeVenta)

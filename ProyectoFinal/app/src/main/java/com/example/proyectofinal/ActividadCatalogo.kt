@@ -1,17 +1,10 @@
 package com.example.proyectofinal
 
-import android.app.SearchManager
-import android.content.ComponentName
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
-import android.view.MotionEvent
 import android.widget.ImageButton
 import android.widget.SearchView
-import android.widget.SearchView.OnQueryTextListener
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import clases.ItemSpacingDecoration
@@ -71,7 +64,7 @@ class ActividadCatalogo : AppCompatActivity(),SearchView.OnQueryTextListener  {
             this.startActivity(intent)
         }
 
-        val botonIrAnadirProducto:FloatingActionButton=findViewById(R.id.botonAñadirProducto)
+        val botonIrAnadirProducto:FloatingActionButton=findViewById(R.id.botonAnadirProducto)
         botonIrAnadirProducto.setOnClickListener{
             val intent:Intent=Intent(
                 this,ActividadAnadirProducto::class.java
