@@ -7,6 +7,7 @@ import android.widget.ImageButton
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import clases.Cliente
+import clases.ItemSpacingDecoration
 import clases.Producto
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import recyclers.catalogo.ProductosAdapter
@@ -28,6 +29,12 @@ class ActividadCliente : AppCompatActivity() {
             StaggeredGridLayoutManager.VERTICAL)
         staggeredManager.gapStrategy= StaggeredGridLayoutManager.GAP_HANDLING_NONE
         recyclerView.layoutManager=staggeredManager
+
+        //ajustamos el recycler a la pantalla
+        val spacingInPixels = resources.getDimensionPixelSize(R.dimen.item_spacing)
+        val itemSpacingDecoration = ItemSpacingDecoration(spacingInPixels)
+        recyclerView.addItemDecoration(itemSpacingDecoration)
+
 
 
         val botonIrAnadirCliente: FloatingActionButton =findViewById(R.id.botonAnadirCliente)

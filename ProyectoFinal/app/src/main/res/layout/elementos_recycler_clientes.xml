@@ -4,13 +4,15 @@
     android:id="@+id/contenedorPrincipalDatosClientes"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/bordes_redondos">
 
     <TextView
         android:id="@+id/textoNombreCliente"
         style="@style/textoElementos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
         android:text="TextView" />
 
     <TextView
@@ -18,12 +20,14 @@
         style="@style/textoElementos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
         android:text="TextView" />
 
     <LinearLayout
         android:id="@+id/contenedorBotonesClientes"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="5dp"
         android:orientation="horizontal">
 
         <ImageButton

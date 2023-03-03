@@ -14,6 +14,7 @@ import android.widget.SearchView.OnQueryTextListener
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import clases.ItemSpacingDecoration
 import clases.Producto
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import recyclers.catalogo.ProductosAdapter
@@ -39,6 +40,11 @@ class ActividadCatalogo : AppCompatActivity(),SearchView.OnQueryTextListener  {
             StaggeredGridLayoutManager.VERTICAL)
         staggeredManager.gapStrategy= StaggeredGridLayoutManager.GAP_HANDLING_NONE
         recyclerView.layoutManager=staggeredManager
+
+        val spacingInPixels = resources.getDimensionPixelSize(R.dimen.item_spacing)
+        val itemSpacingDecoration = ItemSpacingDecoration(spacingInPixels)
+        recyclerView.addItemDecoration(itemSpacingDecoration)
+
 
         val botonIrAInicio: ImageButton =findViewById<ImageButton>(R.id.botonIrAInicioDesdeCatalogo)
         val botonIrACliente: ImageButton =findViewById<ImageButton>(R.id.botonIrAClientesDesdeCatalogo)
