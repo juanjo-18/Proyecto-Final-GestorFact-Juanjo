@@ -5,6 +5,8 @@
     android:id="@+id/contenedorFondoAñadirVenta"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
     tools:context=".ActividadAnadirVenta">
 
     <ImageView
@@ -21,14 +23,13 @@
 
         <LinearLayout
             android:id="@+id/contenedorTituloAñadirVenta"
+            style="@style/panelEditar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            style="@style/panelEditar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            >
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/textoTituloAnadirVenta"
@@ -41,10 +42,10 @@
 
         <ImageButton
             android:id="@+id/botonTerminadoAñadiendoVenta"
-            android:layout_width="82dp"
-            android:layout_height="67dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_width="64dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="20dp"
             android:backgroundTint="#00FF0A"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -163,12 +164,187 @@
             </LinearLayout>
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/contenedorEncabezadoProductosAnadirVenta"
+            android:layout_width="409dp"
+            android:layout_height="19dp"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="1dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/contenedorDatosVenta">
+
+            <TextView
+                android:id="@+id/textoNombreAnadirVenta"
+                style="@style/texto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/nombre" />
+
+            <TextView
+                android:id="@+id/textoPrecioAnadirVenta"
+                style="@style/texto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/precio" />
+
+            <TextView
+                android:id="@+id/textoCantidadAnadirVenta"
+                style="@style/texto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/cantidad" />
+
+            <TextView
+                android:id="@+id/textoTotalAnadirVenta"
+                style="@style/texto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/total" />
+        </LinearLayout>
+
         <View
+            android:id="@+id/lineaNegraAnadirVenta"
             android:layout_width="match_parent"
-            android:layout_height="3dp"
+            android:layout_height="5dp"
+            android:layout_marginTop="10dp"
             android:background="@android:color/black"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/contenedorDatosVenta" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/contenedorEncabezadoProductosAnadirVenta" />
+
+        <ImageButton
+            android:id="@+id/botonAnadirLineaAnadirVenta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="1dp"
+            android:layout_marginBottom="5dp"
+            app:layout_constraintBottom_toTopOf="@+id/contenedorEncabezadoProductosAnadirVenta"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@android:drawable/ic_input_add" />
+
+        <TextView
+            android:id="@+id/textoAnadirLineaAnadirVenta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="@string/anadirLinea"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/contenedorEncabezadoProductosAnadirVenta"
+            app:layout_constraintStart_toEndOf="@+id/botonAnadirLineaAnadirVenta" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerLineasProductos"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/contenedorDeConetendoresDatosAnadirVenta"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lineaNegraAnadirVenta" />
+
+        <LinearLayout
+            android:id="@+id/contenedorDeConetendoresDatosAnadirVenta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/bordes_redondos"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:id="@+id/contenedorDatoTotalBaseAnadirVenta"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textoTotalBaseAnadirVenta"
+                    style="@style/texto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/totalBase" />
+
+                <TextView
+                    android:id="@+id/textoNumeroTotalBaseAnadirVenta"
+                    style="@style/texto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="1"
+                    android:text="TextView" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/contenedorDatoIVAAnadirVenta"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textoIVAAnadirVenta"
+                    style="@style/texto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/iva" />
+
+                <TextView
+                    android:id="@+id/textoNumeroIvaAnadirVenta"
+                    style="@style/texto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="72dp"
+                    android:layout_weight="1"
+                    android:text="TextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/contenedorDatoTotalAlbaranAnadirVenta"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="4dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textoTotalTerminadoAnadriVenta"
+                    style="@style/texto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/totalEuro" />
+
+                <TextView
+                    android:id="@+id/textoNumeroTotalAnadirVenta"
+                    style="@style/texto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="60dp"
+                    android:layout_weight="1"
+                    android:text="TextView" />
+            </LinearLayout>
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

@@ -1,6 +1,7 @@
 package com.example.proyectofinal
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -58,6 +59,13 @@ class ActividadAnadirVenta : AppCompatActivity() {
             datePicker.setIcon(R.drawable.caja)
             datePicker.setMessage(this.resources.getString(R.string.fecha))
             datePicker.show()
+        }
+
+        binding.botonTerminadoAAdiendoVenta.setOnClickListener{
+            val intent: Intent = Intent(
+                this,ActividadVenta::class.java
+            )
+            this.startActivity(intent)
         }
 
 
