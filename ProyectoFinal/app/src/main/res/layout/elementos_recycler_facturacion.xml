@@ -95,14 +95,14 @@
                 style="@style/textoElementos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="27dp"
+                android:layout_marginLeft="32dp"
                 android:text="TextView" />
 
             <ImageView
                 android:id="@+id/imageViewFactura"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="30dp"
+                android:layout_marginRight="55dp"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/euro" />
         </LinearLayout>

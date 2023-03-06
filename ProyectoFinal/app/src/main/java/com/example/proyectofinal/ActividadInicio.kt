@@ -26,6 +26,7 @@ class ActividadInicio : AppCompatActivity() {
         val botonIrACatalogo: ImageButton =
             findViewById<ImageButton>(R.id.botonIrACatalogoDesdeInicio)
         val botonIrAVenta:ImageButton=findViewById<ImageButton>(R.id.botonIrAVentaDedeInicio)
+        val botonIrAFacturacion:ImageButton=findViewById<ImageButton>(R.id.botonIrAFacturacionDesdeInicio)
 
 
         botonIrACatalogo.setOnClickListener{
@@ -46,6 +47,12 @@ class ActividadInicio : AppCompatActivity() {
         botonIrAVenta.setOnClickListener{
             val intent: Intent = Intent(
                 this,ActividadVenta::class.java
+            )
+            this.startActivity(intent)
+        }
+        botonIrAFacturacion.setOnClickListener{
+            val intent: Intent = Intent(
+                this,ActividadFacturacion::class.java
             )
             this.startActivity(intent)
         }

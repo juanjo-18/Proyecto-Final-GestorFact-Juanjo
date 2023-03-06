@@ -97,7 +97,7 @@
                 app:srcCompat="@drawable/cliente" />
 
             <ImageButton
-                android:id="@+id/imageButton4DesdeFacturacion"
+                android:id="@+id/botonIrAVentasDesdeFacturacion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

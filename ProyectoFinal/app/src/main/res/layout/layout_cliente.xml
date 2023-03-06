@@ -107,7 +107,7 @@
                 app:srcCompat="@drawable/tag" />
 
             <ImageButton
-                android:id="@+id/imageButton5DesdeCliente"
+                android:id="@+id/botonIrAFacturacionDesdeCliente"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

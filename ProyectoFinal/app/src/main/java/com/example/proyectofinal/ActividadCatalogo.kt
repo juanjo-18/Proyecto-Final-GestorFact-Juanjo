@@ -39,9 +39,20 @@ class ActividadCatalogo : AppCompatActivity(),SearchView.OnQueryTextListener  {
         recyclerView.addItemDecoration(itemSpacingDecoration)
 
 
+        val botonIrAnadirProducto:FloatingActionButton=findViewById(R.id.botonAnadirProducto)
+        botonIrAnadirProducto.setOnClickListener{
+            val intent:Intent=Intent(
+                this,ActividadAnadirProducto::class.java
+            )
+            this.startActivity(intent)
+        }
+
+
         val botonIrAInicio: ImageButton =findViewById<ImageButton>(R.id.botonIrAInicioDesdeCatalogo)
         val botonIrACliente: ImageButton =findViewById<ImageButton>(R.id.botonIrAClientesDesdeCatalogo)
         val botonIrAVenta: ImageButton =findViewById<ImageButton>(R.id.botonIrAVentaDesdeCatalogo)
+        val botonIrAFacturacion: ImageButton =findViewById<ImageButton>(R.id.botonIrAFacturacionDesdeCatalogo)
+
 
         botonIrAInicio.setOnClickListener{
             val intent: Intent = Intent(
@@ -64,13 +75,14 @@ class ActividadCatalogo : AppCompatActivity(),SearchView.OnQueryTextListener  {
             this.startActivity(intent)
         }
 
-        val botonIrAnadirProducto:FloatingActionButton=findViewById(R.id.botonAnadirProducto)
-        botonIrAnadirProducto.setOnClickListener{
-            val intent:Intent=Intent(
-                this,ActividadAnadirProducto::class.java
+        botonIrAFacturacion.setOnClickListener{
+            val intent: Intent = Intent(
+                this,ActividadFacturacion::class.java
             )
             this.startActivity(intent)
         }
+
+
 
 
 

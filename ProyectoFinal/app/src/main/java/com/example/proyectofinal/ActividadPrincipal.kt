@@ -11,7 +11,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import clases.Usuario
 import com.example.proyectofinal.databinding.LayoutInicioBinding
-import com.example.proyectofinal.databinding.LayoutPrimeraBinding
+import com.example.proyectofinal.databinding.LayoutLoginBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import emergentes.Alerta
@@ -19,11 +19,11 @@ import java.time.LocalDate
 
 
 class ActividadPrincipal : AppCompatActivity() {
-    private lateinit var binding: LayoutPrimeraBinding
+    private lateinit var binding: LayoutLoginBinding
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = LayoutPrimeraBinding.inflate(layoutInflater)
+        binding = LayoutLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val botonIrAInico: Button =findViewById<Button>(R.id.botonIniciarSesion)
