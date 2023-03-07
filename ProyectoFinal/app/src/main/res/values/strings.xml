@@ -60,6 +60,10 @@
     <string name="totalBase">Total base (€)</string>
     <string name="iva">IVA (€)</string>
     <string name="totalEuro">Total (€)</string>
-    <string name="nuvaFactura">Nueva factura</string>
+    <string name="nuevaFactura">Nueva factura</string>
+    <string name="abono">Abono</string>
+    <string name="factura">Factura</string>
+    <string name="cliente">Cliente</string>
+    <string name="titulo">Titulo</string>
 
 </resources>

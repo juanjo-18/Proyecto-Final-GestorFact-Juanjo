@@ -40,17 +40,6 @@
         </LinearLayout>
 
 
-        <ImageButton
-            android:id="@+id/botonTerminadoAñadiendoVenta"
-            android:layout_width="64dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="20dp"
-            android:backgroundTint="#00FF0A"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerLineasProductos"
-            app:srcCompat="@drawable/check" />
-
         <LinearLayout
             android:id="@+id/contenedorCheckBox"
 
@@ -102,7 +91,7 @@
                 style="@style/texto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="@string/cliente" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/contenedorNombreClienteVenta"
@@ -120,7 +109,7 @@
                 style="@style/texto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="@string/titulo" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/contenedorCampoTituloAnadirVenta"
@@ -138,7 +127,7 @@
                 style="@style/texto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="@string/fecha" />
 
             <LinearLayout
                 android:id="@+id/contenedorFechaVenta"
@@ -249,19 +238,31 @@
             app:layout_constraintBottom_toTopOf="@+id/contenedorDeConetendoresDatosAnadirVenta"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lineaNegraAnadirVenta" />
+            app:layout_constraintTop_toBottomOf="@+id/lineaNegraAnadirVenta">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <ImageButton
+            android:id="@+id/botonTerminadoAñadiendoVenta"
+            android:layout_width="64dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="#00FF0A"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/check" />
 
         <LinearLayout
             android:id="@+id/contenedorDeConetendoresDatosAnadirVenta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="275dp"
             android:layout_marginEnd="20dp"
+            android:layout_marginBottom="15dp"
             android:background="@drawable/bordes_redondos"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lineaNegraAnadirVenta">
+            app:layout_constraintEnd_toEndOf="parent">
 
             <LinearLayout
                 android:id="@+id/contenedorDatoTotalBaseAnadirVenta"

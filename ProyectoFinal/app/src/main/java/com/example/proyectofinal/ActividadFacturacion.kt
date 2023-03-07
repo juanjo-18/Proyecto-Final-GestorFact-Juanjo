@@ -66,5 +66,12 @@ class ActividadFacturacion : AppCompatActivity() {
             this.startActivity(intent)
         }
 
+        binding.botonAnadirFactura.setOnClickListener{
+            val intent: Intent = Intent(
+                this,ActividadAnadirFactura::class.java
+            )
+            this.startActivity(intent)
+        }
+
     }
 }

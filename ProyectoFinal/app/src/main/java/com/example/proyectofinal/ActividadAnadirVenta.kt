@@ -8,7 +8,13 @@ import android.os.Bundle
 import android.widget.DatePicker
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import clases.ItemSpacingDecoration
+import clases.Producto
 import com.example.proyectofinal.databinding.LayoutAnadirVentaBinding
+import recyclers.anadirProductosVenta.LineaVentaAdapter
+import recyclers.catalogo.ProductosAdapter
 import java.time.LocalDate
 import java.util.*
 
@@ -20,6 +26,22 @@ class ActividadAnadirVenta : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = LayoutAnadirVentaBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
+        val valores = arrayListOf<Producto>()
+        for (i in 3 downTo 1) {
+            var producto: Producto = Producto()
+            valores.add(producto)
+        }
+        val recyclerView: RecyclerView =findViewById<RecyclerView>(R.id.recyclerLineasProductos)
+        recyclerView.adapter= LineaVentaAdapter(this,valores)
+        val staggeredManager: StaggeredGridLayoutManager = StaggeredGridLayoutManager(1,
+            StaggeredGridLayoutManager.VERTICAL)
+        staggeredManager.gapStrategy= StaggeredGridLayoutManager.GAP_HANDLING_NONE
+        recyclerView.layoutManager=staggeredManager
+
+
+
 
         binding.checkBoxPresupuesto.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {

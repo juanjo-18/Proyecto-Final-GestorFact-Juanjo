@@ -36,20 +36,9 @@
                 style="@style/tituloParaEditar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/nuevaVenta" />
+                android:text="@string/nuevaFactura" />
         </LinearLayout>
 
-
-        <ImageButton
-            android:id="@+id/botonTerminadoAnadiendoFactura"
-            android:layout_width="64dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="20dp"
-            android:backgroundTint="#00FF0A"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerLineasProductosFactura"
-            app:srcCompat="@drawable/check" />
 
         <LinearLayout
             android:id="@+id/contenedorCheckBoxFactura"
@@ -63,25 +52,18 @@
             app:layout_constraintTop_toBottomOf="@+id/contenedorTituloAñadirFactura">
 
             <CheckBox
-                android:id="@+id/checkBoxPresupuestoFactura"
+                android:id="@+id/checkBoxAbonoFactura"
                 style="@style/texto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/presupuesto" />
+                android:text="@string/abono" />
 
             <CheckBox
-                android:id="@+id/checkBoxAlbaranFactura"
+                android:id="@+id/checkBoxFacturaFactura"
                 style="@style/texto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/albaran" />
-
-            <CheckBox
-                android:id="@+id/checkBoxPedidoFactura"
-                style="@style/texto"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/pedido" />
+                android:text="@string/factura" />
 
         </LinearLayout>
 
@@ -102,7 +84,7 @@
                 style="@style/texto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="@string/cliente" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/contenedorNombreClienteFactura"
@@ -120,7 +102,7 @@
                 style="@style/texto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="@string/titulo" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/contenedorCampoTituloAnadirFactura"
@@ -138,7 +120,7 @@
                 style="@style/texto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="@string/fecha" />
 
             <LinearLayout
                 android:id="@+id/contenedorFechaFactura"
@@ -248,20 +230,34 @@
             android:layout_marginBottom="10dp"
             app:layout_constraintBottom_toTopOf="@+id/contenedorDeConetendoresDatosAnadirFactura"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lineaNegraAnadirFactura" />
+            app:layout_constraintTop_toBottomOf="@+id/lineaNegraAnadirFactura"
+            app:layout_constraintVertical_bias="0.0">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <ImageButton
+            android:id="@+id/botonTerminadoAnadiendoFactura"
+            android:layout_width="64dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="#00FF0A"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/check" />
 
         <LinearLayout
             android:id="@+id/contenedorDeConetendoresDatosAnadirFactura"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="275dp"
             android:layout_marginEnd="20dp"
+            android:layout_marginBottom="15dp"
             android:background="@drawable/bordes_redondos"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lineaNegraAnadirFactura">
+            app:layout_constraintEnd_toEndOf="parent">
 
             <LinearLayout
                 android:id="@+id/contenedorDatoTotalBaseAnadirFactura"
