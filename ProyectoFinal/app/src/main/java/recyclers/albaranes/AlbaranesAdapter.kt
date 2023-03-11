@@ -40,15 +40,7 @@ class AlbaranesAdapter(val actividadMadre: Activity, val datos: ArrayList<Albara
             datos.removeAt(position)
             this.notifyDataSetChanged()
         }
-        //hacer el boton editar funcional cuando tenga la actividad editar albaran
-        /*
-        holder.botonEditar.setOnClickListener {
-            val intent: Intent = Intent(actividadMadre, ActividadEditarProducto::class.java)
-            val bundle: Bundle = Bundle()
-            bundle.putParcelable("producto", producto)
-            intent.putExtras(bundle)
-            actividadMadre.startActivity(intent)
-        }*/
+
     }
 
     override fun getItemCount(): Int {

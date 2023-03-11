@@ -5,18 +5,20 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import android.widget.DatePicker
-import android.widget.Toast
+import android.widget.ImageButton
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import clases.ItemSpacingDecoration
 import clases.Producto
 import com.example.proyectofinal.databinding.LayoutAnadirVentaBinding
+import com.google.android.material.textfield.TextInputEditText
 import recyclers.anadirProductosVenta.LineaVentaAdapter
-import recyclers.catalogo.ProductosAdapter
 import java.time.LocalDate
 import java.util.*
+import java.util.logging.Handler
 
 class ActividadAnadirVenta : AppCompatActivity() {
     private lateinit var binding: LayoutAnadirVentaBinding
@@ -29,7 +31,7 @@ class ActividadAnadirVenta : AppCompatActivity() {
 
 
         val valores = arrayListOf<Producto>()
-        for (i in 3 downTo 1) {
+        for (i in 1 downTo 1) {
             var producto: Producto = Producto()
             valores.add(producto)
         }
@@ -40,6 +42,14 @@ class ActividadAnadirVenta : AppCompatActivity() {
         staggeredManager.gapStrategy= StaggeredGridLayoutManager.GAP_HANDLING_NONE
         recyclerView.layoutManager=staggeredManager
 
+
+        //boton que añade linea
+        val añadirLinea:ImageButton = findViewById<ImageButton>(R.id.botonAnadirLineaAnadirVenta)
+        añadirLinea.setOnClickListener {
+            val producto=Producto()
+            valores.add(producto) // Agrega un nuevo Producto vacío a la lista de valores
+            recyclerView.adapter?.notifyItemInserted(valores.indexOf(producto)) // Notifica al Adapter del cambio en la lista de valores
+        }
 
 
 
