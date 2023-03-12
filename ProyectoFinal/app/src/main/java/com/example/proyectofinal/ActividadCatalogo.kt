@@ -1,8 +1,12 @@
 package com.example.proyectofinal
 
+import android.content.ClipData
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.SearchView
 import androidx.lifecycle.lifecycleScope
@@ -18,7 +22,6 @@ import kotlinx.coroutines.*
 import recyclers.catalogo.ProductosAdapter
 
 class ActividadCatalogo : AppCompatActivity(), SearchView.OnQueryTextListener {
-    /*val textoBuscar:SearchView=findViewById(R.id.buscadorDeProductos)*/
     private lateinit var db: AppDataBase
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,19 +32,10 @@ class ActividadCatalogo : AppCompatActivity(), SearchView.OnQueryTextListener {
 
 
         var valores= arrayListOf<Producto>()
-        /*
+        val context = this
         GlobalScope.launch {
              valores = db.productoDAO().getAll() as ArrayList<Producto>
-        }*/
-
-        suspend fun getAllProductos(): List<Producto> = withContext(Dispatchers.IO) {
-            db.productoDAO().getAll()
-        }
-
-        val context = this
-        lifecycleScope.launch {
-            valores = getAllProductos() as ArrayList<Producto>
-            val recyclerView: RecyclerView = findViewById<RecyclerView>(R.id.reciclerCatalogo)
+                val recyclerView: RecyclerView = findViewById<RecyclerView>(R.id.reciclerCatalogo)
             recyclerView.adapter = ProductosAdapter(context, valores)
             val staggeredManager: StaggeredGridLayoutManager = StaggeredGridLayoutManager(
                 1,
@@ -54,7 +48,11 @@ class ActividadCatalogo : AppCompatActivity(), SearchView.OnQueryTextListener {
             val itemSpacingDecoration = ItemSpacingDecoration(spacingInPixels)
             recyclerView.addItemDecoration(itemSpacingDecoration)
 
+
+
+
         }
+
 
 
 
@@ -106,10 +104,7 @@ class ActividadCatalogo : AppCompatActivity(), SearchView.OnQueryTextListener {
         }
 
 
-        /*
-        textoBuscar.setOnQueryTextListener(this)
 
-         */
 
     }
 

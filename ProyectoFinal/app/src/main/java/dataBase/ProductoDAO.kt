@@ -1,8 +1,6 @@
 package dataBase
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import clases.Producto
 
 @Dao
@@ -12,5 +10,14 @@ interface ProductoDAO {
 
     @Insert
     fun insert(producto: Producto)
+
+    @Delete
+    fun delete(producto: Producto)
+
+    @Update
+    fun updateUsers(vararg producto: Producto)
+
+    @Query("SELECT * FROM producto WHERE nombre LIKE :searchText")
+    fun buscarProductosPorNombre(searchText: String): List<Producto>
 
 }

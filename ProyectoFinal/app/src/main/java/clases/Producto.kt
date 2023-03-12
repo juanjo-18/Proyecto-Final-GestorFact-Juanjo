@@ -20,9 +20,7 @@ data class Producto(
 
 
 
-
 fun Producto():Producto{
-
     val producto = Producto(nombre = null, precio = 0, cantidad = 0)
     return producto
 }

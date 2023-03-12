@@ -21,7 +21,6 @@ class ClientesAdapter (val actividadMadre: Activity, val datos:ArrayList<Cliente
     override fun onBindViewHolder(holder: ClientesViewHolder, position: Int) {
         val cliente:Cliente = datos.get(position)
         holder.nombreCliente.text=cliente.nombre
-        holder.referencia.text=cliente.referencia
 
 
         holder.botonBorrar.setOnClickListener {
