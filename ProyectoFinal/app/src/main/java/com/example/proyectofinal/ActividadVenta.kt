@@ -1,27 +1,29 @@
 package com.example.proyectofinal
 
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import clases.Albaran
-import clases.ItemSpacingDecoration
-import clases.Producto
+import clases.*
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import recyclers.albaranes.AlbaranesAdapter
 import recyclers.catalogo.ProductosAdapter
 
 class ActividadVenta : AppCompatActivity() {
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.layout_venta)
 
         val valores = arrayListOf<Albaran>()
         for (i in 3 downTo 1) {
-            var albaran: Albaran = Albaran()
+            lateinit var albaran: Albaran
+            albaran=albaran.random()
             valores.add(albaran)
         }
         val recyclerView: RecyclerView =findViewById<RecyclerView>(R.id.reciclerVenta)

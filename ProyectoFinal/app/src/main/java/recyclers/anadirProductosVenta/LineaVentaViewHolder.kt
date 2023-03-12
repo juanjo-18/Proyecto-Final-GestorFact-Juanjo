@@ -13,10 +13,10 @@ import com.example.proyectofinal.R
 import com.google.android.material.textfield.TextInputEditText
 
 class LineaVentaViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-    val campoNombre: EditText by lazy { itemView.findViewById(R.id.campoNombreAnadirLineaVenta) }
-    val campoPrecio: EditText by lazy { itemView.findViewById(R.id.campoPrecioAnadirLineaVenta) }
-    val campoCantidad: EditText by lazy { itemView.findViewById(R.id.campoCantidadAnadirLineaVenta) }
-    val campoTotal: TextView by lazy { itemView.findViewById(R.id.campoTotalLineaAnadirVentaLinea) }
+    val campoNombre: TextView by lazy { itemView.findViewById(R.id.textoNombreAnadirLineaVenta) }
+    val campoPrecio: TextView by lazy { itemView.findViewById(R.id.textoPrecioAnadirLineaVenta) }
+    val campoCantidad: TextView by lazy { itemView.findViewById(R.id.textoCantidadAnadirLineaVenta) }
+    val campoTotal: TextView by lazy { itemView.findViewById(R.id.textoTotalLineaAnadirVentaLinea) }
     val botonBorrar: ImageButton =itemView.findViewById<ImageButton>(R.id.botonBorrarAnadirVenta)
 /*
     init {
@@ -39,69 +39,15 @@ class LineaVentaViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             override fun afterTextChanged(s: Editable?) {}
         })
     }*/
-    fun eliminarProducto(){
-        campoCantidad.setText("")
-        campoNombre.setText("")
-        campoPrecio.setText("")
-        campoTotal.text="0"
-    }
 
-    fun bindProducto(position: Int) {
-        var cantidadLlena = false
-        var precioLleno = false
-        campoCantidad.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                if (cantidadLlena && precioLleno) {
-                    val cantidad = campoCantidad.text.toString().toInt()
-                    val precio = campoPrecio.text.toString().toInt()
-                    campoTotal.text = (cantidad * precio).toString()
-                }
-            }
 
-            override fun beforeTextChanged(
-                s: CharSequence?,
-                start: Int,
-                count: Int,
-                after: Int
-            ) {
-            }
+    fun bindProducto(producto: Producto) {
+        campoNombre.text=producto.nombre
+        campoCantidad.text=producto.cantidad.toString()
+        campoPrecio.text=producto.precio.toString()
+        campoTotal.text=(producto.precio*producto.cantidad).toString()
 
-            override fun onTextChanged(
-                s: CharSequence?,
-                start: Int,
-                before: Int,
-                count: Int
-            ) {
-                cantidadLlena = s.toString().isNotEmpty()
-            }
-        })
 
-        campoPrecio.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                if (cantidadLlena && precioLleno) {
-                    val cantidad =campoCantidad.text.toString().toInt()
-                    val precio = campoPrecio.text.toString().toInt()
-                    campoTotal.text = (cantidad * precio).toString()
-                }
-            }
-
-            override fun beforeTextChanged(
-                s: CharSequence?,
-                start: Int,
-                count: Int,
-                after: Int
-            ) {
-            }
-
-            override fun onTextChanged(
-                s: CharSequence?,
-                start: Int,
-                before: Int,
-                count: Int
-            ) {
-                precioLleno = s.toString().isNotEmpty()
-            }
-        })
 
 
     }

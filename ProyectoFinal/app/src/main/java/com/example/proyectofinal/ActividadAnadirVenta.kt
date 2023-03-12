@@ -5,7 +5,8 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
+import android.text.Editable
+import android.text.TextWatcher
 import android.widget.DatePicker
 import android.widget.ImageButton
 import androidx.annotation.RequiresApi
@@ -31,10 +32,7 @@ class ActividadAnadirVenta : AppCompatActivity() {
 
 
         val valores = arrayListOf<Producto>()
-        for (i in 1 downTo 1) {
-            var producto: Producto = Producto()
-            valores.add(producto)
-        }
+
         val recyclerView: RecyclerView =findViewById<RecyclerView>(R.id.recyclerLineasProductos)
         recyclerView.adapter= LineaVentaAdapter(this,valores)
         val staggeredManager: StaggeredGridLayoutManager = StaggeredGridLayoutManager(1,
@@ -44,15 +42,78 @@ class ActividadAnadirVenta : AppCompatActivity() {
 
 
         //boton que añade linea
-        val añadirLinea:ImageButton = findViewById<ImageButton>(R.id.botonAnadirLineaAnadirVenta)
+        val añadirLinea:ImageButton = findViewById<ImageButton>(R.id.botonAnadirVenta)
         añadirLinea.setOnClickListener {
             val producto=Producto()
+            producto.nombre=binding.campoNombreAnadirLineaVenta.text.toString()
+            producto.cantidad=binding.campoCantidadAnadirLineaVenta.text.toString().toIntOrNull()?:0
+            producto.precio=binding.campoPrecioAnadirLineaVenta.text.toString().toIntOrNull()?:0
+
+
             valores.add(producto) // Agrega un nuevo Producto vacío a la lista de valores
             recyclerView.adapter?.notifyItemInserted(valores.indexOf(producto)) // Notifica al Adapter del cambio en la lista de valores
+            binding.campoNombreAnadirLineaVenta.setText("")
+            binding.campoPrecioAnadirLineaVenta.setText("")
+            binding.campoCantidadAnadirLineaVenta.setText("")
+            binding.campoTotalLineaAnadirVentaLinea.text="0"
         }
 
 
+        var cantidadLlena=false
+        var precioLleno=false
+       binding.campoCantidadAnadirLineaVenta.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                if (cantidadLlena && precioLleno) {
+                    val cantidad = binding.campoCantidadAnadirLineaVenta.text.toString().toInt()
+                    val precio = binding.campoPrecioAnadirLineaVenta.text.toString().toInt()
+                    binding.campoTotalLineaAnadirVentaLinea.text = (cantidad * precio).toString()
+                }
+            }
 
+            override fun beforeTextChanged(
+                s: CharSequence?,
+                start: Int,
+                count: Int,
+                after: Int
+            ) {
+            }
+
+            override fun onTextChanged(
+                s: CharSequence?,
+                start: Int,
+                before: Int,
+                count: Int
+            ) {
+                cantidadLlena = s.toString().isNotEmpty()
+            }
+        })
+
+        binding.campoPrecioAnadirLineaVenta.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                if (cantidadLlena && precioLleno) {
+                    val cantidad = binding.campoCantidadAnadirLineaVenta.text.toString().toInt()
+                    val precio = binding.campoPrecioAnadirLineaVenta.text.toString().toInt()
+                    binding.campoTotalLineaAnadirVentaLinea.text = (cantidad * precio).toString()
+                }
+            }
+
+            override fun beforeTextChanged(
+                s: CharSequence?,
+                start: Int,
+                count: Int,
+                after: Int
+            ) {
+            }
+
+            override fun onTextChanged(
+                s: CharSequence?,
+                start: Int,
+                before: Int,
+                count: Int
+            ) {
+                precioLleno = s.toString().isNotEmpty()
+            }
+        })
         binding.checkBoxPresupuesto.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
                 binding.checkBoxPedido.isChecked = false

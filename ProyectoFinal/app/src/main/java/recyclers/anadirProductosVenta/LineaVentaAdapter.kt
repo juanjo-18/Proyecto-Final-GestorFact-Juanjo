@@ -28,9 +28,8 @@ class LineaVentaAdapter(val actividadMadre: Activity, val datos: ArrayList<Produ
 
     override fun onBindViewHolder(holder: LineaVentaViewHolder, position: Int) {
 
-        holder.bindProducto(position)
+        holder.bindProducto(datos[position])
         holder.botonBorrar.setOnClickListener {
-            holder.eliminarProducto()
             datos.removeAt(position)
             this.notifyItemRemoved(position)
             notifyItemRangeChanged(position, datos.size)

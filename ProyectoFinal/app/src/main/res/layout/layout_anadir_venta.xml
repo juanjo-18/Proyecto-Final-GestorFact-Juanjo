@@ -198,6 +198,84 @@
                 android:text="@string/total" />
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/contenedorPrincipalDatosAnadirVenta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="12dp"
+            app:layout_constraintTop_toBottomOf="@id/contenedorEncabezadoProductosAnadirVenta">
+
+            <LinearLayout
+                android:id="@+id/contenedorBotonesAnadirVenta"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/delimitadorAnadirLineaVenta"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/campoNombreAnadirLineaVenta"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="3dp"
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:paddingBottom="10dp" />
+
+                    <EditText
+                        android:id="@+id/campoPrecioAnadirLineaVenta"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:ems="10"
+                        android:inputType="textPersonName" />
+
+                    <EditText
+                        android:id="@+id/campoCantidadAnadirLineaVenta"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:ems="10"
+                        android:inputType="textPersonName" />
+
+                    <TextView
+                        android:id="@+id/campoTotalLineaAnadirVentaLinea"
+                        style="@style/texto"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:paddingTop="18dp"
+                        android:text="0"
+                        android:textAlignment="center" />
+
+
+                </LinearLayout>
+
+                <ImageButton
+                    android:id="@+id/botonAnadirVenta"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="8"
+                    app:srcCompat="@android:drawable/ic_input_add" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
         <View
             android:id="@+id/lineaNegraAnadirVenta"
             android:layout_width="match_parent"
@@ -206,28 +284,7 @@
             android:background="@android:color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/contenedorEncabezadoProductosAnadirVenta" />
-
-        <ImageButton
-            android:id="@+id/botonAnadirLineaAnadirVenta"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="1dp"
-            android:layout_marginBottom="5dp"
-            app:layout_constraintBottom_toTopOf="@+id/contenedorEncabezadoProductosAnadirVenta"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@android:drawable/ic_input_add" />
-
-        <TextView
-            android:id="@+id/textoAnadirLineaAnadirVenta"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:text="@string/anadirLinea"
-            android:textSize="16dp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/contenedorEncabezadoProductosAnadirVenta"
-            app:layout_constraintStart_toEndOf="@+id/botonAnadirLineaAnadirVenta" />
+            app:layout_constraintTop_toBottomOf="@+id/contenedorPrincipalDatosAnadirVenta" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerLineasProductos"

@@ -1,73 +1,28 @@
 package clases
 
-import android.os.Parcel
 import android.os.Parcelable
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import kotlinx.parcelize.Parcelize
 import java.time.LocalDate
 import java.util.*
 
-class Producto: Parcelable {
-
-    lateinit var referencia:String
-    var nombre:String?
-    var precio:Int=0
-    var cantidad:Int=0
-
-    constructor(parcel: Parcel) : this() {
-        referencia = parcel.readString()!!
-        nombre = parcel.readString()
-        precio = parcel.readInt()
-        cantidad =parcel.readInt()
-    }
-
-    constructor(referencia: String, nombre: String, precio: Int, cantidad:Int) :
-            this() {
-        this.referencia=referencia
-        this.nombre=nombre
-        this.cantidad=cantidad
-        this.precio=precio
-    }
-
-    constructor(){
-        val random: Random = Random()
-        val nombresPosibles= arrayOf<String>("Martillo","Arandela","Destornillador","Sierra","Nevera","Estufa","Cama")
-        this.nombre=nombresPosibles[random.nextInt(nombresPosibles.size)]
-        this.referencia="PR"+random.nextInt(1000)
-        this.cantidad=random.nextInt(100)
-        this.precio=random.nextInt(100)
+@Parcelize
+@Entity
+data class Producto(
+    @PrimaryKey(autoGenerate = true)@ColumnInfo("id") var referencia: Int =0,
+    @ColumnInfo("nombre") var nombre:String?,
+    @ColumnInfo("precio") var precio:Int=0,
+    @ColumnInfo("cantidad") var cantidad:Int=0
+) : Parcelable
 
 
-    }
 
-     fun getName(): String {
-        return nombre + ""
-    }
 
-    override fun toString(): String {
-        return nombre+""
-    }
 
-     fun getNumeroSerie(): String{
-        return referencia +""
-    }
+fun Producto():Producto{
 
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(referencia)
-        parcel.writeString(nombre)
-        parcel.writeInt(cantidad)
-        parcel.writeInt(precio)
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    companion object CREATOR : Parcelable.Creator<Producto> {
-        override fun createFromParcel(parcel: Parcel): Producto {
-            return Producto(parcel)
-        }
-
-        override fun newArray(size: Int): Array<Producto?> {
-            return arrayOfNulls(size)
-        }
-    }
+    val producto = Producto(nombre = null, precio = 0, cantidad = 0)
+    return producto
 }

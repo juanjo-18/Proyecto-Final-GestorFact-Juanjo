@@ -1,13 +1,13 @@
 package com.example.proyectofinal
 
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import clases.Albaran
-import clases.Factura
-import clases.ItemSpacingDecoration
+import clases.*
 import com.example.proyectofinal.databinding.LayoutEditarProductoBinding
 import com.example.proyectofinal.databinding.LayoutFacturacionBinding
 import recyclers.albaranes.AlbaranesAdapter
@@ -16,6 +16,7 @@ import recyclers.facturacion.FacturacionAdapter
 class ActividadFacturacion : AppCompatActivity() {
     private lateinit var binding: LayoutFacturacionBinding
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= LayoutFacturacionBinding.inflate(layoutInflater)
@@ -24,7 +25,8 @@ class ActividadFacturacion : AppCompatActivity() {
 
         val valores = arrayListOf<Factura>()
         for (i in 3 downTo 1) {
-            var factura: Factura = Factura()
+            lateinit var factura: Factura
+            factura=factura.random()
             valores.add(factura)
         }
         val recyclerView: RecyclerView =findViewById<RecyclerView>(R.id.reciclerFactura)

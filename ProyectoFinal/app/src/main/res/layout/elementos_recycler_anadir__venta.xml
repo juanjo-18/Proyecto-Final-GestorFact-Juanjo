@@ -19,8 +19,8 @@
             android:layout_weight="1"
             android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/campoNombreAnadirLineaVenta"
+            <TextView
+                android:id="@+id/textoNombreAnadirLineaVenta"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginRight="3dp"
@@ -30,19 +30,8 @@
                 android:inputType="textPersonName"
                 android:paddingBottom="10dp" />
 
-            <EditText
-                android:id="@+id/campoPrecioAnadirLineaVenta"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_weight="1"
-                android:background="@color/white"
-                android:ems="10"
-                android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/campoCantidadAnadirLineaVenta"
+            <TextView
+                android:id="@+id/textoPrecioAnadirLineaVenta"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="5dp"
@@ -53,7 +42,18 @@
                 android:inputType="textPersonName" />
 
             <TextView
-                android:id="@+id/campoTotalLineaAnadirVentaLinea"
+                android:id="@+id/textoCantidadAnadirLineaVenta"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/textoTotalLineaAnadirVentaLinea"
                 style="@style/texto"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
