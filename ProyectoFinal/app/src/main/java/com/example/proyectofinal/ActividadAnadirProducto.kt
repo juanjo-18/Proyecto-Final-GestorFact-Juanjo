@@ -18,8 +18,9 @@ class ActividadAnadirProducto : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding= LayoutAnadirProductoBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        db = Room.databaseBuilder(this, AppDataBase::class.java, "db").build()
-
+        db= Room.databaseBuilder(applicationContext, AppDataBase::class.java, "db")
+            .addMigrations(AppDataBase.MIGRATION_1_2)
+            .build()
         val botonIrACatalogo:ImageButton=findViewById(R.id.botonTerminadoAñadiendoProducto)
         botonIrACatalogo.setOnClickListener{
             GlobalScope.launch {

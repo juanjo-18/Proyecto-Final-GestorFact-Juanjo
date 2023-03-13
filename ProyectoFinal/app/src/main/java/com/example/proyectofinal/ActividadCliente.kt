@@ -23,10 +23,12 @@ class ActividadCliente : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.layout_cliente)
-        db = Room.databaseBuilder(this, AppDataBase::class.java, "db").build()
-
+        db= Room.databaseBuilder(applicationContext, AppDataBase::class.java, "db")
+            .addMigrations(AppDataBase.MIGRATION_1_2)
+            .build()
         var valores = arrayListOf<Cliente>()
         val context = this
+
         GlobalScope.launch {
             valores = db.clienteDAO().getAll() as ArrayList<Cliente>
             val recyclerView: RecyclerView = findViewById<RecyclerView>(R.id.reciclerCliente)

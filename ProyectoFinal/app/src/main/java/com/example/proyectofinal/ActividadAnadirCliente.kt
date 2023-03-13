@@ -20,7 +20,9 @@ class ActividadAnadirCliente : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = LayoutAnadirClienteBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        db = Room.databaseBuilder(this, AppDataBase::class.java, "db").build()
+        db= Room.databaseBuilder(applicationContext, AppDataBase::class.java, "db")
+            .addMigrations(AppDataBase.MIGRATION_1_2)
+            .build()
 
         val botonIrACliente: ImageButton = findViewById(R.id.botonTerminadoAñadiendoCliente)
         botonIrACliente.setOnClickListener {

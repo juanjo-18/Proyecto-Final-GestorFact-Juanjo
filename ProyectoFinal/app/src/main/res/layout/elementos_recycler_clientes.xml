@@ -15,14 +15,6 @@
         android:layout_marginLeft="5dp"
         android:text="TextView" />
 
-    <TextView
-        android:id="@+id/textoReferenciaCliente"
-        style="@style/textoElementos"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:text="TextView" />
-
     <LinearLayout
         android:id="@+id/contenedorBotonesClientes"
         android:layout_width="match_parent"

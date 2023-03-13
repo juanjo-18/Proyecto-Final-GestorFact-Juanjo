@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.room.Room
 import clases.ItemSpacingDecoration
 import clases.Producto
-import clases.random
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dataBase.AppDataBase
 import kotlinx.coroutines.*
@@ -27,7 +26,9 @@ class ActividadCatalogo : AppCompatActivity(), SearchView.OnQueryTextListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.layout_catalogo)
-        db = Room.databaseBuilder(this, AppDataBase::class.java, "db").build()
+        db= Room.databaseBuilder(applicationContext, AppDataBase::class.java, "db")
+            .addMigrations(AppDataBase.MIGRATION_1_2)
+            .build()
 
 
 
