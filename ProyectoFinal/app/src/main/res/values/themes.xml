@@ -14,11 +14,11 @@
     </style>
 
     <style name="textoElementos">
-        <item name='android:textSize'>18sp</item>
+        <item name='android:textSize'>21sp</item>
         <item name='android:textStyle'>bold</item>
     </style>
     <style name="textoElementosFechas">
-        <item name='android:textSize'>18sp</item>
+        <item name='android:textSize'>21sp</item>
         <item name='android:textStyle'>bold</item>
         <item name='android:textColor'>@color/naranjaClaro</item>
     </style>
@@ -59,7 +59,7 @@
 
     <style name="texto" >
         <item name="android:textAlignment">gravity</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">21sp</item>
         <item name="android:textColor">@color/black</item>
     </style>
 

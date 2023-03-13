@@ -12,10 +12,12 @@ import android.widget.ImageButton
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import clases.ItemSpacingDecoration
-import clases.Producto
+import androidx.room.Room
+import clases.*
 import com.example.proyectofinal.databinding.LayoutAnadirVentaBinding
-import com.google.android.material.textfield.TextInputEditText
+import dataBase.AppDataBase
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import recyclers.anadirProductosVenta.LineaVentaAdapter
 import java.time.LocalDate
 import java.util.*
@@ -23,18 +25,22 @@ import java.util.logging.Handler
 
 class ActividadAnadirVenta : AppCompatActivity() {
     private lateinit var binding: LayoutAnadirVentaBinding
+    private lateinit var db: AppDataBase
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = LayoutAnadirVentaBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        db= Room.databaseBuilder(applicationContext, AppDataBase::class.java, "db")
+            .addMigrations(AppDataBase.MIGRATION_1_2)
+            .build()
 
 
-        val valores = arrayListOf<Producto>()
+        val productos = arrayListOf<Producto>()
 
         val recyclerView: RecyclerView =findViewById<RecyclerView>(R.id.recyclerLineasProductos)
-        recyclerView.adapter= LineaVentaAdapter(this,valores)
+        recyclerView.adapter= LineaVentaAdapter(this,productos)
         val staggeredManager: StaggeredGridLayoutManager = StaggeredGridLayoutManager(1,
             StaggeredGridLayoutManager.VERTICAL)
         staggeredManager.gapStrategy= StaggeredGridLayoutManager.GAP_HANDLING_NONE
@@ -50,8 +56,8 @@ class ActividadAnadirVenta : AppCompatActivity() {
             producto.precio=binding.campoPrecioAnadirLineaVenta.text.toString().toIntOrNull()?:0
 
 
-            valores.add(producto) // Agrega un nuevo Producto vacío a la lista de valores
-            recyclerView.adapter?.notifyItemInserted(valores.indexOf(producto)) // Notifica al Adapter del cambio en la lista de valores
+            productos.add(producto) // Agrega un nuevo Producto vacío a la lista de valores
+            recyclerView.adapter?.notifyItemInserted(productos.indexOf(producto)) // Notifica al Adapter del cambio en la lista de valores
             binding.campoNombreAnadirLineaVenta.setText("")
             binding.campoPrecioAnadirLineaVenta.setText("")
             binding.campoCantidadAnadirLineaVenta.setText("")
@@ -155,6 +161,35 @@ class ActividadAnadirVenta : AppCompatActivity() {
         }
 
         binding.botonTerminadoAAdiendoVenta.setOnClickListener{
+           var totalAlbaranFinal:Int=0
+
+            GlobalScope.launch {
+                for(producto in productos){
+                    db.albaran_ProductoDAO().insert(
+                        Albaran_Producto(
+                            tituloAlbaran = binding.campoTituloAnadirVenta.text.toString(),
+                            nombreProducto = producto.nombre.toString(),
+                            precio=producto.precio,
+                            cantidad = producto.cantidad,
+                            total = producto.precio*producto.cantidad
+                        )
+                    )
+                    totalAlbaranFinal += producto.precio * producto.cantidad
+                }
+
+                db.albaranDAO().insert(
+                   Albaran(
+                       titulo=binding.campoTituloAnadirVenta.text.toString(),
+                       nombreCliente = binding.campoClienteNombreAnadirVenta.text.toString(),
+                       fecha=LocalDate.now(),
+                       estado="pendiente",
+                       precioTotal =totalAlbaranFinal,
+                       cliente = binding.campoClienteNombreAnadirVenta.text.toString()
+                   )
+                )
+            }
+
+
             val intent: Intent = Intent(
                 this,ActividadVenta::class.java
             )
