@@ -55,6 +55,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/campoReferenciaProductoEditarEditar"
+                    style="@style/texto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/referencia" />
@@ -68,6 +69,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/campoNombreProductoEditar"
+                    style="@style/texto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/nombre" />
@@ -81,6 +83,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/campoPrecioProductoEditar"
+                    style="@style/texto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/precioBase" />
@@ -94,6 +97,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/campoStockEditar"
+                    style="@style/texto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/stock" />

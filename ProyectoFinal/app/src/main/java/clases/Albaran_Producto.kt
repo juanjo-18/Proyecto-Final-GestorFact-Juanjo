@@ -14,13 +14,13 @@ data class Albaran_Producto(
     @PrimaryKey(autoGenerate = true) @ColumnInfo("id") var referencia:Int=0,
     @ColumnInfo("tituloAlbaran") var tituloAlbaran: String?,
     @ColumnInfo("nombreProducto") var nombreProducto: String?,
-    @ColumnInfo("precio") var precio: Int = 0,
+    @ColumnInfo("precio") var precio: Float = 0f,
     @ColumnInfo("cantidad") var cantidad: Int = 0,
-    @ColumnInfo("total") var total: Int = 0
+    @ColumnInfo("total") var total: Float = 0f
     ) : Parcelable
 
 
 fun Albaran_Producto():Albaran_Producto{
-    val albaran_producto = Albaran_Producto(tituloAlbaran = null, nombreProducto = null, precio = 0, cantidad = 0, total = 0)
+    val albaran_producto = Albaran_Producto(tituloAlbaran = null, nombreProducto = null, precio = 0f, cantidad = 0, total = 0f)
     return albaran_producto
 }

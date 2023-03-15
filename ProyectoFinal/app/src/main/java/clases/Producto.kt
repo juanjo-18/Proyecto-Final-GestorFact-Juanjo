@@ -13,7 +13,7 @@ import java.util.*
 data class Producto(
     @PrimaryKey(autoGenerate = true)@ColumnInfo("id") var referencia: Int =0,
     @ColumnInfo("nombre") var nombre:String?,
-    @ColumnInfo("precio") var precio:Int=0,
+    @ColumnInfo("precio") var precio:Float=0f,
     @ColumnInfo("cantidad") var cantidad:Int=0
 ) : Parcelable
 
@@ -21,6 +21,6 @@ data class Producto(
 
 
 fun Producto():Producto{
-    val producto = Producto(nombre = null, precio = 0, cantidad = 0)
+    val producto = Producto(nombre = null, precio = 0f, cantidad = 0)
     return producto
 }

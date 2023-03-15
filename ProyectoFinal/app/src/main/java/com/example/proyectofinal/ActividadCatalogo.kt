@@ -15,6 +15,9 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.room.Room
 import clases.ItemSpacingDecoration
 import clases.Producto
+import com.example.proyectofinal.databinding.LayoutAnadirClienteBinding
+import com.example.proyectofinal.databinding.LayoutAnadirProductoBinding
+import com.example.proyectofinal.databinding.LayoutCatalogoBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dataBase.AppDataBase
 import kotlinx.coroutines.*
@@ -22,21 +25,22 @@ import recyclers.catalogo.ProductosAdapter
 
 class ActividadCatalogo : AppCompatActivity(), SearchView.OnQueryTextListener {
     private lateinit var db: AppDataBase
+    private lateinit var binding: LayoutCatalogoBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.layout_catalogo)
-        db= Room.databaseBuilder(applicationContext, AppDataBase::class.java, "db")
+        binding = LayoutCatalogoBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        db = Room.databaseBuilder(applicationContext, AppDataBase::class.java, "db")
             .addMigrations(AppDataBase.MIGRATION_1_2)
             .build()
 
 
-
-        var valores= arrayListOf<Producto>()
+        var valores = arrayListOf<Producto>()
         val context = this
         GlobalScope.launch {
-             valores = db.productoDAO().getAll() as ArrayList<Producto>
-                val recyclerView: RecyclerView = findViewById<RecyclerView>(R.id.reciclerCatalogo)
+            valores = db.productoDAO().getAll() as ArrayList<Producto>
+            val recyclerView: RecyclerView = findViewById<RecyclerView>(R.id.reciclerCatalogo)
             recyclerView.adapter = ProductosAdapter(context, valores)
             val staggeredManager: StaggeredGridLayoutManager = StaggeredGridLayoutManager(
                 1,
@@ -50,16 +54,11 @@ class ActividadCatalogo : AppCompatActivity(), SearchView.OnQueryTextListener {
             recyclerView.addItemDecoration(itemSpacingDecoration)
 
 
-
-
         }
 
 
+        binding.botonAnadirProducto.setOnClickListener {
 
-
-
-        val botonIrAnadirProducto: FloatingActionButton = findViewById(R.id.botonAnadirProducto)
-        botonIrAnadirProducto.setOnClickListener {
             val intent: Intent = Intent(
                 this, ActividadAnadirProducto::class.java
             )
@@ -103,8 +102,6 @@ class ActividadCatalogo : AppCompatActivity(), SearchView.OnQueryTextListener {
             )
             this.startActivity(intent)
         }
-
-
 
 
     }

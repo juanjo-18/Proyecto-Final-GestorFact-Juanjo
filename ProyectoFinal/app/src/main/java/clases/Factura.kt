@@ -21,6 +21,6 @@ data class Factura(
     @ColumnInfo("fecha") var fecha: LocalDate?,
     @ColumnInfo("tipoFactura") var tipoFactura: String?,
     @ColumnInfo("cobrada") var cobrada: Boolean = false,
-    @ColumnInfo("PrecioTotal") var precioTotal: Int = 0,
+    @ColumnInfo("PrecioTotal") var precioTotal: Float = 0f,
     @ColumnInfo("dni") var cliente: String
 ) : Parcelable

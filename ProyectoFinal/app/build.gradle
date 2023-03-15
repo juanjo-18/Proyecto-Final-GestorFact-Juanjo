@@ -53,6 +53,9 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.4.1'
+    // ITextPDF5
+    implementation 'com.itextpdf:itextg:5.5.10'
+
     implementation 'androidx.navigation:navigation-ui-ktx:2.4.1'
     implementation 'com.google.android.gms:play-services-plus:17.0.0'
     implementation 'com.google.firebase:firebase-firestore-ktx:24.1.1'

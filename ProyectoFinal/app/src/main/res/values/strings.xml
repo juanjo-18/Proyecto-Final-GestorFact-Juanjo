@@ -65,5 +65,13 @@
     <string name="factura">Factura</string>
     <string name="cliente">Cliente</string>
     <string name="titulo">Titulo</string>
+    <string name="camposVacios">No puede haber campos vacios</string>
+    <string name="contieneTexto">Los campos numericos no pueden contener texto</string>
+    <string name="numeroMal">Los numeros no son validos</string>
+    <string name="contieneNegativo">No puede haber numeros negativos</string>
+    <string name="numeroBajo">La cantidad y el precio no puede ser tan pequeño</string>
+    <string name="completarCheck">Tienes que marcar una casilla</string>
+    <string name="tituloRepetido">No puede haber un titulo repetido</string>
+    <string name="minimoProducto">Mínimo tiene que haber un producto añadido</string>
 
 </resources>
