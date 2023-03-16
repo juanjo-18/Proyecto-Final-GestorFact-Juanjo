@@ -17,6 +17,9 @@ interface ProductoDAO {
     @Update
     fun updateUsers(vararg producto: Producto)
 
+    @Query("UPDATE producto SET nombre= :nombre,cantidad= :cantidad, precio= :precio where id= :referencia")
+    fun actualizarProducto(referencia:Int,nombre:String,cantidad:Int,precio:Float):Int
+
     @Query("SELECT * FROM producto WHERE nombre LIKE :searchText")
     fun buscarProductosPorNombre(searchText: String): List<Producto>
 

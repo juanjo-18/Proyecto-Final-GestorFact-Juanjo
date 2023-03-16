@@ -25,7 +25,7 @@ class ActividadPrincipal : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = LayoutLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        //this.deleteDatabase("db")
+       // this.deleteDatabase("db")
 
         val botonIrAInico: Button =findViewById<Button>(R.id.botonIniciarSesion)
         val botonIrARegistro: Button =findViewById<Button>(R.id.botonRegistrarte)

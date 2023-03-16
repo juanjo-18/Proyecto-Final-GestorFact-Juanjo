@@ -30,9 +30,7 @@ class ProductosAdapter (val actividadMadre: Activity, val datos:ArrayList<Produc
 
         holder.botonEditar.setOnClickListener {
             val intent: Intent = Intent(actividadMadre, ActividadEditarProducto::class.java)
-            val bundle: Bundle = Bundle()
-            bundle.putParcelable("producto",producto)
-            intent.putExtras(bundle)
+            intent.putExtra("nombre", producto.nombre)
             actividadMadre.startActivity(intent)
         }
     }
