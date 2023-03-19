@@ -12,12 +12,26 @@ import com.google.firebase.firestore.FirebaseFirestore
 import emergentes.Alerta
 import java.time.LocalDate
 
+/**
+ * Esta es la pantalla inicial donde una vez iniciado sesion o registrarte entraras aqui se muestran los datos
+ * generales de las facturas y albaranes.
+ * @author Juanjo Medina
+ */
 class ActividadInicio : AppCompatActivity() {
 
+    /**
+     * Variable para la instancia de la base de datos.
+     */
     private lateinit var binding: LayoutInicioBinding
 
+    /**
+     * Método onCreate() de la actividad, se llama al crear la actividad.
+     * @param savedInstanceState estado de la actividad si se restaura.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Se infla el layout y se establece como el contenido de la actividad.
         binding = LayoutInicioBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -28,7 +42,7 @@ class ActividadInicio : AppCompatActivity() {
         val botonIrAVenta:ImageButton=findViewById<ImageButton>(R.id.botonIrAVentaDedeInicio)
         val botonIrAFacturacion:ImageButton=findViewById<ImageButton>(R.id.botonIrAFacturacionDesdeInicio)
 
-
+        //Boton que cambia la panatalla de catalogo
         botonIrACatalogo.setOnClickListener{
             val intent: Intent = Intent(
                 this,ActividadCatalogo::class.java
@@ -37,6 +51,7 @@ class ActividadInicio : AppCompatActivity() {
 
         }
 
+        //Boton que cambia la panatalla de cliente
         botonIrACliente.setOnClickListener{
             val intent: Intent = Intent(
                 this,ActividadCliente::class.java
@@ -44,18 +59,14 @@ class ActividadInicio : AppCompatActivity() {
             this.startActivity(intent)
         }
 
+        //Boton que cambia la panatalla de ventas
         botonIrAVenta.setOnClickListener{
             val intent: Intent = Intent(
                 this,ActividadVenta::class.java
             )
             this.startActivity(intent)
         }
-        botonIrAFacturacion.setOnClickListener{
-            val intent: Intent = Intent(
-                this,ActividadFacturacion::class.java
-            )
-            this.startActivity(intent)
-        }
+
 
     }
 

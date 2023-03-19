@@ -74,5 +74,6 @@
     <string name="tituloRepetido">No puede haber un titulo repetido</string>
     <string name="minimoProducto">Mínimo tiene que haber un producto añadido</string>
     <string name="estadoAlbaran">Estado</string>
+    <string name="seleccionarCliente">Tienes que seleccionar un cliente</string>
 
 </resources>

@@ -32,24 +32,57 @@ import java.time.LocalDate
 import java.time.ZoneId
 import java.time.format.DateTimeParseException
 import java.util.*
+
+/**
+ *Esta es la clase que representa la actividad para registrarse teniendo que poner todos tus datos, despues se te
+ * registrara en la base de datos una vez que rellenes correctamente todos los campos.
+ *
+ * @author Juanjo Medina
+ */
 class ActividadRegistro : AppCompatActivity() {
+
+
+    /**
+     * Variable para el binding del layout.
+     */
     private lateinit var binding: LayoutRegistroBinding
+
+    /**
+     * Variable que se utiliza para solicitar permisos de cámara. Es de tipo Int y su valor es 5432345.
+     */
     private val PERMISO_CAMARA: Int = 5432345
+
+    /**
+     * Variable que utiliza el método registerForActivityResult() de la clase ActivityResultContracts para
+     * lanzar un selector de imagen y obtener la imagen seleccionada. Después de seleccionar una imagen,
+     * la imagen se establece en binding.imagenPerfilUsuario.
+     */
     val lanzadorElegirImagen = registerForActivityResult(ActivityResultContracts.GetContent()) {
         binding.imagenPerfilUsuario.setImageURI(it);
     }
+
+    /**
+     * Variable para la instancia de la base de datos.
+     */
     private val db = FirebaseFirestore.getInstance()
 
 
-   @RequiresApi(Build.VERSION_CODES.O)
-   override fun onCreate(savedInstanceState: Bundle?) {
+    /**
+     * Método onCreate() de la actividad, se llama al crear la actividad.
+     * @param savedInstanceState estado de la actividad si se restaura.
+     */
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Se infla el layout y se establece como el contenido de la actividad.
         binding = LayoutRegistroBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val botonIrAIniciar: Button = findViewById<Button>(R.id.botonIniciarSesion)
         val botonIrAInicio: Button = findViewById<Button>(R.id.botonRegistrarte)
 
+        //Boton que cambia la panatalla inicio
         botonIrAIniciar.setOnClickListener {
             val intent: Intent = Intent(
                 this, ActividadPrincipal::class.java
@@ -57,6 +90,7 @@ class ActividadRegistro : AppCompatActivity() {
             this.startActivity(intent)
         }
 
+        //Boton que te registra en firebase y comprueba que esten todos los valores bien rellenos
         botonIrAInicio.setOnClickListener {
             var camposVacios: Boolean = false;
 
@@ -74,7 +108,6 @@ class ActividadRegistro : AppCompatActivity() {
 
                 try {
                     val fechaNacimiento: LocalDate = LocalDate.parse(binding.textoFecha.text)
-
 
                     val preferencias: SharedPreferences = getSharedPreferences(
                         "preferenciasPersonalizadas", Context.MODE_PRIVATE
@@ -147,10 +180,7 @@ class ActividadRegistro : AppCompatActivity() {
                     Toast.makeText(this, R.string.fechaValida, Toast.LENGTH_LONG)
                         .show()
                 }
-
-
             }
-
 
 
         }
@@ -167,6 +197,7 @@ class ActividadRegistro : AppCompatActivity() {
                 }
             }
 
+        //Boton para que salga un calendario y poder cambiar la fecha
         binding.botonCambiarFecha.setOnClickListener {
             val calendario: Calendar = Calendar.getInstance()
             val datePicker: DatePickerDialog =
@@ -181,6 +212,7 @@ class ActividadRegistro : AppCompatActivity() {
             datePicker.show()
         }
 
+        //Boton que se encarga de acceder a tu galeria para poder añadir una foto
         binding.botonCambiarFoto.setOnClickListener {
             if (ActivityCompat.checkSelfPermission(
                     this,
@@ -212,6 +244,7 @@ class ActividadRegistro : AppCompatActivity() {
 
     }
 
+    //Esta funcion la llamo para dar los permisos a la aplicacion
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,

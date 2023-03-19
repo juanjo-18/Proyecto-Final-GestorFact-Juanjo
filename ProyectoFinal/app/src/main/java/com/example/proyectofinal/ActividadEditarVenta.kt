@@ -4,14 +4,15 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.widget.ImageButton
-import android.widget.Toast
+import android.view.View
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.room.Room
 import clases.Albaran
 import clases.Albaran_Producto
+import clases.Cliente
 import clases.Producto
 import com.example.proyectofinal.databinding.LayoutEditarVentaBinding
 import dataBase.AppDataBase
@@ -23,15 +24,37 @@ import recyclers.anadirProductosVenta.LineaVentaAdapter
 import java.util.*
 import kotlin.collections.ArrayList
 
-
+/**
+ * Esta es la clase que representa la actividad para editar una venta aqui podremos modifcar el albaran tanto
+ * el nombre de cliente, titulo y los productos añadidos una vez realizado los cambios se actualizara a la base de datos
+ *
+ *
+ * @author Juanjo Medina
+ */
 class ActividadEditarVenta : AppCompatActivity() {
+
+    /**
+     * Variable para la instancia de la base de datos.
+     */
     private lateinit var binding: LayoutEditarVentaBinding
+
+    /**
+     * Variable para la instancia de la base de datos.
+     */
     private lateinit var db: AppDataBase
 
+    /**
+     * Método onCreate() de la actividad, se llama al crear la actividad.
+     * @param savedInstanceState estado de la actividad si se restaura.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Se infla el layout y se establece como el contenido de la actividad.
         binding = LayoutEditarVentaBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Se inicializa la instancia de la base de datos y se actualiza si hubiera nueva version.
         db = Room.databaseBuilder(applicationContext, AppDataBase::class.java, "db")
             .addMigrations(AppDataBase.MIGRATION_1_2)
             .build()
@@ -42,7 +65,50 @@ class ActividadEditarVenta : AppCompatActivity() {
         var precioLleno = false
         var cantidadLlena = false
         var checkBoxVacio = true
+        var nombreCliente = ""
+        var clienteIncorrecto = false
 
+        var clientes = ArrayList<Cliente>()
+        var nombres = arrayListOf("Añadir nombre")
+
+        //Recogo todos los clientes de la base de datos para poder mostrarlos despues en un spinner
+        CoroutineScope(Dispatchers.IO).launch {
+            launch(Dispatchers.IO) {
+                clientes = db.clienteDAO().getAll() as ArrayList<Cliente>
+                for (cliente in clientes) {
+                    nombres.add(cliente.nombre.toString())
+                }
+            }
+        }
+
+
+        //Creo un spinner de los clientes que he recogido previamente
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, nombres)
+        val spinner = findViewById<Spinner>(R.id.spinnerNombreClienteEditar)
+        spinner.adapter = adapter
+
+
+        //Si algun elemento del spinner es seleccionado añade el nombre al nombreCliente ademas comprueba si esta marcado
+        //añadir nombre para poner clienteIncorrecto en true para que no deje guardar asi.
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                val nombreSeleccionado = nombres[position]
+                if (nombreSeleccionado == "Añadir nombre") {
+                    clienteIncorrecto = true
+                }
+                nombreCliente = nombreSeleccionado
+            }
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // No se ha seleccionado ningún elemento
+            }
+        }
+
+        //Si el checkBox presupuesto a sido marcado desmarco pedido y albaran.
         binding.checkBoxPresupuestoEditar.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
                 checkBoxVacio = false
@@ -52,6 +118,8 @@ class ActividadEditarVenta : AppCompatActivity() {
                 checkBoxVacio = true
             }
         }
+
+        //Si el checkBox albaran a sido marcado desmarco pedido y albaran.
         binding.checkBoxAlbaranEditar.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
                 checkBoxVacio = false
@@ -61,6 +129,8 @@ class ActividadEditarVenta : AppCompatActivity() {
                 checkBoxVacio = true
             }
         }
+
+        //Si el checkBox pedido a sido marcado desmarco presupuesto y albaran.
         binding.checkBoxPedidoEditar.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
                 checkBoxVacio = false
@@ -71,6 +141,10 @@ class ActividadEditarVenta : AppCompatActivity() {
             }
         }
 
+        /**
+         * Aqui si en el campo cantidad ha habido algun cambio compruebo si el precio tiene algun dato valido
+         *  y si lo tiene lo multiplico el precio y la cantidad, para ponerlo en el total.
+         */
         binding.campoCantidadEditarLineaVenta.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 if (binding.campoCantidadEditarLineaVenta.text.toString().isNotEmpty()
@@ -103,6 +177,10 @@ class ActividadEditarVenta : AppCompatActivity() {
             }
         })
 
+        /**
+         * Aqui si en el campo cantidad ha habido algun cambio compruebo si el precio tiene algun dato valido
+         *  y si lo tiene lo multiplico el precio y la cantidad, para ponerlo en el total.
+         */
         binding.campoPrecioEditarLineaVenta.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 if (binding.campoCantidadEditarLineaVenta.text.toString().isNotEmpty()
@@ -143,36 +221,29 @@ class ActividadEditarVenta : AppCompatActivity() {
         val recyclerView: RecyclerView =
             findViewById<RecyclerView>(R.id.recyclerLineasProductosEditar)
 
+        //Compruebo si el titulo esta relleno
         if (titulo != null) {
             var valores = arrayListOf<Albaran>()
             CoroutineScope(Dispatchers.IO).launch {
                 launch(Dispatchers.IO) {
+                    //hago un select a la base de datos del albaran con el titulo para cargar los datos al latour de editar
                     valores =
                         db.albaranDAO().buscarAlbaranPorTitulo(titulo!!) as ArrayList<Albaran>
                     withContext(Dispatchers.Main) {
                         for (valor in valores) {
                             binding.campoTituloEditarVenta.setText(valor.titulo)
-                            binding.campoClienteNombreEditarVenta.setText(valor.nombreCliente)
                             binding.textoFechaDesdeVentaEditar.setText(valor.fecha.toString())
                             binding.textoNumeroTotalBaseEditarVenta.setText(
                                 (valor.precioTotal / 1.21).toString()
                             )
                             binding.textoNumeroIvaEditarVenta.setText(
-
-
                                 (valor.precioTotal - (valor.precioTotal / 1.21)).toString()
-
                             )
                             binding.textoNumeroTotalEditarVenta.setText(
 
                                 valor.precioTotal.toString()
 
                             )
-
-                            /**
-                             * El estado falta no se como lo voy ha hacer
-                            @ColumnInfo("estado") var estado: String?,
-                             */
                         }
                     }
                 }
@@ -183,6 +254,7 @@ class ActividadEditarVenta : AppCompatActivity() {
 
             CoroutineScope(Dispatchers.IO).launch {
                 launch(Dispatchers.IO) {
+                    //Aqui traigo todos los productos que tiene ese titulo y los cargo al layout
                     albaran_producto = db.albaran_ProductoDAO()
                         .buscarAlbaranProductoPorTitulo(titulo!!) as ArrayList<Albaran_Producto>
                     withContext(Dispatchers.Main) {
@@ -213,7 +285,10 @@ class ActividadEditarVenta : AppCompatActivity() {
             }
         }
 
-        //boton que añade linea
+        /**
+         * Este boton se encarga de añadir una nueva linea al recyclerview y comprobar todos los valores
+         * esten correctos
+         */
         val añadirLinea: ImageButton = findViewById<ImageButton>(R.id.botonEditarVenta)
         añadirLinea.setOnClickListener {
             contieneTexto = false
@@ -274,45 +349,81 @@ class ActividadEditarVenta : AppCompatActivity() {
         }
 
 
-
+        /**
+         * En este boton nos encargamos de comprobar que todos los valores esten correctos y se actualiza en la base
+         * de datos tanto todos los productos como la venta.
+         */
         binding.botonTerminadoAAdiendoVenta.setOnClickListener {
+            if (nombreCliente != "Añadir nombre") {
+                clienteIncorrecto = false
+            }
+            var camposVacios: Boolean = false
 
-            var totalAlbaranFinal: Float = 0f
-            CoroutineScope(Dispatchers.IO).launch {
-                db.albaran_ProductoDAO().borrarTodosPorTitulo(titulo.toString())
-                for (producto in productos) {
-                    db.albaran_ProductoDAO().insert(
-                        Albaran_Producto(
-                            tituloAlbaran = binding.campoTituloEditarVenta.text.toString(),
-                            nombreProducto = producto.nombre.toString(),
-                            precio = producto.precio,
-                            cantidad = producto.cantidad,
-                            total = producto.precio * producto.cantidad
-                        )
-                    )
-                    totalAlbaranFinal += producto.precio * producto.cantidad
-                }
-
-                db.albaranDAO().updateAlbaran(
-                    binding.campoTituloEditarVenta.text.toString(),
-                    binding.campoClienteNombreEditarVenta.text.toString(),
-                    binding.textoFechaDesdeVentaEditar.text.toString(),
-                    "Pendiente",
-                    (totalAlbaranFinal*1.21).toFloat()
-                )
-
-
-
-
+            if (binding.campoTituloEditarVenta.text.toString().isBlank()) {
+                camposVacios = true
             }
 
+            for (producto in productos) {
+                if (producto.nombre.toString().isBlank()) {
+                    camposVacios = true
+                }
+                if (producto.precio.toString().isBlank()) {
+                    camposVacios = true
+                }
+                if (producto.cantidad.toString().isBlank()) {
+                    camposVacios = true
+                }
+            }
+            if (!checkBoxVacio) {
+                if (!clienteIncorrecto) {
+                    if (!camposVacios) {
+                        if (productos.size >= 1) {
+                            var totalAlbaranFinal: Float = 0f
+                            CoroutineScope(Dispatchers.IO).launch {
+                                db.albaran_ProductoDAO().borrarTodosPorTitulo(titulo.toString())
+                                for (producto in productos) {
+                                    //Inserto los productos
+                                    db.albaran_ProductoDAO().insert(
+                                        Albaran_Producto(
+                                            tituloAlbaran = binding.campoTituloEditarVenta.text.toString(),
+                                            nombreProducto = producto.nombre.toString(),
+                                            precio = producto.precio,
+                                            cantidad = producto.cantidad,
+                                            total = producto.precio * producto.cantidad
+                                        )
+                                    )
+                                    totalAlbaranFinal += producto.precio * producto.cantidad
+                                }
 
-            val intent: Intent = Intent(
-                this, ActividadVenta::class.java
-            )
-            this.startActivity(intent)
+                                //Inserto los albaranes
+                                db.albaranDAO().updateAlbaran(
+                                    binding.campoTituloEditarVenta.text.toString(),
+                                    nombreCliente,
+                                    binding.textoFechaDesdeVentaEditar.text.toString(),
+                                    "Pendiente",
+                                    (totalAlbaranFinal * 1.21).toFloat()
+                                )
+                            }
+
+                            val intent: Intent = Intent(
+                                this, ActividadVenta::class.java
+                            )
+                            this.startActivity(intent)
+                        } else {
+                            Toast.makeText(this, R.string.camposVacios, Toast.LENGTH_SHORT).show()
+                        }
+                    } else {
+                        Toast.makeText(this, R.string.minimoProducto, Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    Toast.makeText(this, R.string.seleccionarCliente, Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(this, R.string.completarCheck, Toast.LENGTH_SHORT).show()
+            }
         }
 
+        //Esto es un actualizador de los datos de abajo y laza la funcion actualizarDatos cada 0,1 segundo
         val timer = Timer()
         timer.schedule(object : TimerTask() {
             override fun run() {
@@ -321,6 +432,10 @@ class ActividadEditarVenta : AppCompatActivity() {
         }, 0, 100)
     }
 
+    /**
+     * Esta funcion recibe un arraylist de Productos con todos los productos añadido al recycler para añadir
+     * los valores actualizados a la base, iva y precio total
+     */
     private fun actualizarTotal(productos: ArrayList<Producto>) {
         runOnUiThread {
             var total: Float = 0f

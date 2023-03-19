@@ -12,9 +12,22 @@ import java.io.File
 import java.io.FileOutputStream
 import java.text.DecimalFormat
 
+/**
+ * Esta clase lo que se encarga de recibir tanto una factura o un albaran y creara un pdf con todos los
+ * valores pasado, abra una cabezara con el logo de la empresa, los datos de la empresa nuestra, los del cliente
+ * asi como informacion de la factura o venta. Ademas abajo abra una tabla con los nombres de los productos cantidades,
+ * precios, y precio total. Abajo del documento se encuntra la base del precio del albaran o factura, el iva y
+ * el precio total.
+ * @author Juanjo medina
+ */
+
 class CrearPDF {
 
-
+    /**
+     * Esta funcion sera la encargada de hacer el proceso de la creazion del pdf
+     *  le tengo que pasar el resources de mi pantalla, el context, un objeto albaran, el arrayList de productos
+     *  y un objeto cliente
+     */
     fun generarPdf(
         resources: Resources, context: Context,
         albaran:Albaran,
@@ -68,6 +81,8 @@ class CrearPDF {
         var totalNumeroTexto = formato.format(albaran.precioTotal).toString()+"€"
 
         //Tabla de productos (Actual maximo de productos de 18)
+        //Esta es la cabezera de la tabla para mostrar los productos tambien una lista con todos los datos sacado
+        //Del objeto producto que hay pasado
         val columnas = listOf("Nombre", "Precio", "Unidades", "Subtotal", "IMP.")
         val datos = productos.map {
             listOf(
@@ -84,7 +99,7 @@ class CrearPDF {
 
         var canvas = pagina1.canvas
 
-        //Logo
+        //Aqui se pone el logo
         var bitmap = BitmapFactory.decodeResource(resources, R.drawable.logo)
         var bitmapEscala = Bitmap.createScaledBitmap(bitmap, 175, 115, false)
         canvas.drawBitmap(bitmapEscala, 40f, 40f, paint)
@@ -144,6 +159,7 @@ class CrearPDF {
         paint.color = Color.GRAY
         canvas.drawLine(45f, 295f, 370f, 295f, paint)
 
+        //Datos sobre la factura
         var numeroDePedido = TextPaint()
         numeroDePedido.textSize = 15f
         canvas.drawText(numeroDePedidoTexto, 45f, 315f, numeroDePedido)
@@ -170,6 +186,7 @@ class CrearPDF {
         numeroDeCuenta.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD))
        // canvas.drawText(numeroDeCuentaTexto, 45f, 375f, numeroDeCuenta)
 
+
         //Linea vertical al lado de datos de factura
         paint.strokeWidth = 2f
         val xLinea = (canvasWidth - 2f) / 2f
@@ -189,6 +206,7 @@ class CrearPDF {
         paint.color = Color.GRAY
         canvas.drawLine(430f, 295f, 735f, 295f, paint)
 
+        //Datos del cliente
         var nombreClietne = TextPaint()
         nombreClietne.textSize = 15f
         nombreClietne.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD))
@@ -204,7 +222,7 @@ class CrearPDF {
         canvas.drawText(direccionClienteTexto, 430f, 375f, direccionCliente)
 
 
-
+        //Aqui se llama la funcion para crear la tabla y se marca la posicion que empezara en el folio
         crearTabla(pagina1, columnas, datos as List<List<String>>, 470f)
 
 
@@ -257,21 +275,16 @@ class CrearPDF {
         canvas.drawLine(10f, 1020f, canvasWidth - 10f, 1020f, paint)
 
 
-
-
-
-
-
-
-
-
-
+        //Aqui cierro el documento
         pdfDocument.finishPage(pagina1)
 
-        var file = File(Environment.getExternalStorageDirectory(), "Archivo.pdf")
+        //Aqui es donde se pone el nombre y donde se va a guardar el pdf
+        var file = File(Environment.getExternalStorageDirectory(), numeroFacturaTexto.toString()+"Archivo.pdf")
         if (file.exists()) {
             file.delete()
         }
+
+        //El pdf se va a guardar en descargas
         file = File(
             Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
             "ArchivoPersonalizado.pdf"
@@ -287,6 +300,9 @@ class CrearPDF {
 
     }
 
+    /**
+     * Aqui es donde se va a crear la tabla de los productos
+     */
     fun crearTabla(
         page: PdfDocument.Page,
         columnas: List<String>,

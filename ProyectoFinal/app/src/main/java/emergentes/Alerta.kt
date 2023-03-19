@@ -11,6 +11,10 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import com.example.proyectofinal.R
 
+/**
+ * Clase emergente que es una aleta que contiene un titulo y un mensaje
+ * @author Juanjo Medina
+ */
 class Alerta(val titulo:String, val mensaje:String, val textoBoton:String, val contexto: AppCompatActivity,
              val funcionCallback : (() -> Unit)?=null): DialogFragment() {
     private val layoutInflado: LinearLayout by lazy{
@@ -23,14 +27,6 @@ class Alerta(val titulo:String, val mensaje:String, val textoBoton:String, val c
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialogBuilder: AlertDialog.Builder= AlertDialog.Builder(contexto)
-        //No usamos las cosas por defecto si estamos usando nuestro propio layout
-        /* dialogBuilder.setTitle(titulo)
-         dialogBuilder.setMessage(mensaje)
-         dialogBuilder.setIcon(R.drawable.imagen_servidor)
-         dialogBuilder.setPositiveButton(this.resources.getString(R.string.ok),
-             DialogInterface.OnClickListener{
-             dialog:DialogInterface, di:Int ->
-         })*/
         textoTitulo.setText(titulo)
         textoMensaje.setText(mensaje)
         boton.setText(textoBoton)

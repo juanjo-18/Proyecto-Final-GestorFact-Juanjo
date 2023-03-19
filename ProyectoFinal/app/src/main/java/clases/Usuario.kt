@@ -9,6 +9,10 @@ import emergentes.Alerta
 import java.time.LocalDate
 import java.util.*
 
+/**
+ * Clase del usuario
+ * @author Juanjo medina
+ */
 class Usuario  : Parcelable {
 
     lateinit var contraseña:String

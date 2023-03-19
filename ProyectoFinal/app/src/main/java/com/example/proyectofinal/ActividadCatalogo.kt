@@ -23,14 +23,36 @@ import dataBase.AppDataBase
 import kotlinx.coroutines.*
 import recyclers.catalogo.ProductosAdapter
 
+/**Esta es la clase que representa la actividad Catalogo aqui se mostraran todos los objetos Producto en un recycler
+ * view,  abajo a la derecha hay un boton para añadir un nuevo producto.
+ *
+ * @author Juanjo Medina
+ */
 class ActividadCatalogo : AppCompatActivity(), SearchView.OnQueryTextListener {
+
+    /**
+     * Variable para la instancia de la base de datos.
+     */
     private lateinit var db: AppDataBase
+
+    /**
+     * Variable para la instancia de la base de datos.
+     */
     private lateinit var binding: LayoutCatalogoBinding
 
+
+    /**
+     * Método onCreate() de la actividad, se llama al crear la actividad.
+     * @param savedInstanceState estado de la actividad si se restaura.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Se infla el layout y se establece como el contenido de la actividad.
         binding = LayoutCatalogoBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Se inicializa la instancia de la base de datos y se actualiza si hubiera nueva version.
         db = Room.databaseBuilder(applicationContext, AppDataBase::class.java, "db")
             .addMigrations(AppDataBase.MIGRATION_1_2)
             .build()
@@ -38,6 +60,7 @@ class ActividadCatalogo : AppCompatActivity(), SearchView.OnQueryTextListener {
 
         var valores = arrayListOf<Producto>()
         val context = this
+        //Aqui traigo todos los productos de la base de datos y los muestro en un recyclerview
         GlobalScope.launch {
             valores = db.productoDAO().getAll() as ArrayList<Producto>
             val recyclerView: RecyclerView = findViewById<RecyclerView>(R.id.reciclerCatalogo)
@@ -56,9 +79,8 @@ class ActividadCatalogo : AppCompatActivity(), SearchView.OnQueryTextListener {
 
         }
 
-
+        //Este boton lo que hace es cambiar de pantalla a añadir producto
         binding.botonAnadirProducto.setOnClickListener {
-
             val intent: Intent = Intent(
                 this, ActividadAnadirProducto::class.java
             )
@@ -75,6 +97,7 @@ class ActividadCatalogo : AppCompatActivity(), SearchView.OnQueryTextListener {
             findViewById<ImageButton>(R.id.botonIrAFacturacionDesdeCatalogo)
 
 
+        //Boton que cambia la panatalla a la inicial
         botonIrAInicio.setOnClickListener {
             val intent: Intent = Intent(
                 this, ActividadInicio::class.java
@@ -82,6 +105,7 @@ class ActividadCatalogo : AppCompatActivity(), SearchView.OnQueryTextListener {
             this.startActivity(intent)
         }
 
+        //Boton que cambia la panatalla a ir a cliente
         botonIrACliente.setOnClickListener {
             val intent: Intent = Intent(
                 this, ActividadCliente::class.java
@@ -89,16 +113,10 @@ class ActividadCatalogo : AppCompatActivity(), SearchView.OnQueryTextListener {
             this.startActivity(intent)
         }
 
+        //Boton que cambia la panatalla a venta
         botonIrAVenta.setOnClickListener {
             val intent: Intent = Intent(
                 this, ActividadVenta::class.java
-            )
-            this.startActivity(intent)
-        }
-
-        botonIrAFacturacion.setOnClickListener {
-            val intent: Intent = Intent(
-                this, ActividadFacturacion::class.java
             )
             this.startActivity(intent)
         }

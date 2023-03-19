@@ -17,19 +17,35 @@ import com.google.firebase.firestore.FirebaseFirestore
 import emergentes.Alerta
 import java.time.LocalDate
 
-
+/**
+ * Esta es la clase que representa la actividad para iniciar sesion el usuario donde te pedira el correo electronico
+ * y el usuario, despues de iniciar sesion entraras en la pantalla de incio.
+ *
+ * @author Juanjo Medina
+ */
 class ActividadPrincipal : AppCompatActivity() {
+
+    /**
+     * Variable para la instancia de la base de datos.
+     */
     private lateinit var binding: LayoutLoginBinding
+
+    /**
+     * Método onCreate() de la actividad, se llama al crear la actividad.
+     * @param savedInstanceState estado de la actividad si se restaura.
+     */
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Se infla el layout y se establece como el contenido de la actividad.
         binding = LayoutLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-       //this.deleteDatabase("db")
 
         val botonIrAInico: Button =findViewById<Button>(R.id.botonIniciarSesion)
         val botonIrARegistro: Button =findViewById<Button>(R.id.botonRegistrarte)
 
+        //Boton que se encarga de iniciar sesion comprueba los datos con fire base
         botonIrAInico.setOnClickListener {
             val auth: FirebaseAuth = FirebaseAuth.getInstance()
             auth.signInWithEmailAndPassword(
@@ -83,6 +99,7 @@ class ActividadPrincipal : AppCompatActivity() {
         }
 
 
+        //Boton que cambia la panatalla registro
         botonIrARegistro.setOnClickListener{
             val intent: Intent = Intent(
                 this,ActividadRegistro::class.java

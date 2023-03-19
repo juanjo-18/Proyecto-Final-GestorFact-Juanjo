@@ -100,17 +100,13 @@
                 android:layout_height="wrap_content"
                 android:text="@string/cliente" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/contenedorNombreClienteVentaEditar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            <Spinner
+                android:id="@+id/spinnerNombreClienteEditar"
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/campoClienteNombreEditarVenta"
-                    style="@style/texto"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </com.google.android.material.textfield.TextInputLayout>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:textSize="24dp" />
 
             <TextView
                 android:id="@+id/textoTituloVentaEditar"

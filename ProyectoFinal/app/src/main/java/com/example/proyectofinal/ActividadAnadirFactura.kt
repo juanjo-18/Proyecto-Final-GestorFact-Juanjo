@@ -12,47 +12,47 @@ import com.example.proyectofinal.databinding.LayoutAnadirVentaBinding
 import java.time.LocalDate
 import java.util.*
 
+/**
+ * Esta es la clase que representa la actividad para añadir una nueva factura.
+ * Esta clase se encarga de poder rellenar todos los campos de la factura  y comprobar que los datos esten correctos.
+ * Ademas de guardar la factura en la base de datos.
+ * @author Juanjo Medina
+ */
 class ActividadAnadirFactura : AppCompatActivity() {
+
+    /**
+     * Variable para el binding del layout.
+     */
     private lateinit var binding: LayoutAnadirFacturaBinding
+
+
+    /**
+     * Método onCreate() de la actividad, se llama al crear la actividad.
+     * @param savedInstanceState estado de la actividad si se restaura.
+     */
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding= LayoutAnadirFacturaBinding.inflate(layoutInflater)
+
+        // Se infla el layout y se establece como el contenido de la actividad.
+        binding = LayoutAnadirFacturaBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //Comprueba si el checkBox abono a sido marcardo si lo a sido desmarca el de factura.
         binding.checkBoxAbonoFactura.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
                 binding.checkBoxFacturaFactura.isChecked = false
             }
         }
+
+        //Comprueba si el checkBox factura a sido marcardo si lo a sido desmarca el de abono.
         binding.checkBoxFacturaFactura.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
                 binding.checkBoxAbonoFactura.isChecked = false
             }
         }
 
-        val dateSetListener: DatePickerDialog.OnDateSetListener =
-            DatePickerDialog.OnDateSetListener() { datePicker: DatePicker, year: Int, month: Int, day: Int ->
-                val hoy: LocalDate = LocalDate.now()
-                val fechaElegida: LocalDate = LocalDate.of(year, month, day);
-                binding.textoFechaFacturaFacturacion.text = fechaElegida.toString()
-
-            }
-
-        binding.botonCalendarioCambiarFechaFactura.setOnClickListener {
-            val calendario: Calendar = Calendar.getInstance()
-            val datePicker: DatePickerDialog =
-                DatePickerDialog(
-                    this, dateSetListener,
-                    calendario.get(Calendar.YEAR),
-                    calendario.get(Calendar.MONTH),
-                    calendario.get(Calendar.DAY_OF_MONTH)
-                )
-            datePicker.setIcon(R.drawable.caja)
-            datePicker.setMessage(this.resources.getString(R.string.fecha))
-            datePicker.show()
-        }
-
+        //boton que cambia de pantalla
         binding.botonTerminadoAnadiendoFactura.setOnClickListener {
             val intent: Intent = Intent(
                 this, ActividadFacturacion::class.java

@@ -12,12 +12,26 @@ import clases.Producto
 import com.example.proyectofinal.R
 import com.google.android.material.textfield.TextInputEditText
 
+/**
+ * clase  LineaVentaViewHolderque extiende de RecyclerView.ViewHolder y se utiliza para
+ * representar cada elemento de la lista de Producto en una vista de recyclerview.
+ * @author Juanjo Medina
+ */
 class LineaVentaViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    // TextView para mostrar el nombre del producto en la línea de venta
     val campoNombre: TextView by lazy { itemView.findViewById(R.id.textoNombreAnadirLineaVenta) }
+
+    // TextView para mostrar el precio unitario del producto en la línea de venta
     val campoPrecio: TextView by lazy { itemView.findViewById(R.id.textoPrecioAnadirLineaVenta) }
+
+    // TextView para mostrar la cantidad del producto en la línea de venta
     val campoCantidad: TextView by lazy { itemView.findViewById(R.id.textoCantidadAnadirLineaVenta) }
+
+    // TextView para mostrar el total de la línea de venta (precio unitario x cantidad)
     val campoTotal: TextView by lazy { itemView.findViewById(R.id.textoTotalLineaAnadirVentaLinea) }
-    val botonBorrar: ImageButton =itemView.findViewById<ImageButton>(R.id.botonBorrarAnadirVenta)
+
+    // Botón para borrar la línea de venta
+    val botonBorrar: ImageButton = itemView.findViewById<ImageButton>(R.id.botonBorrarAnadirVenta)
 /*
     init {
         campoCantidad.addTextChangedListener(object : TextWatcher {
