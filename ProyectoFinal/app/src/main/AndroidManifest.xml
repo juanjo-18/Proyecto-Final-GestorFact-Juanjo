@@ -18,7 +18,7 @@
         android:theme="@style/Theme.ProyectoFinal"
         tools:targetApi="31">
         <activity
-            android:name=".ActividadCrearPDF"
+            android:name=".ActividadEditarVenta"
             android:exported="false" />
         <activity
             android:name=".ActividadAnadirFactura"

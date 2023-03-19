@@ -23,8 +23,3 @@ class Cliente(
     @ColumnInfo("codigoPostal") var codigoPostal:Int=0
 ): Parcelable
 
-
-
-
-
-

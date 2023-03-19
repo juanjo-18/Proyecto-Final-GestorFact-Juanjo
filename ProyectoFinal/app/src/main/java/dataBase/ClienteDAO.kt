@@ -14,9 +14,13 @@ interface ClienteDAO {
     @Delete
     fun delete(cliente: Cliente)
 
-    @Update
-    fun updateUsers(vararg cliente: Cliente)
+    @Query("UPDATE cliente SET nombre= :nombre,email= :email, nif= :nif,telefono= :telefono,direccion= :direccion, localidad= :localidad, provincia= :provincia,codigoPostal= :codigoPostal where id= :referencia")
+    fun updateCliente(referencia:Int,nombre:String,email:String,nif:String,telefono:Int,direccion:String,localidad:String,provincia:String,codigoPostal:Int):Int
+
 
     @Query("SELECT * FROM cliente WHERE nombre LIKE :searchText")
-    fun buscarProductosPorNombre(searchText: String): List<Cliente>
+    fun buscarClientePorNombre(searchText: String): Cliente
+    @Query("SELECT * FROM cliente WHERE nombre LIKE :searchText")
+    fun buscarClientesPorNombre(searchText: String): List<Cliente>
+
 }

@@ -19,8 +19,7 @@ data class Albaran(
     @ColumnInfo("nombreCliente") var nombreCliente: String?,
     @ColumnInfo("fecha") var fecha: LocalDate?,
     @ColumnInfo("estado") var estado: String?,
-    @ColumnInfo("precio") var precioTotal: Float = 0f,
-    @ColumnInfo("dni") var cliente: String
+    @ColumnInfo("precio") var precioTotal: Float = 0f
     ) : Parcelable
 
 

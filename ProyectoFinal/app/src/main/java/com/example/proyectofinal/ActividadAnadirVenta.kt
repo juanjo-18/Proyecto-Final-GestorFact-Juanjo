@@ -11,6 +11,8 @@ import android.widget.DatePicker
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.room.Room
@@ -37,6 +39,7 @@ class ActividadAnadirVenta : AppCompatActivity() {
             .build()
 
 
+
         val productos = arrayListOf<Producto>()
 
         val recyclerView: RecyclerView = findViewById<RecyclerView>(R.id.recyclerLineasProductos)
@@ -48,6 +51,8 @@ class ActividadAnadirVenta : AppCompatActivity() {
         staggeredManager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
         recyclerView.layoutManager = staggeredManager
 
+        val hoy: LocalDate = LocalDate.now()
+        binding.textoFechaDesdeVenta.text = hoy.toString()
 
         var contieneTexto = false
         var cantidadNegativa = false
@@ -223,27 +228,8 @@ class ActividadAnadirVenta : AppCompatActivity() {
             }
         }
 
-        val dateSetListener: DatePickerDialog.OnDateSetListener =
-            DatePickerDialog.OnDateSetListener() { datePicker: DatePicker, year: Int, month: Int, day: Int ->
-                val hoy: LocalDate = LocalDate.now()
-                val fechaElegida: LocalDate = LocalDate.of(year, month, day);
-                binding.textoFechaDesdeVenta.text = fechaElegida.toString()
 
-            }
 
-        binding.botonCalendarioCambiarFecha.setOnClickListener {
-            val calendario: Calendar = Calendar.getInstance()
-            val datePicker: DatePickerDialog =
-                DatePickerDialog(
-                    this, dateSetListener,
-                    calendario.get(Calendar.YEAR),
-                    calendario.get(Calendar.MONTH),
-                    calendario.get(Calendar.DAY_OF_MONTH)
-                )
-            datePicker.setIcon(R.drawable.caja)
-            datePicker.setMessage(this.resources.getString(R.string.fecha))
-            datePicker.show()
-        }
 
         binding.botonTerminadoAAdiendoVenta.setOnClickListener {
             var totalAlbaranFinal: Float = 0f
@@ -306,9 +292,8 @@ class ActividadAnadirVenta : AppCompatActivity() {
                                             nombreCliente = binding.campoClienteNombreAnadirVenta.text.toString(),
                                             fecha = LocalDate.now(),
                                             estado = "Pendiente",
-                                            precioTotal = totalAlbaranFinal,
-                                            cliente = binding.campoClienteNombreAnadirVenta.text.toString()
-                                        )
+                                            precioTotal = (totalAlbaranFinal*1.21).toFloat()
+                                         )
                                     )
                                 }.join()
 
@@ -340,6 +325,28 @@ class ActividadAnadirVenta : AppCompatActivity() {
         }
 
 
-
+        val timer = Timer()
+        timer.schedule(object : TimerTask() {
+            override fun run() {
+                actualizarTotal(productos)
+            }
+        }, 0, 100)
+    }
+    private fun actualizarTotal(productos: ArrayList<Producto>) {
+        runOnUiThread {
+            var total: Float = 0f
+            for (producto in productos) {
+                total += (producto.cantidad * producto.precio)
+            }
+            //Modificar los valores totales de abajo
+            var numeroTotalBase = total
+            binding.textoNumeroTotalBaseAnadirVenta.setText("" + numeroTotalBase)
+            var numeroIVA =
+                (binding.textoNumeroTotalBaseAnadirVenta.text.toString()
+                    .toFloat() / 100) * 21
+            binding.textoNumeroIvaAnadirVenta.setText("" + numeroIVA)
+            var numeroTotalFinal = numeroIVA + numeroTotalBase
+            binding.textoNumeroTotalAnadirVenta.setText("" + numeroTotalFinal)
+        }
     }
 }

@@ -18,7 +18,6 @@ class ActividadEditarProducto : AppCompatActivity() {
     private lateinit var binding: LayoutEditarProductoBinding
     private lateinit var db: AppDataBase
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = LayoutEditarProductoBinding.inflate(layoutInflater)
@@ -29,7 +28,6 @@ class ActividadEditarProducto : AppCompatActivity() {
 
         val nombre = intent.getStringExtra("nombre")
 
-        val producto = Producto()
 
         var id:Int=0
         if (nombre != null) {
@@ -58,8 +56,6 @@ class ActividadEditarProducto : AppCompatActivity() {
                 precio = binding.campoPrecioProductoEditar.text.toString().toFloat(),
                 cantidad = binding.campoStockEditar.text.toString().toInt()
             )
-
-            val contexto=this
 
             CoroutineScope(Dispatchers.IO).launch {
                 db.productoDAO().actualizarProducto(id,producto1.nombre.toString(),producto1.cantidad,producto1.precio)

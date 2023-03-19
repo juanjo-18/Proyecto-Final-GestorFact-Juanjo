@@ -10,47 +10,70 @@ import android.widget.Toast
 import com.example.proyectofinal.R
 import java.io.File
 import java.io.FileOutputStream
+import java.text.DecimalFormat
 
 class CrearPDF {
 
-    //Datos de nuestra empresa
-    var nombreEmpresaText = "Juanjo Medina Díaz"
-    var calleEmpresaText = "Manolito, 14"
-    var direccionEmpresaText = "29580, Cártama, Málaga"
-    var dniEmpresaText = "72746587R"
-    var correoEmpresaText = "juanjomedinadiaz@gmail.com"
-    var telefonoEmpresaText = "654878290"
 
-    //Tipo de factura y numero
-    var tipoFacturaTexto = "Factura"
-    var numeroFacturaTexto = "F-300/2023"
+    fun generarPdf(
+        resources: Resources, context: Context,
+        albaran:Albaran,
+        productos: ArrayList<Producto>,cliente:Cliente
+    ) {
 
-    //Datos de factura ordinaria
-    var encabezadoTexto = "DATOS DE FACTURA ORDINARIA"
-    var numeroPedidoTexto = "FAC0000001502"
-    var numeroDePedidoTexto = "Número De Pedido: "
-    var fechaEncabezadoTexto = "Fecha: "
-    var fechaTexto = "10/03/2023"
-    var tipoDePagoTexto = "Transferencia bancaria"
-    var numeroDeCuentaTexto = "ES15 0049 4762 22 2016078965"
-
-    //Datos del cliente
-    var encabezadoDatosClienteTexto = "DATOS DEL CLIENTE"
-    var nombreClienteTexto = "Amazon S.L"
-    var dniClienteTexto = "B13071267"
-    var calleClienteTexto = "POLIGONO INDUSTRIAL EL OLIVAR, PARCELA 02.02"
-    var direccionClienteTexto = "11160, BARBATE, CÁDIZ, España"
-
-    //Datos final de la factura
-    var baseTexto = "BASE"
-    var baseEnEurosTexto = "200€"
-    var ivaTexto = "IVA 21,00%"
-    var ivaNumeroTexto = "28,52"
-    var totalTexto = "TOTAL"
-    var totalNumeroTexto = "250€"
+        //Datos de nuestra empresa
+        //var nombreEmpresaText = "Juanjo Medina Díaz"
+        // var calleEmpresaText = "Manolito, 14"
+        //var direccionEmpresaText = "29580, Cártama, Málaga"
+        //var dniEmpresaText = "72746587R"
+        //var telefonoEmpresaText = "654878290"
 
 
-    fun generarPdf(resources: Resources, context: Context) {
+
+        //Datos de factura ordinaria
+        var encabezadoTexto = "DATOS DE FACTURA ORDINARIA"
+        var numeroPedidoTexto = "FAC0000001502"
+        var numeroDePedidoTexto = "Número De Pedido: "
+        var fechaEncabezadoTexto = "Fecha: "
+        var tipoDePagoTexto = "Transferencia bancaria"
+        //var numeroDeCuentaTexto = "ES15 0049 4762 22 2016078965"
+
+        //Datos del cliente
+        var encabezadoDatosClienteTexto = "DATOS DEL CLIENTE"
+
+
+        //Datos final de la factura
+        var baseTexto = "BASE"
+
+        var ivaTexto = "IVA 21,00%"
+
+        var totalTexto = "TOTAL"
+
+
+        var correoEmpresaText = "juanjomedinadiaz@gmail.com"
+
+        var tipoFacturaTexto = "Factura"
+        var numeroFacturaTexto = ""+albaran.titulo
+        var fechaTexto = ""+albaran.fecha
+
+        var nombreClienteTexto = cliente.nombre.toString()
+        var dniClienteTexto = cliente.nif.toString()
+        var calleClienteTexto = cliente.direccion.toString()
+        var direccionClienteTexto = cliente.codigoPostal.toString()+", "+cliente.localidad.toString()+", "+cliente.provincia.toString()
+
+        val formato = DecimalFormat("#.##")
+        var precio=albaran.precioTotal
+        var baseEnEurosTexto = formato.format((precio/1.21)).toString()+"€"
+        var ivaNumeroTexto = formato.format((precio.toFloat()-(precio/1.21))).toString()
+        var totalNumeroTexto = formato.format(albaran.precioTotal).toString()+"€"
+
+        //Tabla de productos (Actual maximo de productos de 18)
+        val columnas = listOf("Nombre", "Precio", "Unidades", "Subtotal", "IMP.")
+        val datos = productos.map {
+            listOf(
+                it.nombre.toString(), "${it.precio.toString()+""}€", it.cantidad.toString(), "${(it.precio*it.cantidad).toString()+""}€", "IVA 21,00%"
+            )
+        }
 
         var pdfDocument = PdfDocument()
         var paint = Paint()
@@ -86,12 +109,12 @@ class CrearPDF {
         var telefonoEmpresa = TextPaint()
         telefonoEmpresa.textSize = 15f
 
-        canvas.drawText(nombreEmpresaText, 315f, 60f, nombreEmpresa)
-        canvas.drawText(calleEmpresaText, 315f, 80f, calleEmpresa)
-        canvas.drawText(direccionEmpresaText, 315f, 100f, direccionEmpresa)
-        canvas.drawText(dniEmpresaText, 315f, 120f, dniEmpresa)
-        canvas.drawText(correoEmpresaText, 565f, 60f, correoEmpresa)
-        canvas.drawText(telefonoEmpresaText, 565f, 80f, telefonoEmpresa)
+        canvas.drawText(correoEmpresaText, 315f, 60f, correoEmpresa)
+       // canvas.drawText(calleEmpresaText, 315f, 80f, calleEmpresa)
+       // canvas.drawText(direccionEmpresaText, 315f, 100f, direccionEmpresa)
+       // canvas.drawText(dniEmpresaText, 315f, 120f, dniEmpresa)
+        //canvas.drawText(nombreEmpresaText, 565f, 60f, nombreEmpresa)
+        // canvas.drawText(telefonoEmpresaText, 565f, 80f, telefonoEmpresa)
 
 
         //Añadir el titulo y numero de factura centrado
@@ -145,7 +168,7 @@ class CrearPDF {
         var numeroDeCuenta = TextPaint()
         numeroDeCuenta.textSize = 15f
         numeroDeCuenta.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD))
-        canvas.drawText(numeroDeCuentaTexto, 45f, 375f, numeroDeCuenta)
+       // canvas.drawText(numeroDeCuentaTexto, 45f, 375f, numeroDeCuenta)
 
         //Linea vertical al lado de datos de factura
         paint.strokeWidth = 2f
@@ -181,28 +204,8 @@ class CrearPDF {
         canvas.drawText(direccionClienteTexto, 430f, 375f, direccionCliente)
 
 
-        //Tabla de productos (Actual maximo de productos de 18)
-        val columnas = listOf("Nombre", "Precio", "Unidades", "Subtotal", "IMP.")
-        val datos = listOf(
-            listOf("Martillo", "10€", "15", "150€", "IVA 21,00%"),
-            listOf("Sierra", "12€", "5", "60€", "IVA 21,00%"),
-            listOf("Destornillador", "20€", "10", "200€", "IVA 21,00%"),
-            listOf("Martillo", "10€", "15", "150€", "IVA 21,00%"),
-            listOf("Sierra", "12€", "5", "60€", "IVA 21,00%"),
-            listOf("Destornillador", "20€", "10", "200€", "IVA 21,00%"),
-            listOf("Martillo", "10€", "15", "150€", "IVA 21,00%"),
-            listOf("Sierra", "12€", "5", "60€", "IVA 21,00%"),
-            listOf("Destornillador", "20€", "10", "200€", "IVA 21,00%"),
-            listOf("Destornillador", "20€", "10", "200€", "IVA 21,00%"),
-            listOf("Martillo", "10€", "15", "150€", "IVA 21,00%"),
-            listOf("Sierra", "12€", "5", "60€", "IVA 21,00%"),
-            listOf("Destornillador", "20€", "10", "200€", "IVA 21,00%"),
-            listOf("Martillo", "10€", "15", "150€", "IVA 21,00%"),
-            listOf("Sierra", "12€", "5", "60€", "IVA 21,00%"),
-            listOf("Destornillador", "20€", "10", "200€", "IVA 21,00%")
 
-        )
-        crearTabla(pagina1, columnas, datos, 470f)
+        crearTabla(pagina1, columnas, datos as List<List<String>>, 470f)
 
 
         //Datos finales de la factura
@@ -244,7 +247,7 @@ class CrearPDF {
         var totalNumero = TextPaint()
         totalNumero.textSize = 18f
         totalNumero.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD))
-        canvas.drawText(totalNumeroTexto, 740f, 960f, totalNumero)
+        canvas.drawText(totalNumeroTexto, 730f, 960f, totalNumero)
 
 
         //Lineas azules finales del documento
@@ -265,7 +268,11 @@ class CrearPDF {
 
         pdfDocument.finishPage(pagina1)
 
-        val file = File(
+        var file = File(Environment.getExternalStorageDirectory(), "Archivo.pdf")
+        if (file.exists()) {
+            file.delete()
+        }
+        file = File(
             Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
             "ArchivoPersonalizado.pdf"
         )

@@ -2,27 +2,27 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/contenedorFondoAñadirVenta"
+    android:id="@+id/contenedorFondoEditarVenta"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginLeft="5dp"
     android:layout_marginRight="5dp"
-    tools:context=".ActividadAnadirVenta">
+    tools:context=".ActividadEditarVenta">
 
     <ImageView
-        android:id="@+id/fondoAñadirVenta"
+        android:id="@+id/fondoEditarVenta"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
         app:srcCompat="@drawable/engranajes" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/contenedorPrincipalAñadirVenta"
+        android:id="@+id/contenedorPrincipalEditarVenta"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/contenedorTituloAñadirVenta"
+            android:id="@+id/contenedorTituloEditarVenta"
             style="@style/panelEditar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/textoTituloAnadirVenta"
+                android:id="@+id/textoTituloEditarVenta"
                 style="@style/tituloParaEditar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
 
 
         <LinearLayout
-            android:id="@+id/contenedorCheckBox"
+            android:id="@+id/contenedorCheckBoxEditar"
 
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -49,33 +49,40 @@
             android:layout_marginTop="1dp"
             android:orientation="vertical"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/contenedorTituloAñadirVenta">
+            app:layout_constraintTop_toBottomOf="@+id/contenedorTituloEditarVenta">
 
             <CheckBox
-                android:id="@+id/checkBoxPresupuesto"
+                android:id="@+id/checkBoxPresupuestoEditar"
                 style="@style/texto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/presupuesto" />
 
             <CheckBox
-                android:id="@+id/checkBoxAlbaran"
+                android:id="@+id/checkBoxAlbaranEditar"
                 style="@style/texto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/albaran" />
 
             <CheckBox
-                android:id="@+id/checkBoxPedido"
+                android:id="@+id/checkBoxPedidoEditar"
                 style="@style/texto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/pedido" />
 
+            <CheckBox
+                style="@style/texto"
+                android:id="@+id/checkBoxEstadoAlbaran"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/estadoAlbaran" />
+
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/contenedorDatosVenta"
+            android:id="@+id/contenedorDatosVentaEditar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
@@ -83,62 +90,62 @@
             android:layout_marginEnd="1dp"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/contenedorCheckBox"
-            app:layout_constraintTop_toBottomOf="@+id/contenedorTituloAñadirVenta">
+            app:layout_constraintStart_toEndOf="@+id/contenedorCheckBoxEditar"
+            app:layout_constraintTop_toBottomOf="@+id/contenedorTituloEditarVenta">
 
             <TextView
-                android:id="@+id/textoNombreClienteDato"
+                android:id="@+id/textoNombreClienteDatoEditar"
                 style="@style/texto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/cliente" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/contenedorNombreClienteVenta"
+                android:id="@+id/contenedorNombreClienteVentaEditar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/campoClienteNombreAnadirVenta"
+                    android:id="@+id/campoClienteNombreEditarVenta"
                     style="@style/texto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
-                android:id="@+id/textoTituloVenta"
+                android:id="@+id/textoTituloVentaEditar"
                 style="@style/texto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/titulo" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/contenedorCampoTituloAnadirVenta"
+                android:id="@+id/contenedorCampoTituloEditarVenta"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/campoTituloAnadirVenta"
+                    android:id="@+id/campoTituloEditarVenta"
                     style="@style/texto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
-                android:id="@+id/textoFechaVentaAlbraran"
+                android:id="@+id/textoFechaVentaAlbraranEditar"
                 style="@style/texto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/fecha" />
 
             <LinearLayout
-                android:id="@+id/contenedorFechaVenta"
+                android:id="@+id/contenedorFechaVentaEditar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textoFechaDesdeVenta"
+                    android:id="@+id/textoFechaDesdeVentaEditar"
                     style="@style/texto"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -149,7 +156,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/contenedorEncabezadoProductosAnadirVenta"
+            android:id="@+id/contenedorEncabezadoProductosEditarVenta"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="1dp"
@@ -158,10 +165,10 @@
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/contenedorDatosVenta">
+            app:layout_constraintTop_toBottomOf="@+id/contenedorDatosVentaEditar">
 
             <TextView
-                android:id="@+id/textoNombreAnadirVenta"
+                android:id="@+id/textoNombreEditarVenta"
                 style="@style/texto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -169,7 +176,7 @@
                 android:text="@string/nombre" />
 
             <TextView
-                android:id="@+id/textoPrecioAnadirVenta"
+                android:id="@+id/textoPrecioEditarVenta"
                 style="@style/texto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -178,7 +185,7 @@
                 android:textAlignment="gravity" />
 
             <TextView
-                android:id="@+id/textoCantidadAnadirVenta"
+                android:id="@+id/textoCantidadEditarVenta"
                 style="@style/texto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -186,7 +193,7 @@
                 android:text="@string/cantidad" />
 
             <TextView
-                android:id="@+id/textoTotalAnadirVenta"
+                android:id="@+id/textoTotalEditarVenta"
                 style="@style/texto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -195,28 +202,28 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/contenedorPrincipalDatosAnadirVenta"
+            android:id="@+id/contenedorPrincipalDatosEditarVenta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@id/contenedorEncabezadoProductosAnadirVenta">
+            app:layout_constraintTop_toBottomOf="@id/contenedorEncabezadoProductosEditarVenta">
 
             <LinearLayout
-                android:id="@+id/contenedorBotonesAnadirVenta"
+                android:id="@+id/contenedorBotonesEditarVenta"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:id="@+id/delimitadorAnadirLineaVenta"
+                    android:id="@+id/delimitadorEditarLineaVenta"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <EditText
-                        android:id="@+id/campoNombreAnadirLineaVenta"
+                        android:id="@+id/campoNombreEditarLineaVenta"
                         style="@style/texto"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -228,7 +235,7 @@
                         android:paddingBottom="10dp" />
 
                     <EditText
-                        android:id="@+id/campoPrecioAnadirLineaVenta"
+                        android:id="@+id/campoPrecioEditarLineaVenta"
                         style="@style/texto"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -240,7 +247,7 @@
                         android:inputType="textPersonName" />
 
                     <EditText
-                        android:id="@+id/campoCantidadAnadirLineaVenta"
+                        android:id="@+id/campoCantidadEditarLineaVenta"
                         style="@style/texto"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -252,7 +259,7 @@
                         android:inputType="textPersonName" />
 
                     <TextView
-                        android:id="@+id/campoTotalLineaAnadirVentaLinea"
+                        android:id="@+id/campoTotalLineaEditarVentaLinea"
                         style="@style/texto"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -265,7 +272,7 @@
                 </LinearLayout>
 
                 <ImageButton
-                    android:id="@+id/botonAnadirVenta"
+                    android:id="@+id/botonEditarVenta"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="8"
@@ -276,25 +283,25 @@
         </LinearLayout>
 
         <View
-            android:id="@+id/lineaNegraAnadirVenta"
+            android:id="@+id/lineaNegraEditarVenta"
             android:layout_width="match_parent"
             android:layout_height="5dp"
             android:layout_marginTop="10dp"
             android:background="@android:color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/contenedorPrincipalDatosAnadirVenta" />
+            app:layout_constraintTop_toBottomOf="@+id/contenedorPrincipalDatosEditarVenta" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerLineasProductos"
+            android:id="@+id/recyclerLineasProductosEditar"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            app:layout_constraintBottom_toTopOf="@+id/contenedorDeConetendoresDatosAnadirVenta"
+            app:layout_constraintBottom_toTopOf="@+id/contenedorDeConetendoresDatosEditarVenta"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lineaNegraAnadirVenta">
+            app:layout_constraintTop_toBottomOf="@+id/lineaNegraEditarVenta">
 
         </androidx.recyclerview.widget.RecyclerView>
 
@@ -310,7 +317,7 @@
             app:srcCompat="@drawable/check" />
 
         <LinearLayout
-            android:id="@+id/contenedorDeConetendoresDatosAnadirVenta"
+            android:id="@+id/contenedorDeConetendoresDatosEditarVenta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
@@ -321,7 +328,7 @@
             app:layout_constraintEnd_toEndOf="parent">
 
             <LinearLayout
-                android:id="@+id/contenedorDatoTotalBaseAnadirVenta"
+                android:id="@+id/contenedorDatoTotalBaseEditarVenta"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="5dp"
@@ -330,7 +337,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textoTotalBaseAnadirVenta"
+                    android:id="@+id/textoTotalBaseEditarVenta"
                     style="@style/texto"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -338,7 +345,7 @@
                     android:text="@string/totalBase" />
 
                 <TextView
-                    android:id="@+id/textoNumeroTotalBaseAnadirVenta"
+                    android:id="@+id/textoNumeroTotalBaseEditarVenta"
                     style="@style/texto"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -349,7 +356,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/contenedorDatoIVAAnadirVenta"
+                android:id="@+id/contenedorDatoIVAEditarVenta"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="5dp"
@@ -358,7 +365,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textoIVAAnadirVenta"
+                    android:id="@+id/textoIVAEditarVenta"
                     style="@style/texto"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -366,7 +373,7 @@
                     android:text="@string/iva" />
 
                 <TextView
-                    android:id="@+id/textoNumeroIvaAnadirVenta"
+                    android:id="@+id/textoNumeroIvaEditarVenta"
                     style="@style/texto"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -376,7 +383,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/contenedorDatoTotalAlbaranAnadirVenta"
+                android:id="@+id/contenedorDatoTotalAlbaranEditarVenta"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="5dp"
@@ -386,7 +393,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textoTotalTerminadoAnadriVenta"
+                    android:id="@+id/textoTotalTerminadoEditarVenta"
                     style="@style/texto"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -394,7 +401,7 @@
                     android:text="@string/totalEuro" />
 
                 <TextView
-                    android:id="@+id/textoNumeroTotalAnadirVenta"
+                    android:id="@+id/textoNumeroTotalEditarVenta"
                     style="@style/texto"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

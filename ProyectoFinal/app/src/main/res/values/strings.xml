@@ -73,5 +73,6 @@
     <string name="completarCheck">Tienes que marcar una casilla</string>
     <string name="tituloRepetido">No puede haber un titulo repetido</string>
     <string name="minimoProducto">Mínimo tiene que haber un producto añadido</string>
+    <string name="estadoAlbaran">Estado</string>
 
 </resources>
