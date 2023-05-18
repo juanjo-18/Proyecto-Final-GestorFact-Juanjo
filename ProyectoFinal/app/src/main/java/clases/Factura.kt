@@ -45,8 +45,5 @@ data class Factura(
      * Precio total de la factura
      */
     @ColumnInfo("PrecioTotal") var precioTotal: Float = 0f,
-    /**
-     * Dni del cliente
-     */
-    @ColumnInfo("dni") var cliente: String
+
 ) : Parcelable

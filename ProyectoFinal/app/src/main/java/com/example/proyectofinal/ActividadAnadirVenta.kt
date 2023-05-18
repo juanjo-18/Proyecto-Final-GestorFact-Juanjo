@@ -120,12 +120,12 @@ class ActividadAnadirVenta : AppCompatActivity() {
         var checkBoxVacio = true
 
         //Si el checkBox presupuesto a sido marcado desmarco pedido y albaran.
-        binding.checkBoxPresupuesto.setOnCheckedChangeListener { buttonView, isChecked ->
+        binding.checkBoxAbono.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
                 checkBoxVacio = false
-                binding.checkBoxPedido.isChecked = false
+                binding.checkBoxFactura.isChecked = false
                 binding.checkBoxAlbaran.isChecked = false
-            } else if (!binding.checkBoxPedido.isChecked && !binding.checkBoxAlbaran.isChecked) {
+            } else if (!binding.checkBoxFactura.isChecked && !binding.checkBoxAlbaran.isChecked) {
                 checkBoxVacio = true
             }
         }
@@ -133,20 +133,20 @@ class ActividadAnadirVenta : AppCompatActivity() {
         binding.checkBoxAlbaran.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
                 checkBoxVacio = false
-                binding.checkBoxPedido.isChecked = false
-                binding.checkBoxPresupuesto.isChecked = false
-            } else if (!binding.checkBoxPedido.isChecked && !binding.checkBoxPresupuesto.isChecked) {
+                binding.checkBoxFactura.isChecked = false
+                binding.checkBoxAbono.isChecked = false
+            } else if (!binding.checkBoxFactura.isChecked && !binding.checkBoxAbono.isChecked) {
                 checkBoxVacio = true
             }
         }
 
         //Si el checkBox pedido a sido marcado desmarco presupuesto y albaran.
-        binding.checkBoxPedido.setOnCheckedChangeListener { buttonView, isChecked ->
+        binding.checkBoxFactura.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
                 checkBoxVacio = false
-                binding.checkBoxPresupuesto.isChecked = false
+                binding.checkBoxAbono.isChecked = false
                 binding.checkBoxAlbaran.isChecked = false
-            } else if (!binding.checkBoxPresupuesto.isChecked && !binding.checkBoxAlbaran.isChecked) {
+            } else if (!binding.checkBoxAbono.isChecked && !binding.checkBoxAlbaran.isChecked) {
                 checkBoxVacio = true
             }
         }

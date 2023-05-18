@@ -1,6 +1,5 @@
 package com.example.proyectofinal
 
-import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -13,9 +12,12 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.room.Room
-import clases.*
+import clases.Albaran
+import clases.Albaran_Producto
+import clases.Cliente
+import clases.Producto
+import com.example.proyectofinal.databinding.LayoutAnadirCompraBinding
 import com.example.proyectofinal.databinding.LayoutAnadirFacturaBinding
-import com.example.proyectofinal.databinding.LayoutAnadirVentaBinding
 import dataBase.AppDataBase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -25,17 +27,11 @@ import recyclers.anadirProductosVenta.LineaVentaAdapter
 import java.time.LocalDate
 import java.util.*
 
-/**
- * Esta es la clase que representa la actividad para añadir una nueva factura.
- * Esta clase se encarga de poder rellenar todos los campos de la factura  y comprobar que los datos esten correctos.
- * Ademas de guardar la factura en la base de datos.
- * @author Juanjo Medina
- */
-class ActividadAnadirFactura : AppCompatActivity() {
+class ActividadAnadirCompra : AppCompatActivity() {
     /**
      * Variable para el binding del layout.
      */
-    private lateinit var binding: LayoutAnadirFacturaBinding
+    private lateinit var binding: LayoutAnadirCompraBinding
 
     /**
      * Variable para la instancia de la base de datos.
@@ -52,7 +48,7 @@ class ActividadAnadirFactura : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         // Se infla el layout y se establece como el contenido de la actividad.
-        binding = LayoutAnadirFacturaBinding.inflate(layoutInflater)
+        binding = LayoutAnadirCompraBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         // Se inicializa la instancia de la base de datos y se actualiza si hubiera nueva version.
@@ -75,10 +71,11 @@ class ActividadAnadirFactura : AppCompatActivity() {
 
         //Creo un spinner de los clientes que he recogido previamente
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, nombres)
-        val spinner = findViewById<Spinner>(R.id.spinnerNombreCliente)
+        val spinner = findViewById<Spinner>(R.id.spinnerNombreClienteCompra)
         spinner.adapter = adapter
         var nombreCliente = ""
         var clienteIncorrecto = false
+
 
         //Si algun elemento del spinner es seleccionado añade el nombre al nombreCliente ademas comprueba si esta marcado
         //añadir nombre para poner clienteIncorrecto en true para que no deje guardar asi.
@@ -113,7 +110,7 @@ class ActividadAnadirFactura : AppCompatActivity() {
         recyclerView.layoutManager = staggeredManager
 
         val hoy: LocalDate = LocalDate.now()
-        binding.textoFechaDesdeFactura.text = hoy.toString()
+        binding.textoFechaDesdeCompra.text = hoy.toString()
 
         var contieneTexto = false
         var cantidadNegativa = false
@@ -123,7 +120,7 @@ class ActividadAnadirFactura : AppCompatActivity() {
         var checkBoxVacio = true
 
         //Si el checkBox abono a sido marcado desmarco factura.
-        binding.checkBoxAbono.setOnCheckedChangeListener { buttonView, isChecked ->
+        binding.checkBoxDevolucion.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
                 checkBoxVacio = false
                 binding.checkBoxFactura.isChecked = false
@@ -135,8 +132,8 @@ class ActividadAnadirFactura : AppCompatActivity() {
         binding.checkBoxFactura.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
                 checkBoxVacio = false
-                binding.checkBoxAbono.isChecked = false
-            } else if (!binding.checkBoxAbono.isChecked) {
+                binding.checkBoxDevolucion.isChecked = false
+            } else if (!binding.checkBoxDevolucion.isChecked) {
                 checkBoxVacio = true
             }
         }
@@ -149,16 +146,16 @@ class ActividadAnadirFactura : AppCompatActivity() {
          * Aqui si en el campo cantidad ha habido algun cambio compruebo si el precio tiene algun dato valido
          *  y si lo tiene lo multiplico el precio y la cantidad, para ponerlo en el total.
          */
-        binding.campoCantidadAnadirLineaFactura.addTextChangedListener(object : TextWatcher {
+        binding.campoCantidadAnadirLineaCompra.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                if (binding.campoCantidadAnadirLineaFactura.text.toString().isNotEmpty()
-                    && binding.campoCantidadAnadirLineaFactura.text.toString().toIntOrNull() != null
-                    && binding.campoPrecioAnadirLineaFactura.text.toString().isNotEmpty()
-                    && binding.campoPrecioAnadirLineaFactura.text.toString().toFloatOrNull() != null
+                if (binding.campoCantidadAnadirLineaCompra.text.toString().isNotEmpty()
+                    && binding.campoCantidadAnadirLineaCompra.text.toString().toIntOrNull() != null
+                    && binding.campoPrecioAnadirLineaCompra.text.toString().isNotEmpty()
+                    && binding.campoPrecioAnadirLineaCompra.text.toString().toFloatOrNull() != null
                 ) {
-                    val cantidad = binding.campoCantidadAnadirLineaFactura.text.toString().toInt()
-                    val precio = binding.campoPrecioAnadirLineaFactura.text.toString().toFloat()
-                    binding.campoTotalLineaAnadirFacturaLinea.text = (cantidad * precio).toString()
+                    val cantidad = binding.campoCantidadAnadirLineaCompra.text.toString().toInt()
+                    val precio = binding.campoPrecioAnadirLineaCompra.text.toString().toFloat()
+                    binding.campoTotalLineaAnadirCompraLinea.text = (cantidad * precio).toString()
                 }
             }
 
@@ -185,16 +182,16 @@ class ActividadAnadirFactura : AppCompatActivity() {
          * Aqui si en el campo precio ha habido algun cambio compruebo si la cantidad tiene algun dato valido
          *  y si lo tiene lo multiplico el precio y la cantidad, para ponerlo en el total.
          */
-        binding.campoPrecioAnadirLineaFactura.addTextChangedListener(object : TextWatcher {
+        binding.campoPrecioAnadirLineaCompra.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                if (binding.campoCantidadAnadirLineaFactura.text.toString().isNotEmpty()
-                    && binding.campoCantidadAnadirLineaFactura.text.toString().toIntOrNull() != null
-                    && binding.campoPrecioAnadirLineaFactura.text.toString().isNotEmpty()
-                    && binding.campoPrecioAnadirLineaFactura.text.toString().toFloatOrNull() != null
+                if (binding.campoCantidadAnadirLineaCompra.text.toString().isNotEmpty()
+                    && binding.campoCantidadAnadirLineaCompra.text.toString().toIntOrNull() != null
+                    && binding.campoPrecioAnadirLineaCompra.text.toString().isNotEmpty()
+                    && binding.campoPrecioAnadirLineaCompra.text.toString().toFloatOrNull() != null
                 ) {
-                    val cantidad = binding.campoCantidadAnadirLineaFactura.text.toString().toInt()
-                    val precio = binding.campoPrecioAnadirLineaFactura.text.toString().toFloat()
-                    binding.campoTotalLineaAnadirFacturaLinea.text = (cantidad * precio).toString()
+                    val cantidad = binding.campoCantidadAnadirLineaCompra.text.toString().toInt()
+                    val precio = binding.campoPrecioAnadirLineaCompra.text.toString().toFloat()
+                    binding.campoTotalLineaAnadirCompraLinea.text = (cantidad * precio).toString()
                 }
 
             }
@@ -222,7 +219,7 @@ class ActividadAnadirFactura : AppCompatActivity() {
         /**
          * Este boton se encarga de añadir una nueva linea al recyclerview y comprobar todos los valores esten correctos
          */
-        val añadirLinea: ImageButton = findViewById<ImageButton>(R.id.botonAnadirFactura)
+        val añadirLinea: ImageButton = findViewById<ImageButton>(R.id.botonAnadirCompra)
         añadirLinea.setOnClickListener {
             contieneTexto = false
             cantidadNegativa = false
@@ -230,57 +227,57 @@ class ActividadAnadirFactura : AppCompatActivity() {
             cantidadLlena = false
             precioLleno = false
 
-            if (binding.campoNombreAnadirLineaFactura.text.toString().isBlank()) {
+            if (binding.campoNombreAnadirLineaCompra.text.toString().isBlank()) {
                 campoVacio = true
             }
-            if (binding.campoCantidadAnadirLineaFactura.text.toString().isBlank()) {
+            if (binding.campoCantidadAnadirLineaCompra.text.toString().isBlank()) {
                 campoVacio = true
             }
-            if (binding.campoPrecioAnadirLineaFactura.text.toString().isBlank()) {
+            if (binding.campoPrecioAnadirLineaCompra.text.toString().isBlank()) {
                 campoVacio = true
             }
             if (!campoVacio) {
-                if (binding.campoCantidadAnadirLineaFactura.text.toString().toIntOrNull() == null) {
+                if (binding.campoCantidadAnadirLineaCompra.text.toString().toIntOrNull() == null) {
                     contieneTexto = true
                 }
-                if (binding.campoPrecioAnadirLineaFactura.text.toString().toFloatOrNull() == null) {
+                if (binding.campoPrecioAnadirLineaCompra.text.toString().toFloatOrNull() == null) {
                     contieneTexto = true
                 }
                 if (!contieneTexto) {
-                    if (binding.campoCantidadAnadirLineaFactura.text.toString().toInt() < 1) {
+                    if (binding.campoCantidadAnadirLineaCompra.text.toString().toInt() < 1) {
                         cantidadNegativa = true
                     }
-                    if (binding.campoPrecioAnadirLineaFactura.text.toString().toFloat() < 0.00001) {
+                    if (binding.campoPrecioAnadirLineaCompra.text.toString().toFloat() < 0.00001) {
                         cantidadNegativa = true
                     }
                     if (!cantidadNegativa) {
                         val producto = Producto()
-                        producto.nombre = binding.campoNombreAnadirLineaFactura.text.toString()
+                        producto.nombre = binding.campoNombreAnadirLineaCompra.text.toString()
                         producto.cantidad =
-                            binding.campoCantidadAnadirLineaFactura.text.toString().toIntOrNull() ?: 0
+                            binding.campoCantidadAnadirLineaCompra.text.toString().toIntOrNull() ?: 0
                         producto.precio =
-                            binding.campoPrecioAnadirLineaFactura.text.toString().toFloatOrNull()
+                            binding.campoPrecioAnadirLineaCompra.text.toString().toFloatOrNull()
                                 ?: 0f
 
                         //Modificar los valores totales de abajo
                         var numeroTotalBase =
-                            binding.textoNumeroTotalBaseAnadirFactura.text.toString()
+                            binding.textoNumeroTotalBaseAnadirCompra.text.toString()
                                 .toFloat() + producto.cantidad * producto.precio
-                        binding.textoNumeroTotalBaseAnadirFactura.setText("" + numeroTotalBase)
+                        binding.textoNumeroTotalBaseAnadirCompra.setText("" + numeroTotalBase)
                         var numeroIVA =
-                            (binding.textoNumeroTotalBaseAnadirFactura.text.toString()
+                            (binding.textoNumeroTotalBaseAnadirCompra.text.toString()
                                 .toFloat() / 100) * 21
-                        binding.textoNumeroIvaAnadirFactura.setText("" + numeroIVA)
+                        binding.textoNumeroIvaAnadirCompra.setText("" + numeroIVA)
                         var numeroTotalFinal = numeroIVA + numeroTotalBase
-                        binding.textoNumeroTotalAnadirFactura.setText("" + numeroTotalFinal)
+                        binding.textoNumeroTotalAnadirCompra.setText("" + numeroTotalFinal)
 
 
                         productos.add(producto) // Agrega un nuevo Producto vacío a la lista de valores
                         recyclerView.adapter?.notifyItemInserted(productos.indexOf(producto)) // Notifica al Adapter del cambio en la lista de valores
-                        binding.campoNombreAnadirLineaFactura.setText("")
-                        binding.campoPrecioAnadirLineaFactura.setText("")
-                        binding.campoCantidadAnadirLineaFactura.setText("")
-                        binding.campoTotalLineaAnadirFacturaLinea.text = "0"
+                        binding.campoNombreAnadirLineaCompra.setText("")
+                        binding.campoPrecioAnadirLineaCompra.setText("")
+                        binding.campoCantidadAnadirLineaCompra.setText("")
+                        binding.campoTotalLineaAnadirCompraLinea.text = "0"
                     } else {
                         Toast.makeText(this, R.string.numeroBajo, Toast.LENGTH_SHORT).show()
                     }
@@ -295,9 +292,9 @@ class ActividadAnadirFactura : AppCompatActivity() {
 
         /**
          * En este boton nos encargamos de comprobar que todos los valores esten correctos y se añadan a la base
-         * de datos tanto todos los productos como la factura.
+         * de datos tanto todos los productos como la venta.
          */
-        binding.botonTerminadoAAdiendoFactura.setOnClickListener {
+        binding.botonTerminadoAAdiendoCompra.setOnClickListener {
             if (nombreCliente != "Añadir nombre") {
                 clienteIncorrecto = false
             }
@@ -306,7 +303,7 @@ class ActividadAnadirFactura : AppCompatActivity() {
             var totalAlbaranFinal: Float = 0f
             var camposVacios: Boolean = false
 
-            if (binding.campoTituloAnadirFactura.text.toString().isBlank()) {
+            if (binding.campoTituloAnadirCompra.text.toString().isBlank()) {
                 camposVacios = true
             }
 
@@ -328,24 +325,24 @@ class ActividadAnadirFactura : AppCompatActivity() {
                         if (productos.size >= 1) {
 
                             CoroutineScope(Dispatchers.IO).launch {
-                                var facturas = db.facturaDAO().getAll()
+                                var albaranes = db.albaranDAO().getAll()
                                 var tituloRepetido = false
                                 var titulo = ""
 
-                                for (factura in facturas) {
-                                    if (factura.titulo == binding.campoTituloAnadirFactura.text.toString()) {
+                                for (albaran in albaranes) {
+                                    if (albaran.titulo == binding.campoTituloAnadirCompra.text.toString()) {
                                         tituloRepetido = true
-                                        titulo = factura.titulo
+                                        titulo = albaran.titulo
                                     }
                                 }
 
                                 if (!tituloRepetido) {
-                                    //Aqui inserto todos los productos a la tabla intermedia factura-producto
+                                    //Aqui inserto todos los productos a la tabla intermedia albaran_producto
                                     launch(Dispatchers.IO) {
                                         for (producto in productos) {
-                                            db.factura_ProductoDAO().insert(
-                                                Factura_Producto(
-                                                    tituloFactura = binding.campoTituloAnadirFactura.text.toString(),
+                                            db.albaran_ProductoDAO().insert(
+                                                Albaran_Producto(
+                                                    tituloAlbaran = binding.campoTituloAnadirCompra.text.toString(),
                                                     nombreProducto = producto.nombre.toString(),
                                                     precio = producto.precio,
                                                     cantidad = producto.cantidad,
@@ -355,14 +352,13 @@ class ActividadAnadirFactura : AppCompatActivity() {
                                             totalAlbaranFinal += producto.precio * producto.cantidad
                                         }
 
-                                        //Aqui insertamos la factura a la base de datos factura
-                                        db.facturaDAO().insert(
-                                            Factura(
-                                                titulo = binding.campoTituloAnadirFactura.text.toString(),
+                                        //Aqui insertamos la venta a la base de datos Albaran
+                                        db.albaranDAO().insert(
+                                            Albaran(
+                                                titulo = binding.campoTituloAnadirCompra.text.toString(),
                                                 nombreCliente = nombreCliente,
                                                 fecha = LocalDate.now(),
-                                                tipoFactura = "",
-                                                cobrada = false,
+                                                estado = "Pendiente",
                                                 precioTotal = (totalAlbaranFinal * 1.21).toFloat()
                                             )
                                         )
@@ -370,14 +366,14 @@ class ActividadAnadirFactura : AppCompatActivity() {
 
                                     withContext(Dispatchers.Main) {
                                         val intent: Intent = Intent(
-                                            this@ActividadAnadirFactura, ActividadFacturacion::class.java
+                                            this@ActividadAnadirCompra, ActividadVenta::class.java
                                         )
                                         startActivity(intent)
                                     }
                                 } else {
                                     withContext(Dispatchers.Main) {
                                         Toast.makeText(
-                                            this@ActividadAnadirFactura,
+                                            this@ActividadAnadirCompra,
                                             R.string.tituloRepetido,
                                             Toast.LENGTH_SHORT
                                         ).show()
@@ -419,13 +415,13 @@ class ActividadAnadirFactura : AppCompatActivity() {
             }
             //Modificar los valores totales de abajo
             var numeroTotalBase = total
-            binding.textoNumeroTotalBaseAnadirFactura.setText("" + numeroTotalBase)
+            binding.textoNumeroTotalBaseAnadirCompra.setText("" + numeroTotalBase)
             var numeroIVA =
-                (binding.textoNumeroTotalBaseAnadirFactura.text.toString()
+                (binding.textoNumeroTotalBaseAnadirCompra.text.toString()
                     .toFloat() / 100) * 21
-            binding.textoNumeroIvaAnadirFactura.setText("" + numeroIVA)
+            binding.textoNumeroIvaAnadirCompra.setText("" + numeroIVA)
             var numeroTotalFinal = numeroIVA + numeroTotalBase
-            binding.textoNumeroTotalAnadirFactura.setText("" + numeroTotalFinal)
+            binding.textoNumeroTotalAnadirCompra.setText("" + numeroTotalFinal)
         }
     }
 }

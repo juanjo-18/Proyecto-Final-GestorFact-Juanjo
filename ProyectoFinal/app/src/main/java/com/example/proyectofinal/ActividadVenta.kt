@@ -112,6 +112,13 @@ class ActividadVenta : AppCompatActivity() {
             this.startActivity(intent)
         }
 
+        botonIrAFacturacion.setOnClickListener{
+            val intent: Intent = Intent(
+                this,ActividadFacturacion::class.java
+            )
+            this.startActivity(intent)
+        }
+
 
 
     }

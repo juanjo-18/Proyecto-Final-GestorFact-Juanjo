@@ -93,9 +93,6 @@ class ActividadCatalogo : AppCompatActivity(), SearchView.OnQueryTextListener {
         val botonIrACliente: ImageButton =
             findViewById<ImageButton>(R.id.botonIrAClientesDesdeCatalogo)
         val botonIrAVenta: ImageButton = findViewById<ImageButton>(R.id.botonIrAVentaDesdeCatalogo)
-        val botonIrAFacturacion: ImageButton =
-            findViewById<ImageButton>(R.id.botonIrAFacturacionDesdeCatalogo)
-
 
         //Boton que cambia la panatalla a la inicial
         botonIrAInicio.setOnClickListener {
@@ -117,6 +114,15 @@ class ActividadCatalogo : AppCompatActivity(), SearchView.OnQueryTextListener {
         botonIrAVenta.setOnClickListener {
             val intent: Intent = Intent(
                 this, ActividadVenta::class.java
+            )
+            this.startActivity(intent)
+        }
+
+        //Boton que cambia la panatalla a facturacion
+        val botonIrAFacturacion:ImageButton=findViewById<ImageButton>(R.id.botonIrAFacturacionDesdeCatalogo)
+        botonIrAFacturacion.setOnClickListener{
+            val intent: Intent = Intent(
+                this,ActividadFacturacion::class.java
             )
             this.startActivity(intent)
         }

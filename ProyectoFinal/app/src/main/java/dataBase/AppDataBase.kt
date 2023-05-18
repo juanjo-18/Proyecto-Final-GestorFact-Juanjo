@@ -16,7 +16,7 @@ import clases.*
  * @author Juanjo medina
  */
 @TypeConverters(LocalDateConverter::class, ListConverter::class)
-@Database(entities = [Producto::class, Cliente::class, Albaran::class, Factura::class,Albaran_Producto::class,Factura_Producto::class], version = 4)
+@Database(entities = [Producto::class, Cliente::class, Albaran::class, Factura::class,Albaran_Producto::class,Factura_Producto::class], version = 5)
 abstract class AppDataBase:RoomDatabase() {
     abstract fun productoDAO(): ProductoDAO
 

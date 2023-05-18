@@ -7,22 +7,22 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     android:backgroundTint="#000000"
-    tools:context=".ActividadFacturacion">
+    tools:context=".ActividadCompra">
 
     <ImageView
-        android:id="@+id/imagenFondoFactura"
+        android:id="@+id/imagenFondoCompra"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
         app:srcCompat="@drawable/fondo" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/contenedorPrincipalFactura"
+        android:id="@+id/contenedorPrincipalCompra"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/contenedorTituloFactura"
+            android:id="@+id/contenedorTituloCompra"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -36,7 +36,7 @@
                 android:layout_weight="1">
 
                 <SearchView
-                    android:id="@+id/buscadorDeFacturas"
+                    android:id="@+id/buscadorDeCompra"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="1dp"
@@ -46,7 +46,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ImageButton
-                android:id="@+id/botonBuscadorFacturas"
+                android:id="@+id/botonBuscadorCompra"
                 android:layout_width="70dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"
@@ -55,70 +55,70 @@
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/reciclerFactura"
+            android:id="@+id/reciclerCompra"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="40dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/contenedorTituloFactura"
+            app:layout_constraintEnd_toStartOf="@+id/contenedorTituloCompra"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/contenedorTituloFactura">
+            app:layout_constraintTop_toBottomOf="@+id/contenedorTituloCompra">
 
         </androidx.recyclerview.widget.RecyclerView>
 
         <LinearLayout
-            android:id="@+id/contenedorMenuBotonesFactura"
+            android:id="@+id/contenedorMenuBotonesCompra"
             android:layout_width="match_parent"
             android:layout_height="43dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/reciclerFactura">
+            app:layout_constraintTop_toBottomOf="@+id/reciclerCompra">
 
             <ImageButton
-                android:id="@+id/botonIrAInicioDesdeFacturacion"
+                android:id="@+id/botonIrAInicioDesdeCompra"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/casa" />
 
             <ImageButton
-                android:id="@+id/botonIrACatalogoDesdeFacturacion"
+                android:id="@+id/botonIrACatalogoDesdeCompra"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/libro" />
 
             <ImageButton
-                android:id="@+id/botonIrAClientesDesdeFacturacion"
+                android:id="@+id/botonIrAClientesDesdeCompra"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/cliente" />
 
             <ImageButton
-                android:id="@+id/botonIrAVentasDesdeFacturacion"
+                android:id="@+id/botonIrAVentasDesdeCompra"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/tag" />
 
             <ImageButton
-                android:id="@+id/botonIrAComprasDesdeFacturacion"
+                android:id="@+id/botonIrAComprasDesdeCompra"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/file_document" />
 
             <ImageButton
-                android:id="@+id/imageButton6DesdeFacturacion"
+                android:id="@+id/imageButton6DesdeCompra"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/cart" />
 
             <ImageButton
-                android:id="@+id/imageButton7DesdeFacturacion"
+                android:id="@+id/imageButton7DesdeCompra"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -127,12 +127,12 @@
         </LinearLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/botonAnadirFactura"
+            android:id="@+id/botonAnadirCompra"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
             android:clickable="true"
-            app:layout_constraintBottom_toTopOf="@+id/contenedorMenuBotonesFactura"
+            app:layout_constraintBottom_toTopOf="@+id/contenedorMenuBotonesCompra"
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@android:drawable/ic_menu_add" />
     </androidx.constraintlayout.widget.ConstraintLayout>

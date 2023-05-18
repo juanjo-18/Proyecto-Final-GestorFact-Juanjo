@@ -71,4 +71,4 @@ class FacturacionAdapter (val actividadMadre: Activity, val datos: ArrayList<Fac
     override fun getItemCount(): Int {
         return datos.size
     }
-} 
+}

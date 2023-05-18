@@ -2,27 +2,27 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/contenedorFondoAñadirFactura"
+    android:id="@+id/contenedorFondoAñadirCompra"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginLeft="5dp"
     android:layout_marginRight="5dp"
-    tools:context=".ActividadAnadirFactura">
+    tools:context=".ActividadAnadirCompra">
 
     <ImageView
-        android:id="@+id/fondoAñadirFactura"
+        android:id="@+id/fondoAñadirCompra"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
         app:srcCompat="@drawable/engranajes" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/contenedorPrincipalAñadirFactura"
+        android:id="@+id/contenedorPrincipalAñadirCompra"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/contenedorTituloAñadirFactura"
+            android:id="@+id/contenedorTituloAñadirCompra"
             style="@style/panelEditar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -32,16 +32,16 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/textoTituloAnadirFactura"
+                android:id="@+id/textoTituloAnadirCompra"
                 style="@style/tituloParaEditar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/nuevaFactura" />
+                android:text="@string/nuevaCompra" />
         </LinearLayout>
 
 
         <LinearLayout
-            android:id="@+id/contenedorCheckBox"
+            android:id="@+id/contenedorCheckBoxCompra"
 
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -49,26 +49,26 @@
             android:layout_marginTop="1dp"
             android:orientation="vertical"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/contenedorTituloAñadirFactura">
+            app:layout_constraintTop_toBottomOf="@+id/contenedorTituloAñadirCompra">
 
             <CheckBox
-                android:id="@+id/checkBoxAbono"
+                android:id="@+id/checkBoxDevolucion"
                 style="@style/texto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/abono" />
+                android:text="@string/devolucion" />
 
             <CheckBox
                 android:id="@+id/checkBoxFactura"
                 style="@style/texto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/factura" />
+                android:text="@string/compra" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/contenedorDatosFactura"
+            android:id="@+id/contenedorDatosCompra"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
@@ -76,37 +76,37 @@
             android:layout_marginEnd="1dp"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/contenedorCheckBox"
-            app:layout_constraintTop_toBottomOf="@+id/contenedorTituloAñadirFactura">
+            app:layout_constraintStart_toEndOf="@+id/contenedorCheckBoxCompra"
+            app:layout_constraintTop_toBottomOf="@+id/contenedorTituloAñadirCompra">
 
             <TextView
-                android:id="@+id/textoNombreClienteDato"
+                android:id="@+id/textoNombreProveedor"
                 style="@style/texto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/cliente" />
+                android:text="@string/proveedor" />
 
             <Spinner
-                android:id="@+id/spinnerNombreCliente"
+                android:id="@+id/spinnerNombreClienteCompra"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
                 android:textSize="24dp"/>
 
             <TextView
-                android:id="@+id/textoTituloFactura"
+                android:id="@+id/textoTituloCompra"
                 style="@style/texto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/titulo" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/contenedorCampoTituloAnadirFactura"
+                android:id="@+id/contenedorCampoTituloAnadirCompra"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/campoTituloAnadirFactura"
+                    android:id="@+id/campoTituloAnadirCompra"
                     style="@style/texto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -114,20 +114,20 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
-                android:id="@+id/textoFechaVentaFactura"
+                android:id="@+id/textoFechaVentaCompra"
                 style="@style/texto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/fecha" />
 
             <LinearLayout
-                android:id="@+id/contenedorFechaFactura"
+                android:id="@+id/contenedorFechaCompra"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textoFechaDesdeFactura"
+                    android:id="@+id/textoFechaDesdeCompra"
                     style="@style/texto"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -139,7 +139,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/contenedorEncabezadoProductosAnadirFactura"
+            android:id="@+id/contenedorEncabezadoProductosAnadirCompra"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="1dp"
@@ -148,10 +148,10 @@
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/contenedorDatosFactura">
+            app:layout_constraintTop_toBottomOf="@+id/contenedorDatosCompra">
 
             <TextView
-                android:id="@+id/textoNombreAnadirFactura"
+                android:id="@+id/textoNombreAnadirCompra"
                 style="@style/texto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -159,7 +159,7 @@
                 android:text="@string/nombre" />
 
             <TextView
-                android:id="@+id/textoPrecioAnadirFactura"
+                android:id="@+id/textoPrecioAnadirCompra"
                 style="@style/texto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -168,7 +168,7 @@
                 android:textAlignment="gravity" />
 
             <TextView
-                android:id="@+id/textoCantidadAnadirFactura"
+                android:id="@+id/textoCantidadAnadirCompra"
                 style="@style/texto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -176,7 +176,7 @@
                 android:text="@string/cantidad" />
 
             <TextView
-                android:id="@+id/textoTotalAnadirFactura"
+                android:id="@+id/textoTotalAnadirCompra"
                 style="@style/texto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -185,28 +185,28 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/contenedorPrincipalDatosAnadirFactura"
+            android:id="@+id/contenedorPrincipalDatosAnadirCompra"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@id/contenedorEncabezadoProductosAnadirFactura">
+            app:layout_constraintTop_toBottomOf="@id/contenedorEncabezadoProductosAnadirCompra">
 
             <LinearLayout
-                android:id="@+id/contenedorBotonesAnadirFactura"
+                android:id="@+id/contenedorBotonesAnadirCompra"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:id="@+id/delimitadorAnadirLineaFactura"
+                    android:id="@+id/delimitadorAnadirLineaCompra"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <EditText
-                        android:id="@+id/campoNombreAnadirLineaFactura"
+                        android:id="@+id/campoNombreAnadirLineaCompra"
                         style="@style/texto"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -218,7 +218,7 @@
                         android:paddingBottom="10dp" />
 
                     <EditText
-                        android:id="@+id/campoPrecioAnadirLineaFactura"
+                        android:id="@+id/campoPrecioAnadirLineaCompra"
                         style="@style/texto"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -230,7 +230,7 @@
                         android:inputType="textPersonName" />
 
                     <EditText
-                        android:id="@+id/campoCantidadAnadirLineaFactura"
+                        android:id="@+id/campoCantidadAnadirLineaCompra"
                         style="@style/texto"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -242,7 +242,7 @@
                         android:inputType="textPersonName" />
 
                     <TextView
-                        android:id="@+id/campoTotalLineaAnadirFacturaLinea"
+                        android:id="@+id/campoTotalLineaAnadirCompraLinea"
                         style="@style/texto"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -255,7 +255,7 @@
                 </LinearLayout>
 
                 <ImageButton
-                    android:id="@+id/botonAnadirFactura"
+                    android:id="@+id/botonAnadirCompra"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="8"
@@ -266,14 +266,14 @@
         </LinearLayout>
 
         <View
-            android:id="@+id/lineaNegraAnadirFactura"
+            android:id="@+id/lineaNegraAnadirCompra"
             android:layout_width="match_parent"
             android:layout_height="5dp"
             android:layout_marginTop="10dp"
             android:background="@android:color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/contenedorPrincipalDatosAnadirFactura" />
+            app:layout_constraintTop_toBottomOf="@+id/contenedorPrincipalDatosAnadirCompra" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerLineasProductos"
@@ -281,15 +281,15 @@
             android:layout_height="0dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            app:layout_constraintBottom_toTopOf="@+id/contenedorDeConetendoresDatosAnadirFactura"
+            app:layout_constraintBottom_toTopOf="@+id/contenedorDeConetendoresDatosAnadirCompra"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lineaNegraAnadirFactura">
+            app:layout_constraintTop_toBottomOf="@+id/lineaNegraAnadirCompra">
 
         </androidx.recyclerview.widget.RecyclerView>
 
         <ImageButton
-            android:id="@+id/botonTerminadoAñadiendoFactura"
+            android:id="@+id/botonTerminadoAñadiendoCompra"
             android:layout_width="64dp"
             android:layout_height="60dp"
             android:layout_marginStart="20dp"
@@ -300,7 +300,7 @@
             app:srcCompat="@drawable/check" />
 
         <LinearLayout
-            android:id="@+id/contenedorDeConetendoresDatosAnadirFactura"
+            android:id="@+id/contenedorDeConetendoresDatosAnadirCompra"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
@@ -311,7 +311,7 @@
             app:layout_constraintEnd_toEndOf="parent">
 
             <LinearLayout
-                android:id="@+id/contenedorDatoTotalBaseAnadirFactura"
+                android:id="@+id/contenedorDatoTotalBaseAnadirCompra"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="5dp"
@@ -320,7 +320,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textoTotalBaseAnadirFactura"
+                    android:id="@+id/textoTotalBaseAnadirCompra"
                     style="@style/texto"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -328,7 +328,7 @@
                     android:text="@string/totalBase" />
 
                 <TextView
-                    android:id="@+id/textoNumeroTotalBaseAnadirFactura"
+                    android:id="@+id/textoNumeroTotalBaseAnadirCompra"
                     style="@style/texto"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -339,7 +339,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/contenedorDatoIVAAnadirFactura"
+                android:id="@+id/contenedorDatoIVAAnadirCompra"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="5dp"
@@ -348,7 +348,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textoIVAAnadirFactura"
+                    android:id="@+id/textoIVAAnadirCompra"
                     style="@style/texto"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -356,7 +356,7 @@
                     android:text="@string/iva" />
 
                 <TextView
-                    android:id="@+id/textoNumeroIvaAnadirFactura"
+                    android:id="@+id/textoNumeroIvaAnadirCompra"
                     style="@style/texto"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -366,7 +366,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/contenedorDatoTotalAlbaranAnadirFactura"
+                android:id="@+id/contenedorDatoTotalAlbaranAnadirCompra"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="5dp"
@@ -376,7 +376,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textoTotalTerminadoAnadirFactura"
+                    android:id="@+id/textoTotalTerminadoAnadirCompra"
                     style="@style/texto"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -384,7 +384,7 @@
                     android:text="@string/totalEuro" />
 
                 <TextView
-                    android:id="@+id/textoNumeroTotalAnadirFactura"
+                    android:id="@+id/textoNumeroTotalAnadirCompra"
                     style="@style/texto"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

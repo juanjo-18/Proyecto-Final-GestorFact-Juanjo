@@ -103,6 +103,13 @@ class ActividadFacturacion : AppCompatActivity() {
             )
             this.startActivity(intent)
         }
+        //Boton que cambia la panatalla a compra
+        binding.botonIrAComprasDesdeFacturacion.setOnClickListener{
+            val intent: Intent = Intent(
+                this,ActividadCompra::class.java
+            )
+            this.startActivity(intent)
+        }
 
         //Boton que cambia la panatalla a añadir factura
         binding.botonAnadirFactura.setOnClickListener{

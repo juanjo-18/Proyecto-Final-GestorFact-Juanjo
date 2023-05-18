@@ -75,5 +75,10 @@
     <string name="minimoProducto">Mínimo tiene que haber un producto añadido</string>
     <string name="estadoAlbaran">Estado</string>
     <string name="seleccionarCliente">Tienes que seleccionar un cliente</string>
+    <string name="nuevaCompra">Nueva Compra</string>
+    <string name="devolucion">Devolucion</string>
+    <string name="compra">Compra</string>
+    <string name="proveedor">Proveedor</string>
+
 
 </resources>

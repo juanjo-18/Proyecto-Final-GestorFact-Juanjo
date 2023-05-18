@@ -47,55 +47,60 @@ class ActividadPrincipal : AppCompatActivity() {
 
         //Boton que se encarga de iniciar sesion comprueba los datos con fire base
         botonIrAInico.setOnClickListener {
-            val auth: FirebaseAuth = FirebaseAuth.getInstance()
-            auth.signInWithEmailAndPassword(
-                binding.campoCorreo.text.toString(),
-                binding.campoContrasena.text.toString()
-            )
-                .addOnCompleteListener {
-                    if (it.isSuccessful) {
+            if(binding.campoCorreo.text.isNotBlank() && binding.campoContrasena.text.isNotBlank()) {
+                val auth: FirebaseAuth = FirebaseAuth.getInstance()
+                auth.signInWithEmailAndPassword(
+                    binding.campoCorreo.text.toString(),
+                    binding.campoContrasena.text.toString()
+                )
+                    .addOnCompleteListener {
+                        if (it.isSuccessful) {
 
-                        FirebaseFirestore.getInstance().collection("usuarios")
-                            .whereEqualTo("email", binding.campoCorreo.text.toString()).get()
-                            .addOnSuccessListener { result ->
-                                for (document in result) {
-                                    var usuarioLogado = Usuario(
-                                        binding.campoContrasena.text.toString(),
-                                        "" + document.getString("email"),
-                                        LocalDate.now(),
-                                    )
-                                    val alerta: Alerta = Alerta(this.resources.getString(R.string.nuestraApp),
-                                        "Bienvenido "+usuarioLogado!!.email,
-                                        this.resources.getString(R.string.ok), this, {
+                            FirebaseFirestore.getInstance().collection("usuarios")
+                                .whereEqualTo("email", binding.campoCorreo.text.toString()).get()
+                                .addOnSuccessListener { result ->
+                                    for (document in result) {
+                                        var usuarioLogado = Usuario(
+                                            binding.campoContrasena.text.toString(),
+                                            "" + document.getString("email"),
+                                            LocalDate.now(),
+                                        )
+                                        val alerta: Alerta =
+                                            Alerta(this.resources.getString(R.string.nuestraApp),
+                                                "Bienvenido " + usuarioLogado!!.email,
+                                                this.resources.getString(R.string.ok), this, {
 
-                                            val intent: Intent = Intent(
-                                                this,ActividadInicio::class.java
-                                            )
-                                            this.startActivity(intent)
-                                        })
-                                    alerta.mostrar()
+                                                    val intent: Intent = Intent(
+                                                        this, ActividadInicio::class.java
+                                                    )
+                                                    this.startActivity(intent)
+                                                })
+                                        alerta.mostrar()
 
 
+                                    }
+
+                                }.addOnFailureListener {
+                                    Toast.makeText(
+                                        this,
+                                        "",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
                                 }
 
-                            }.addOnFailureListener {
-                                Toast.makeText(
-                                    this,
-                                    "",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
 
-
-                    } else {
-                        it.exception?.printStackTrace()
-                        Toast.makeText(
-                            this,
-                            it.exception.toString(),
-                            Toast.LENGTH_LONG
-                        ).show()
+                        } else {
+                            it.exception?.printStackTrace()
+                            Toast.makeText(
+                                this,
+                                it.exception.toString(),
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
                     }
-                }
+            } else{
+                Toast.makeText(this,R.string.camposVacios,Toast.LENGTH_SHORT).show()
+            }
         }
 
 
