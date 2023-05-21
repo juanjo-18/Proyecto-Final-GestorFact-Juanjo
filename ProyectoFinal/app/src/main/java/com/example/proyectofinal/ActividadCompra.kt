@@ -34,6 +34,46 @@ class ActividadCompra : AppCompatActivity() {
 
 
 
+        //Boton que cambia la panatalla catalogo
+        binding.botonIrACatalogoDesdeCompra.setOnClickListener{
+            val intent: Intent = Intent(
+                this,ActividadCatalogo::class.java
+            )
+            this.startActivity(intent)
+        }
+
+        //Boton que cambia la panatalla cliente
+        binding.botonIrAClientesDesdeCompra.setOnClickListener{
+            val intent: Intent = Intent(
+                this,ActividadCliente::class.java
+            )
+            this.startActivity(intent)
+        }
+
+        //Boton que cambia la panatalla ventas
+        binding.botonIrAVentasDesdeCompra.setOnClickListener{
+            val intent: Intent = Intent(
+                this,ActividadVenta::class.java
+            )
+            this.startActivity(intent)
+        }
+        //Boton que cambia la panatalla inicio
+        binding.botonIrAInicioDesdeCompra.setOnClickListener{
+            val intent: Intent = Intent(
+                this,ActividadInicio::class.java
+            )
+            this.startActivity(intent)
+        }
+        //Boton que cambia la panatalla a facturacion
+        binding.botonIrAFacturacionDesdeCompra.setOnClickListener{
+            val intent: Intent = Intent(
+                this,ActividadFacturacion::class.java
+            )
+            this.startActivity(intent)
+        }
+
+
+
         //Boton que cambia la panatalla a añadir compra
         binding.botonAnadirCompra.setOnClickListener{
             val intent: Intent = Intent(

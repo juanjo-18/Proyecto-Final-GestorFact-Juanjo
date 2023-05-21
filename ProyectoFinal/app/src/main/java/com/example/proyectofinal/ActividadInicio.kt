@@ -75,6 +75,14 @@ class ActividadInicio : AppCompatActivity() {
             this.startActivity(intent)
         }
 
+        //Boton que cambia la panatalla a compra
+        binding.botonIrAComprasDesdeInicio.setOnClickListener{
+            val intent: Intent = Intent(
+                this,ActividadCompra::class.java
+            )
+            this.startActivity(intent)
+        }
+
     }
 
 }

@@ -111,14 +111,14 @@
                 app:srcCompat="@drawable/file_document" />
 
             <ImageButton
-                android:id="@+id/imageButton6DesdeVenta"
+                android:id="@+id/botonIrAComprasDesdeVentas"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/cart" />
 
             <ImageButton
-                android:id="@+id/imageButton7DesdeVenta"
+                android:id="@+id/botonIrAInformesDesdeVentas"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

@@ -104,21 +104,21 @@
                 app:srcCompat="@drawable/tag" />
 
             <ImageButton
-                android:id="@+id/botonIrAComprasDesdeFacturacion"
+                android:id="@+id/botonSinUso"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/file_document" />
 
             <ImageButton
-                android:id="@+id/imageButton6DesdeFacturacion"
+                android:id="@+id/botonIrAComprasDesdeFacturacion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/cart" />
 
             <ImageButton
-                android:id="@+id/imageButton7DesdeFacturacion"
+                android:id="@+id/botonIrAInformesDesdeFacturacion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
