@@ -82,6 +82,13 @@ class ActividadInicio : AppCompatActivity() {
             )
             this.startActivity(intent)
         }
+        //Boton que cambia la panatalla a informes
+        binding.botonIrAInformesDesdeInicio.setOnClickListener{
+            val intent: Intent = Intent(
+                this,ActividadInformes::class.java
+            )
+            this.startActivity(intent)
+        }
 
     }
 

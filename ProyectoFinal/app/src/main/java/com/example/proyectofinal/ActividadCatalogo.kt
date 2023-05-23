@@ -136,6 +136,15 @@ class ActividadCatalogo : AppCompatActivity(), SearchView.OnQueryTextListener {
             this.startActivity(intent)
         }
 
+       //Boton que cambia la panatalla a compra
+        val botonIrAInformes:ImageButton=findViewById<ImageButton>(R.id.botonIraInformesDesdeCatalogo)
+        botonIrAInformes.setOnClickListener{
+            val intent: Intent = Intent(
+                this,ActividadInformes::class.java
+            )
+            this.startActivity(intent)
+        }
+
 
     }
 

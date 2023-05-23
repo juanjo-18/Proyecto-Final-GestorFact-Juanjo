@@ -121,7 +121,7 @@
                 app:srcCompat="@drawable/cart" />
 
             <ImageButton
-                android:id="@+id/botonIrAAInformesDesdeCliente"
+                android:id="@+id/botonIrAInformesDesdeCliente"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

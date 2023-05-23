@@ -89,6 +89,8 @@ class ActividadVenta : AppCompatActivity() {
             findViewById<ImageButton>(R.id.botonIrAFacturacionDesdeVenta)
         val botonIrACompras: ImageButton =
             findViewById<ImageButton>(R.id.botonIrAComprasDesdeVentas)
+        val botonIrAInformes: ImageButton =
+            findViewById<ImageButton>(R.id.botonIrAInformesDesdeVentas)
 
         //Boton que cambia la panatalla a la inicial
         botonIrAInicio.setOnClickListener {
@@ -125,6 +127,14 @@ class ActividadVenta : AppCompatActivity() {
         botonIrACompras.setOnClickListener{
             val intent: Intent = Intent(
                 this,ActividadCompra::class.java
+            )
+            this.startActivity(intent)
+        }
+
+        //Boton que cambia la panatalla a informes
+        botonIrAInformes.setOnClickListener{
+            val intent: Intent = Intent(
+                this,ActividadInformes::class.java
             )
             this.startActivity(intent)
         }
