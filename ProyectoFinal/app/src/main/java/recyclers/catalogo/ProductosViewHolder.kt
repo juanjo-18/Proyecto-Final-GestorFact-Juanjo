@@ -12,19 +12,19 @@ import com.example.proyectofinal.R
  * representar cada elemento de la lista de Producto en una vista de recyclerview.
  * @author Juanjo Medina
  */
-class ProductosViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class ProductosViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     // TextView para mostrar el nombre del producto en el catálogo
-    val nombre: TextView by lazy{ view.findViewById<TextView>(R.id.textoCatalogo)}
+    val nombre: TextView by lazy{ itemView.findViewById<TextView>(R.id.textoCatalogo)}
 
     // TextView para mostrar el precio del producto en el catálogo
-    val precio: TextView by lazy{ view.findViewById<TextView>(R.id.textoPrecio)}
+    val precio: TextView by lazy{ itemView.findViewById<TextView>(R.id.textoPrecio)}
 
     // TextView para mostrar la cantidad disponible del producto en el catálogo
-    val cantidad: TextView by lazy{ view.findViewById<TextView>(R.id.textoStock)}
+    val cantidad: TextView by lazy{ itemView.findViewById<TextView>(R.id.textoStock)}
 
     // Botón para editar el producto en el catálogo
-    val botonEditar: ImageButton by lazy{ view.findViewById<ImageButton>(R.id.botonEditarCatalogo) }
+    val botonEditar: ImageButton by lazy{ itemView.findViewById<ImageButton>(R.id.botonEditarCatalogo) }
 
     // Botón para borrar el producto del catálogo
-    val botonBorrar: ImageButton by lazy{ view.findViewById<ImageButton>(R.id.botonEliminarCatalogo) }
+    val botonBorrar: ImageButton by lazy{ itemView.findViewById<ImageButton>(R.id.botonEliminarCatalogo) }
  }

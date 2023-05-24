@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    android:backgroundTint="#000000"
+    android:backgroundTint="#FFFFFF"
     tools:context=".ActividadCatalogo">
 
     <ImageView
@@ -30,27 +30,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="157dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <SearchView
-                    android:id="@+id/buscadorDeProductos"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="1dp"
-                    android:layout_marginEnd="1dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <ImageButton
-                android:id="@+id/botonBuscadorCatalogo"
-                android:layout_width="70dp"
+            <EditText
+                android:id="@+id/buscadorProductos"
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/lupa" />
+                android:background="@color/white"
+                android:backgroundTint="#FFFFFF"
+                android:ems="10"
+                android:hint="Buscar producto"
+                android:inputType="textPersonName"
+                android:textColorHint="#575757" />
 
         </LinearLayout>
 
@@ -60,6 +49,7 @@
             android:layout_height="0dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="40dp"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/contenedorTituloCatalogo"
             app:layout_constraintStart_toStartOf="parent"

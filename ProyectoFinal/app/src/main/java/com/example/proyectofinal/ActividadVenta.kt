@@ -6,11 +6,15 @@ import android.content.pm.PackageManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -22,6 +26,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import recyclers.albaranes.AlbaranesAdapter
 import recyclers.catalogo.ProductosAdapter
+import recyclers.clientes.ClientesAdapter
 
 /**
  * Esta es la clase que representa la actividad venta donde estaran todos los albaranes en un recycler view a
@@ -34,6 +39,10 @@ class ActividadVenta : AppCompatActivity() {
      * Variable para la instancia de la base de datos.
      */
     private lateinit var db: AppDataBase
+
+    var listaVenta = arrayListOf<Albaran>()
+
+    private lateinit var adaptador: AlbaranesAdapter
 
     /**
      * Método onCreate() de la actividad, se llama al crear la actividad.
@@ -57,6 +66,7 @@ class ActividadVenta : AppCompatActivity() {
         //Aqui recogo todos los albaranes de la base de datos y lo muestro en un recycler view
         GlobalScope.launch {
             valores = db.albaranDAO().getAll() as ArrayList<Albaran>
+            listaVenta= db.albaranDAO().getAll() as ArrayList<Albaran>
             val recyclerView: RecyclerView = findViewById<RecyclerView>(R.id.reciclerVenta)
             recyclerView.adapter = AlbaranesAdapter( context, valores)
             val staggeredManager: StaggeredGridLayoutManager = StaggeredGridLayoutManager(
@@ -69,7 +79,28 @@ class ActividadVenta : AppCompatActivity() {
             val spacingInPixels = resources.getDimensionPixelSize(R.dimen.item_spacing)
             val itemSpacingDecoration = ItemSpacingDecoration(spacingInPixels)
             recyclerView.addItemDecoration(itemSpacingDecoration)
+            setupRecyclerView()
         }
+        val buscadorAlbaran: EditText = findViewById(R.id.buscadorVenta)
+
+        buscadorAlbaran.addTextChangedListener(object: TextWatcher {
+            override fun beforeTextChanged(
+                s: CharSequence?,
+                start: Int,
+                count: Int,
+                after: Int
+            ) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                filtrar(s.toString())
+            }
+        })
 
         //Boton que cambia la panatalla para añadir una nueva venta
         val botonIrAnadirVenta: FloatingActionButton = findViewById(R.id.botonAnadirVenta)
@@ -141,6 +172,21 @@ class ActividadVenta : AppCompatActivity() {
 
 
 
+    }
+    fun setupRecyclerView(){
+        val recyclerView: RecyclerView = findViewById<RecyclerView>(R.id.reciclerVenta)
+        recyclerView.layoutManager= LinearLayoutManager(this)
+        adaptador = AlbaranesAdapter(this,listaVenta)
+        recyclerView.adapter=adaptador
+    }
+    fun filtrar(texto: String){
+        var listaFiltrada= arrayListOf<Albaran>()
+        listaVenta.forEach{
+            if(it.titulo?.toLowerCase()?.contains(texto.toLowerCase()) == true){
+                listaFiltrada.add(it)
+            }
+        }
+        adaptador.filtrar(listaFiltrada)
     }
 
 }

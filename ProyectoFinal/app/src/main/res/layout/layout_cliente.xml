@@ -30,30 +30,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="157dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
             <EditText
                 android:id="@+id/buscadorCliente"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
                 android:layout_weight="1"
                 android:background="@color/white"
                 android:backgroundTint="#FFFFFF"
                 android:ems="10"
                 android:hapticFeedbackEnabled="false"
-                android:inputType="textPersonName" />
-
-            <ImageButton
-                android:id="@+id/imagenBuscadorCliente"
-                android:layout_width="70dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/lupa" />
+                android:hint="Buscar cliente"
+                android:inputType="textPersonName"
+                android:textColorHint="#575757" />
 
         </LinearLayout>
 

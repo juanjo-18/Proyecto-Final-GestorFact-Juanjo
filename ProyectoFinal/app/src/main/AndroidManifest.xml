@@ -22,18 +22,22 @@
             android:exported="false" />
         <activity
             android:name=".ActividadCompra"
+            android:windowSoftInputMode="adjustPan"
             android:exported="false" />
         <activity
             android:name=".ActividadAnadirCompra"
+            android:windowSoftInputMode="adjustPan"
             android:exported="false" />
         <activity
             android:name=".ActividadEditarVenta"
             android:exported="false" />
         <activity
             android:name=".ActividadAnadirFactura"
+            android:windowSoftInputMode="adjustPan"
             android:exported="false" />
         <activity
             android:name=".ActividadFacturacion"
+            android:windowSoftInputMode="adjustPan"
             android:exported="false" />
         <activity
             android:name=".ActividadAnadirVenta"
@@ -41,6 +45,7 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ActividadVenta"
+            android:windowSoftInputMode="adjustPan"
             android:exported="false" />
         <activity
             android:name=".ActividadEditarCliente"
@@ -56,9 +61,11 @@
             android:exported="false" />
         <activity
             android:name=".ActividadCliente"
+            android:windowSoftInputMode="adjustPan"
             android:exported="false" />
         <activity
             android:name=".ActividadCatalogo"
+            android:windowSoftInputMode="adjustPan"
             android:exported="false">
             <meta-data
                 android:name="android.app.searchable"

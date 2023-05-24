@@ -24,7 +24,7 @@ import recyclers.catalogo.ProductosViewHolder
  * @param actividadMadre instancia de la actividad principal que utiliza este adaptador
  * @param datos arreglo de elementos de tipo cliente que se utilizarán para poblar la vista de la lista
  */
-class ClientesAdapter(val actividadMadre: Activity, val datos: ArrayList<Cliente>) :
+class ClientesAdapter(val actividadMadre: Activity, var datos: ArrayList<Cliente>) :
     RecyclerView.Adapter<ClientesViewHolder>() {
     /*** Adapter para el RecyclerView que muestra la lista de clientes ***/
     private lateinit var db: AppDataBase
@@ -79,5 +79,9 @@ class ClientesAdapter(val actividadMadre: Activity, val datos: ArrayList<Cliente
     /* Devuelve la cantidad de elementos en la lista */
     override fun getItemCount(): Int {
         return datos.size
+    }
+    fun filtrar(listaFiltrada: ArrayList<Cliente>){
+        this.datos=listaFiltrada
+        notifyDataSetChanged()
     }
 }

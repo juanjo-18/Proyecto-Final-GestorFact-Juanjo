@@ -3,7 +3,11 @@ package com.example.proyectofinal
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.widget.EditText
 import android.widget.ImageButton
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.room.Room
@@ -28,6 +32,9 @@ class ActividadCliente : AppCompatActivity() {
      * Variable para la instancia de la base de datos.
      */
     private lateinit var db: AppDataBase
+    var listaCliente = arrayListOf<Cliente>()
+
+    private lateinit var adaptador: ClientesAdapter
 
     /**
      * Método onCreate() de la actividad, se llama al crear la actividad.
@@ -49,6 +56,7 @@ class ActividadCliente : AppCompatActivity() {
         //Aqui recogo todos los clientes de la base de datos y los muestro en el recycler view
         GlobalScope.launch {
             valores = db.clienteDAO().getAll() as ArrayList<Cliente>
+            listaCliente= db.clienteDAO().getAll() as ArrayList<Cliente>
             val recyclerView: RecyclerView = findViewById<RecyclerView>(R.id.reciclerCliente)
             recyclerView.adapter = ClientesAdapter(context, valores)
             val staggeredManager: StaggeredGridLayoutManager = StaggeredGridLayoutManager(
@@ -62,7 +70,29 @@ class ActividadCliente : AppCompatActivity() {
             val spacingInPixels = resources.getDimensionPixelSize(R.dimen.item_spacing)
             val itemSpacingDecoration = ItemSpacingDecoration(spacingInPixels)
             recyclerView.addItemDecoration(itemSpacingDecoration)
+            setupRecyclerView()
         }
+        val buscadorCliente: EditText =findViewById(R.id.buscadorCliente)
+
+        buscadorCliente.addTextChangedListener(object: TextWatcher {
+            override fun beforeTextChanged(
+                s: CharSequence?,
+                start: Int,
+                count: Int,
+                after: Int
+            ) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                filtrar(s.toString())
+            }
+
+        })
 
 
         //Boton que cambia la panatalla a añadir cliente
@@ -130,5 +160,21 @@ class ActividadCliente : AppCompatActivity() {
             this.startActivity(intent)
         }
 
+    }
+    fun setupRecyclerView(){
+        val recyclerView: RecyclerView = findViewById<RecyclerView>(R.id.reciclerCliente)
+        recyclerView.layoutManager= LinearLayoutManager(this)
+        adaptador = ClientesAdapter(this,listaCliente)
+        recyclerView.adapter=adaptador
+    }
+
+    fun filtrar(texto: String){
+        var listaFiltrada= arrayListOf<Cliente>()
+        listaCliente.forEach{
+            if(it.nombre?.toLowerCase()?.contains(texto.toLowerCase()) == true){
+                listaFiltrada.add(it)
+            }
+        }
+        adaptador.filtrar(listaFiltrada)
     }
 }

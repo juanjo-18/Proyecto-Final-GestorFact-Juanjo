@@ -4,6 +4,7 @@ import android.app.Activity
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import clases.Factura
+import clases.Producto
 import com.example.proyectofinal.R
 
 /**
@@ -13,7 +14,7 @@ import com.example.proyectofinal.R
  * @param actividadMadre instancia de la actividad principal que utiliza este adaptador
  * @param datos arreglo de elementos de tipo factura que se utilizarán para poblar la vista de la lista
  */
-class FacturacionAdapter (val actividadMadre: Activity, val datos: ArrayList<Factura>):
+class FacturacionAdapter (val actividadMadre: Activity, var datos: ArrayList<Factura>):
     RecyclerView.Adapter<FacturacionViewHolder>() {
     /***
      * Este método crea una nueva instancia de la vista de elemento del adaptador
@@ -70,5 +71,9 @@ class FacturacionAdapter (val actividadMadre: Activity, val datos: ArrayList<Fac
      ***/
     override fun getItemCount(): Int {
         return datos.size
+    }
+    fun filtrar(listaFiltrada: ArrayList<Factura>){
+        this.datos=listaFiltrada
+        notifyDataSetChanged()
     }
 }

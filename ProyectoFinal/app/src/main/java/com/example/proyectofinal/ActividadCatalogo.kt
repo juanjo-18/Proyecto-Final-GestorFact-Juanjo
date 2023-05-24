@@ -10,6 +10,7 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.SearchView
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.room.Room
@@ -21,6 +22,7 @@ import com.example.proyectofinal.databinding.LayoutCatalogoBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dataBase.AppDataBase
 import kotlinx.coroutines.*
+import org.w3c.dom.Text
 import recyclers.catalogo.ProductosAdapter
 
 /**Esta es la clase que representa la actividad Catalogo aqui se mostraran todos los objetos Producto en un recycler
@@ -40,7 +42,9 @@ class ActividadCatalogo : AppCompatActivity(), SearchView.OnQueryTextListener {
      */
     private lateinit var binding: LayoutCatalogoBinding
 
+    var listaProducto = arrayListOf<Producto>()
 
+    private lateinit var adaptador: ProductosAdapter
     /**
      * Método onCreate() de la actividad, se llama al crear la actividad.
      * @param savedInstanceState estado de la actividad si se restaura.
@@ -60,9 +64,12 @@ class ActividadCatalogo : AppCompatActivity(), SearchView.OnQueryTextListener {
 
         var valores = arrayListOf<Producto>()
         val context = this
+
+
         //Aqui traigo todos los productos de la base de datos y los muestro en un recyclerview
         GlobalScope.launch {
             valores = db.productoDAO().getAll() as ArrayList<Producto>
+            listaProducto= db.productoDAO().getAll() as ArrayList<Producto>
             val recyclerView: RecyclerView = findViewById<RecyclerView>(R.id.reciclerCatalogo)
             recyclerView.adapter = ProductosAdapter(context, valores)
             val staggeredManager: StaggeredGridLayoutManager = StaggeredGridLayoutManager(
@@ -75,9 +82,30 @@ class ActividadCatalogo : AppCompatActivity(), SearchView.OnQueryTextListener {
             val spacingInPixels = resources.getDimensionPixelSize(R.dimen.item_spacing)
             val itemSpacingDecoration = ItemSpacingDecoration(spacingInPixels)
             recyclerView.addItemDecoration(itemSpacingDecoration)
-
-
+            setupRecyclerView()
         }
+
+        binding.buscadorProductos.addTextChangedListener(object:TextWatcher{
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+                }
+
+                override fun afterTextChanged(s: Editable?) {
+                    filtrar(s.toString())
+                }
+
+            })
+
+
 
         //Este boton lo que hace es cambiar de pantalla a añadir producto
         binding.botonAnadirProducto.setOnClickListener {
@@ -146,6 +174,21 @@ class ActividadCatalogo : AppCompatActivity(), SearchView.OnQueryTextListener {
         }
 
 
+    }
+    fun filtrar(texto: String){
+        var listaFiltrada= arrayListOf<Producto>()
+        listaProducto.forEach{
+            if(it.nombre?.toLowerCase()?.contains(texto.toLowerCase()) == true){
+                listaFiltrada.add(it)
+            }
+        }
+        adaptador.filtrar(listaFiltrada)
+    }
+
+    fun setupRecyclerView(){
+        binding.reciclerCatalogo.layoutManager=LinearLayoutManager(this)
+        adaptador = ProductosAdapter(this,listaProducto)
+        binding.reciclerCatalogo.adapter=adaptador
     }
 
 

@@ -32,7 +32,7 @@ import java.io.FileOutputStream
  * @param actividadMadre instancia de la actividad principal que utiliza este adaptador
  * @param datos arreglo de elementos de tipo Albaran que se utilizarán para poblar la vista de la lista
  */
-class AlbaranesAdapter(val actividadMadre: Activity, val datos: ArrayList<Albaran>) :
+class AlbaranesAdapter(val actividadMadre: Activity, var datos: ArrayList<Albaran>) :
     RecyclerView.Adapter<AlbaranesViewHolder>() {
 
     private lateinit var db: AppDataBase
@@ -208,6 +208,10 @@ class AlbaranesAdapter(val actividadMadre: Activity, val datos: ArrayList<Albara
                 200 // Código de petición para identificar la solicitud
             )
         }
+    }
+    fun filtrar(listaFiltrada: ArrayList<Albaran>){
+        this.datos=listaFiltrada
+        notifyDataSetChanged()
     }
 
 

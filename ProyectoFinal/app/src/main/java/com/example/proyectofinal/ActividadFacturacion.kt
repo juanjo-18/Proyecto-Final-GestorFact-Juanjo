@@ -4,7 +4,10 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.annotation.RequiresApi
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.room.Room
@@ -15,6 +18,7 @@ import dataBase.AppDataBase
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import recyclers.albaranes.AlbaranesAdapter
+import recyclers.catalogo.ProductosAdapter
 import recyclers.facturacion.FacturacionAdapter
 
 /**
@@ -32,6 +36,9 @@ class ActividadFacturacion : AppCompatActivity() {
      * Variable para la instancia de la base de datos.
      */
     private lateinit var db: AppDataBase
+    var listaFactura= arrayListOf<Factura>()
+
+    private lateinit var adaptador: FacturacionAdapter
 
     /**
      * Método onCreate() de la actividad, se llama al crear la actividad.
@@ -59,6 +66,7 @@ class ActividadFacturacion : AppCompatActivity() {
          */
         GlobalScope.launch {
             valores = db.facturaDAO().getAll() as ArrayList<Factura>
+            listaFactura= db.facturaDAO().getAll() as ArrayList<Factura>
             val recyclerView: RecyclerView = findViewById<RecyclerView>(R.id.reciclerFactura)
             recyclerView.adapter = FacturacionAdapter(context, valores)
             val staggeredManager: StaggeredGridLayoutManager = StaggeredGridLayoutManager(
@@ -71,7 +79,26 @@ class ActividadFacturacion : AppCompatActivity() {
             val spacingInPixels = resources.getDimensionPixelSize(R.dimen.item_spacing)
             val itemSpacingDecoration = ItemSpacingDecoration(spacingInPixels)
             recyclerView.addItemDecoration(itemSpacingDecoration)
+            setupRecyclerView()
         }
+        binding.buscadorFactura.addTextChangedListener(object: TextWatcher {
+            override fun beforeTextChanged(
+                s: CharSequence?,
+                start: Int,
+                count: Int,
+                after: Int
+            ) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                filtrar(s.toString())
+            }
+        })
 
         //Boton que cambia la panatalla catalogo
         binding.botonIrACatalogoDesdeFacturacion.setOnClickListener{
@@ -127,5 +154,19 @@ class ActividadFacturacion : AppCompatActivity() {
             this.startActivity(intent)
         }
 
+    }
+    fun setupRecyclerView(){
+        binding.reciclerFactura.layoutManager= LinearLayoutManager(this)
+        adaptador = FacturacionAdapter(this,listaFactura)
+        binding.reciclerFactura.adapter=adaptador
+    }
+    fun filtrar(texto: String){
+        var listaFiltrada= arrayListOf<Factura>()
+        listaFactura.forEach{
+            if(it.titulo?.toLowerCase()?.contains(texto.toLowerCase()) == true){
+                listaFiltrada.add(it)
+            }
+        }
+        adaptador.filtrar(listaFiltrada)
     }
 }

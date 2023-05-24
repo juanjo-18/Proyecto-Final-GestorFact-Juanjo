@@ -22,9 +22,10 @@ import java.util.stream.Collectors
  * @param actividadMadre instancia de la actividad principal que utiliza este adaptador
  * @param datos arreglo de elementos de tipo producto que se utilizarán para poblar la vista de la lista
  */
-class ProductosAdapter (val actividadMadre: Activity, val datos:ArrayList<Producto>) : RecyclerView.Adapter<ProductosViewHolder>() {
+class ProductosAdapter (val actividadMadre: Activity, var datos:ArrayList<Producto>) : RecyclerView.Adapter<ProductosViewHolder>() {
     var listener: OnItemClickListener? = null
     private lateinit var db: AppDataBase
+
 
     // Crea una nueva vista de elemento de lista y la devuelve dentro de una instancia de ProductosViewHolder.
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductosViewHolder {
@@ -38,6 +39,7 @@ class ProductosAdapter (val actividadMadre: Activity, val datos:ArrayList<Produc
 
     // Reemplaza el contenido de una vista de elemento de la lista.
     override fun onBindViewHolder(holder: ProductosViewHolder, position: Int) {
+
         // Obtiene el objeto Producto en la posición dada en la lista.
         val producto:Producto = datos.get(position)
         // Asigna los valores de las propiedades del producto a las vistas correspondientes en el ViewHolder.
@@ -69,6 +71,10 @@ class ProductosAdapter (val actividadMadre: Activity, val datos:ArrayList<Produc
         }
     }
 
+    fun filtrar(listaFiltrada: ArrayList<Producto>){
+        this.datos=listaFiltrada
+        notifyDataSetChanged()
+    }
     // Devuelve el número total de elementos en la lista.
     override fun getItemCount(): Int {
         return datos.size

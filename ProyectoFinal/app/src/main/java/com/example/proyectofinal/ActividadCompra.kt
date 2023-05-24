@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.room.Room
 import clases.Factura
 import clases.ItemSpacingDecoration
+import clases.Producto
 import com.example.proyectofinal.databinding.LayoutAnadirCompraBinding
 import com.example.proyectofinal.databinding.LayoutAnadirFacturaBinding
 import com.example.proyectofinal.databinding.LayoutCompraBinding
@@ -15,6 +16,7 @@ import com.example.proyectofinal.databinding.LayoutFacturacionBinding
 import dataBase.AppDataBase
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import recyclers.catalogo.ProductosAdapter
 import recyclers.facturacion.FacturacionAdapter
 
 class ActividadCompra : AppCompatActivity() {
@@ -24,6 +26,7 @@ class ActividadCompra : AppCompatActivity() {
      */
     private lateinit var db: AppDataBase
     private lateinit var binding: LayoutCompraBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
