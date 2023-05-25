@@ -21,7 +21,7 @@ data class Albaran_Producto(
      */
     @PrimaryKey(autoGenerate = true) @ColumnInfo("id") var referencia:Int=0,
     /**
-     * Titulo principal que hace referencai al albaran
+     * Titulo principal que hace referencia al albaran
      */
     @ColumnInfo("tituloAlbaran") var tituloAlbaran: String?,
     /**

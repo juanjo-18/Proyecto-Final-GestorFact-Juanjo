@@ -67,19 +67,21 @@ class ActividadVenta : AppCompatActivity() {
         GlobalScope.launch {
             valores = db.albaranDAO().getAll() as ArrayList<Albaran>
             listaVenta= db.albaranDAO().getAll() as ArrayList<Albaran>
-            val recyclerView: RecyclerView = findViewById<RecyclerView>(R.id.reciclerVenta)
-            recyclerView.adapter = AlbaranesAdapter( context, valores)
-            val staggeredManager: StaggeredGridLayoutManager = StaggeredGridLayoutManager(
-                1,
-                StaggeredGridLayoutManager.VERTICAL
-            )
-            staggeredManager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
-            recyclerView.layoutManager = staggeredManager
+            if(valores.size>0) {
+                val recyclerView: RecyclerView = findViewById<RecyclerView>(R.id.reciclerVenta)
+                recyclerView.adapter = AlbaranesAdapter(context, valores)
+                val staggeredManager: StaggeredGridLayoutManager = StaggeredGridLayoutManager(
+                    1,
+                    StaggeredGridLayoutManager.VERTICAL
+                )
+                staggeredManager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
+                recyclerView.layoutManager = staggeredManager
 
-            val spacingInPixels = resources.getDimensionPixelSize(R.dimen.item_spacing)
-            val itemSpacingDecoration = ItemSpacingDecoration(spacingInPixels)
-            recyclerView.addItemDecoration(itemSpacingDecoration)
-            setupRecyclerView()
+                val spacingInPixels = resources.getDimensionPixelSize(R.dimen.item_spacing)
+                val itemSpacingDecoration = ItemSpacingDecoration(spacingInPixels)
+                recyclerView.addItemDecoration(itemSpacingDecoration)
+                setupRecyclerView()
+            }
         }
         val buscadorAlbaran: EditText = findViewById(R.id.buscadorVenta)
 

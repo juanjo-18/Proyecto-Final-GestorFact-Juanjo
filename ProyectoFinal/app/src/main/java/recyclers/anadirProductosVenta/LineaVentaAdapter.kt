@@ -1,19 +1,14 @@
 package recyclers.anadirProductosVenta
 
 import android.app.Activity
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
-import clases.Albaran
-import clases.Albaran_Producto
 import clases.Producto
+import com.example.proyectofinal.ActividadEditarVenta
 import com.example.proyectofinal.R
 import dataBase.AppDataBase
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import recyclers.anadirProductosFactura.LineaFacturaViewHolder
 
 /**
  * Clase que extiende RecyclerView.Adapter para crear un adaptador personalizado

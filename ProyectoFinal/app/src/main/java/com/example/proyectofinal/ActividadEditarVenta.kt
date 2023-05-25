@@ -407,7 +407,7 @@ class ActividadEditarVenta : AppCompatActivity() {
                     if (!camposVacios) {
                         if (productos.size >= 1) {
                             var totalAlbaranFinal: Float = 0f
-                            CoroutineScope(Dispatchers.IO).launch {
+                           CoroutineScope(Dispatchers.IO).launch {
                                 db.albaran_ProductoDAO().borrarTodosPorTitulo(titulo.toString())
                                 for (producto in productos) {
                                     //Inserto los productos
@@ -428,6 +428,7 @@ class ActividadEditarVenta : AppCompatActivity() {
                                 //Inserto los albaranes
                                 db.albaranDAO().updateAlbaran(
                                     binding.campoTituloEditarVenta.text.toString(),
+                                    titulo.toString(),
                                     nombreCliente,
                                     LocalDate.now(),
                                     "Pendiente",

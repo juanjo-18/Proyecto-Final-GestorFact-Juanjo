@@ -40,8 +40,8 @@ interface AlbaranDAO {
     /**
      * Actualiza un objeto albaran pasandole todos los datos por parametros
      */
-    @Query("UPDATE albaran SET nombreCliente= :nombreCliente,fecha= :fecha,estado= :estado,precio= :precio where titulo= :titulo")
-    fun updateAlbaran(titulo:String, nombreCliente:String, fecha: LocalDate, estado:String, precio:Float):Int
+    @Query("UPDATE albaran SET titulo= :tituloNuevo, nombreCliente= :nombreCliente,fecha= :fecha,estado= :estado,precio= :precio where titulo= :tituloAntiguo")
+    fun updateAlbaran(tituloNuevo:String,tituloAntiguo:String, nombreCliente:String, fecha: LocalDate, estado:String, precio:Float):Int
 
     /**
      * Busca un albaran por el titulo que se le pasa por parametros devuelve una lista de albaran

@@ -17,7 +17,6 @@ import clases.Albaran_Producto
 import clases.Cliente
 import clases.Producto
 import com.example.proyectofinal.databinding.LayoutAnadirCompraBinding
-import com.example.proyectofinal.databinding.LayoutAnadirFacturaBinding
 import dataBase.AppDataBase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

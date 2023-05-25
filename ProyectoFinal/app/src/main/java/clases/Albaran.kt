@@ -20,9 +20,13 @@ import kotlin.collections.ArrayList
 @Entity
 data class Albaran(
     /**
-     * Clave primaria titulo es un string
+     * referencia es la clave primaria que se incrementa automaticamente
      */
-    @PrimaryKey(autoGenerate = false) @ColumnInfo("titulo") var titulo: String,
+    @PrimaryKey(autoGenerate = true) @ColumnInfo("id") var referencia:Int=0,
+    /**
+     * Titulo principal que hace referencia al albaran
+     */
+    @ColumnInfo("titulo") var titulo: String,
     /**
      * Nombre del destinatario del albaran el cliente
      */

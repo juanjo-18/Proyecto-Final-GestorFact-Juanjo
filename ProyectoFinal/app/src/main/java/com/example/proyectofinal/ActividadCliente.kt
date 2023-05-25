@@ -57,20 +57,22 @@ class ActividadCliente : AppCompatActivity() {
         GlobalScope.launch {
             valores = db.clienteDAO().getAll() as ArrayList<Cliente>
             listaCliente= db.clienteDAO().getAll() as ArrayList<Cliente>
-            val recyclerView: RecyclerView = findViewById<RecyclerView>(R.id.reciclerCliente)
-            recyclerView.adapter = ClientesAdapter(context, valores)
-            val staggeredManager: StaggeredGridLayoutManager = StaggeredGridLayoutManager(
-                1,
-                StaggeredGridLayoutManager.VERTICAL
-            )
-            staggeredManager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
-            recyclerView.layoutManager = staggeredManager
+            if(valores.size>0) {
+                val recyclerView: RecyclerView = findViewById<RecyclerView>(R.id.reciclerCliente)
+                recyclerView.adapter = ClientesAdapter(context, valores)
+                val staggeredManager: StaggeredGridLayoutManager = StaggeredGridLayoutManager(
+                    1,
+                    StaggeredGridLayoutManager.VERTICAL
+                )
+                staggeredManager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
+                recyclerView.layoutManager = staggeredManager
 
-            //ajustamos el recycler a la pantalla
-            val spacingInPixels = resources.getDimensionPixelSize(R.dimen.item_spacing)
-            val itemSpacingDecoration = ItemSpacingDecoration(spacingInPixels)
-            recyclerView.addItemDecoration(itemSpacingDecoration)
-            setupRecyclerView()
+                //ajustamos el recycler a la pantalla
+                val spacingInPixels = resources.getDimensionPixelSize(R.dimen.item_spacing)
+                val itemSpacingDecoration = ItemSpacingDecoration(spacingInPixels)
+                recyclerView.addItemDecoration(itemSpacingDecoration)
+                setupRecyclerView()
+            }
         }
         val buscadorCliente: EditText =findViewById(R.id.buscadorCliente)
 

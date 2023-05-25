@@ -1,6 +1,5 @@
 package com.example.proyectofinal
 
-import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -15,12 +14,12 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.room.Room
 import clases.*
 import com.example.proyectofinal.databinding.LayoutAnadirFacturaBinding
-import com.example.proyectofinal.databinding.LayoutAnadirVentaBinding
 import dataBase.AppDataBase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import recyclers.anadirProductosFactura.LineaFacturaAdapter
 import recyclers.anadirProductosVenta.LineaVentaAdapter
 import java.time.LocalDate
 import java.util.*
@@ -104,7 +103,7 @@ class ActividadAnadirFactura : AppCompatActivity() {
         //Esto es el recycler view de productos que yo ire añadiendo con el boton
         val productos = arrayListOf<Producto>()
         val recyclerView: RecyclerView = findViewById<RecyclerView>(R.id.recyclerLineasProductos)
-        recyclerView.adapter = LineaVentaAdapter(this, productos)
+        recyclerView.adapter = LineaFacturaAdapter(this, productos)
         val staggeredManager: StaggeredGridLayoutManager = StaggeredGridLayoutManager(
             1,
             StaggeredGridLayoutManager.VERTICAL
@@ -121,12 +120,13 @@ class ActividadAnadirFactura : AppCompatActivity() {
         var precioLleno = false
         var cantidadLlena = false
         var checkBoxVacio = true
-
+        var tipoFactura=""
         //Si el checkBox abono a sido marcado desmarco factura.
         binding.checkBoxAbono.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
                 checkBoxVacio = false
                 binding.checkBoxFactura.isChecked = false
+                tipoFactura="Abono"
             } else if (!binding.checkBoxFactura.isChecked ) {
                 checkBoxVacio = true
             }
@@ -134,6 +134,7 @@ class ActividadAnadirFactura : AppCompatActivity() {
         //Si el checkBox factura a sido marcado desmarco abono.
         binding.checkBoxFactura.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
+                tipoFactura="Factura"
                 checkBoxVacio = false
                 binding.checkBoxAbono.isChecked = false
             } else if (!binding.checkBoxAbono.isChecked) {
@@ -361,7 +362,7 @@ class ActividadAnadirFactura : AppCompatActivity() {
                                                 titulo = binding.campoTituloAnadirFactura.text.toString(),
                                                 nombreCliente = nombreCliente,
                                                 fecha = LocalDate.now(),
-                                                tipoFactura = "",
+                                                tipoFactura = tipoFactura,
                                                 cobrada = false,
                                                 precioTotal = (totalAlbaranFinal * 1.21).toFloat()
                                             )

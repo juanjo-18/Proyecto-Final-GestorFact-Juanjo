@@ -5,12 +5,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import clases.Producto
+import com.example.proyectofinal.ActividadEditarFactura
 import com.example.proyectofinal.R
 import dataBase.AppDataBase
-import recyclers.anadirProductosVenta.LineaVentaViewHolder
+import kotlinx.coroutines.CoroutineScope
 
-class LineaFacturaAdapter (val actividadMadre: Activity, val datos: ArrayList<Producto>) :
-    RecyclerView.Adapter<LineaVentaViewHolder>() {
+class LineaFacturaAdapter(val actividadMadre: Activity, val datos: ArrayList<Producto>) :
+    RecyclerView.Adapter<LineaFacturaViewHolder>() {
 
     // Base de datos
     private lateinit var db: AppDataBase
@@ -19,13 +20,13 @@ class LineaFacturaAdapter (val actividadMadre: Activity, val datos: ArrayList<Pr
     private val escrito = arrayOfNulls<String>(datos.size)
 
     // Creación de la vista para cada elemento de la lista
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LineaVentaViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LineaFacturaViewHolder {
         // Se inicializa la base de datos
         db = Room.databaseBuilder(actividadMadre, AppDataBase::class.java, "db")
             .addMigrations(AppDataBase.MIGRATION_1_2)
             .build()
         // Se crea y retorna el ViewHolder
-        return LineaVentaViewHolder(
+        return LineaFacturaViewHolder(
             actividadMadre.layoutInflater.inflate(
                 R.layout.elementos_recycler_anadir__venta,
                 parent,
@@ -35,7 +36,7 @@ class LineaFacturaAdapter (val actividadMadre: Activity, val datos: ArrayList<Pr
     }
 
     // Asociación de los datos a cada elemento de la lista
-    override fun onBindViewHolder(holder: LineaVentaViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: LineaFacturaViewHolder, position: Int) {
         // Se obtiene el producto en la posición correspondiente
         val producto: Producto = datos.get(position)
         // Se vincula el producto al ViewHolder para mostrar sus datos

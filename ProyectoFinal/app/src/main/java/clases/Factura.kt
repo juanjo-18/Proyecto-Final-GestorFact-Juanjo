@@ -22,9 +22,13 @@ import kotlin.collections.ArrayList
 @Entity
 data class Factura(
     /**
-     * La clave primaria es el titulo
+     * referencia es la clave primaria que se incrementa automaticamente
      */
-    @PrimaryKey(autoGenerate = false) @ColumnInfo("titulo") var titulo: String,
+    @PrimaryKey(autoGenerate = true) @ColumnInfo("id") var referencia:Int=0,
+    /**
+     * Titulo principal que hace referencia a la factura
+     */
+    @ColumnInfo("titulo") var titulo: String,
     /**
      * Nombre del cliente destinatario de la factura
      */
@@ -44,6 +48,6 @@ data class Factura(
     /**
      * Precio total de la factura
      */
-    @ColumnInfo("PrecioTotal") var precioTotal: Float = 0f,
+    @ColumnInfo("precioTotal") var precioTotal: Float = 0f,
 
 ) : Parcelable

@@ -1,11 +1,19 @@
 package recyclers.facturacion
 
 import android.app.Activity
+import android.content.Intent
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
 import clases.Factura
 import clases.Producto
+import com.example.proyectofinal.ActividadEditarFactura
+import com.example.proyectofinal.ActividadEditarVenta
 import com.example.proyectofinal.R
+import dataBase.AppDataBase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 /**
  * Clase que extiende RecyclerView.Adapter para crear un adaptador personalizado
@@ -16,12 +24,17 @@ import com.example.proyectofinal.R
  */
 class FacturacionAdapter (val actividadMadre: Activity, var datos: ArrayList<Factura>):
     RecyclerView.Adapter<FacturacionViewHolder>() {
+    private lateinit var db: AppDataBase
+
     /***
      * Este método crea una nueva instancia de la vista de elemento del adaptador
      * y devuelve un nuevo objeto FacturacionViewHolder que mantiene la referencia
      * de cada vista de elemento del adaptador.
      ***/
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FacturacionViewHolder {
+        db = Room.databaseBuilder(actividadMadre, AppDataBase::class.java, "db")
+            .addMigrations(AppDataBase.MIGRATION_1_2)
+            .build()
         return FacturacionViewHolder(
             actividadMadre.layoutInflater.inflate(
                 R.layout.elementos_recycler_facturacion,
@@ -50,19 +63,23 @@ class FacturacionAdapter (val actividadMadre: Activity, var datos: ArrayList<Fac
          * Elimina el elemento correspondiente de la lista de facturas y actualiza el RecyclerView.
          ***/
         holder.botonBorrar.setOnClickListener {
+            CoroutineScope(Dispatchers.IO).launch {
+                launch(Dispatchers.IO) {
+                    // Se elimina la factura de la base de datos utilizando la función 'delete' de la clase 'FacturaDAO'
+                    db.facturaDAO().delete(factura)
+                }
+            }
             datos.removeAt(position)
             this.notifyDataSetChanged()
         }
-
-        //hacer el boton editar funcional cuando tenga la actividad editar albaran
-        /*
-        holder.botonEditar.setOnClickListener {
-            val intent: Intent = Intent(actividadMadre, ActividadEditarProducto::class.java)
-            val bundle: Bundle = Bundle()
-            bundle.putParcelable("producto", producto)
-            intent.putExtras(bundle)
+        holder.botonEditar.setOnClickListener{
+            // Se crea un intent para iniciar la actividad de editar factura, y se le pasan algunos datos
+            val intent: Intent = Intent(actividadMadre, ActividadEditarFactura::class.java)
+            intent.putExtra("titulo", factura.titulo)
             actividadMadre.startActivity(intent)
-        }*/
+        }
+
+
     }
 
     /***
@@ -76,4 +93,5 @@ class FacturacionAdapter (val actividadMadre: Activity, var datos: ArrayList<Fac
         this.datos=listaFiltrada
         notifyDataSetChanged()
     }
+
 }

@@ -1,9 +1,398 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/contenedorFondoEditarFactura"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
     tools:context=".ActividadEditarFactura">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:id="@+id/fondoEditarFactura"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/engranajes" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/contenedorPrincipalEditarFactura"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/contenedorTituloEditarFactura"
+            style="@style/panelEditar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/textoTituloEditarFactura"
+                style="@style/tituloParaEditar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Editar Factura" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/contenedorCheckBox"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="1dp"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/contenedorTituloEditarFactura">
+
+            <CheckBox
+                android:id="@+id/checkBoxAbono"
+                style="@style/texto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/abono" />
+
+            <CheckBox
+                android:id="@+id/checkBoxFactura"
+                style="@style/texto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/factura" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/contenedorDatosFactura"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="1dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/contenedorCheckBox"
+            app:layout_constraintTop_toBottomOf="@+id/contenedorTituloEditarFactura">
+
+            <TextView
+                android:id="@+id/textoNombreClienteDatoEditar"
+                style="@style/texto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/cliente" />
+
+            <Spinner
+                android:id="@+id/spinnerNombreClienteEditar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:textSize="24dp"/>
+
+            <TextView
+                android:id="@+id/textoTituloFacturaEditar"
+                style="@style/texto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/titulo" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/contenedorCampoTituloEditarFactura"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/campoTituloEditarFactura"
+                    style="@style/texto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/textoFechaVentaFactura"
+                style="@style/texto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/fecha" />
+
+            <LinearLayout
+                android:id="@+id/contenedorFechaFactura"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textoFechaDesdeFactura"
+                    style="@style/texto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="TextView" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/contenedorEncabezadoProductosEditarFactura"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="1dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/contenedorDatosFactura">
+
+            <TextView
+                android:id="@+id/textoNombreEditarFactura"
+                style="@style/texto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/nombre" />
+
+            <TextView
+                android:id="@+id/textoPrecioEditarFactura"
+                style="@style/texto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/precio"
+                android:textAlignment="gravity" />
+
+            <TextView
+                android:id="@+id/textoCantidadEditarFactura"
+                style="@style/texto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/cantidad" />
+
+            <TextView
+                android:id="@+id/textoTotalEditarFactura"
+                style="@style/texto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="@string/total" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/contenedorPrincipalDatosEditarFactura"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/contenedorEncabezadoProductosEditarFactura">
+
+            <LinearLayout
+                android:id="@+id/contenedorBotonesEditarFactura"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/delimitadorEditarLineaFactura"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/campoNombreEditarLineaFactura"
+                        style="@style/texto"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="3dp"
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:paddingBottom="10dp" />
+
+                    <EditText
+                        android:id="@+id/campoPrecioEditarLineaFactura"
+                        style="@style/texto"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:ems="10"
+                        android:inputType="textPersonName" />
+
+                    <EditText
+                        android:id="@+id/campoCantidadEditarLineaFactura"
+                        style="@style/texto"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:ems="10"
+                        android:inputType="textPersonName" />
+
+                    <TextView
+                        android:id="@+id/campoTotalLineaEditarFacturaLinea"
+                        style="@style/texto"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:paddingTop="18dp"
+                        android:text="0"
+                        android:textAlignment="center" />
+
+
+                </LinearLayout>
+
+                <ImageButton
+                    android:id="@+id/botonEditarFactura"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="8"
+                    app:srcCompat="@android:drawable/ic_input_add" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/lineaNegraEditarFactura"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/contenedorPrincipalDatosEditarFactura" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerLineasProductos"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/contenedorDeConetendoresDatosEditarFactura"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lineaNegraEditarFactura">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <ImageButton
+            android:id="@+id/botonTerminadoAñadiendoFactura"
+            android:layout_width="64dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="#00FF0A"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/check" />
+
+        <LinearLayout
+            android:id="@+id/contenedorDeConetendoresDatosEditarFactura"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/bordes_redondos"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:id="@+id/contenedorDatoTotalBaseEditarFactura"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textoTotalBaseEditarFactura"
+                    style="@style/texto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/totalBase" />
+
+                <TextView
+                    android:id="@+id/textoNumeroTotalBaseEditarFactura"
+                    style="@style/texto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_weight="1"
+                    android:text="0" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/contenedorDatoIVAEditarFactura"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textoIVAEditarFactura"
+                    style="@style/texto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/iva" />
+
+                <TextView
+                    android:id="@+id/textoNumeroIvaEditarFactura"
+                    style="@style/texto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="76dp"
+                    android:layout_weight="1"
+                    android:text="0" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/contenedorDatoTotalAlbaranEditarFactura"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="4dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textoTotalTerminadoEditarFactura"
+                    style="@style/texto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/totalEuro" />
+
+                <TextView
+                    android:id="@+id/textoNumeroTotalEditarFactura"
+                    style="@style/texto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="60dp"
+                    android:layout_weight="1"
+                    android:text="0" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
