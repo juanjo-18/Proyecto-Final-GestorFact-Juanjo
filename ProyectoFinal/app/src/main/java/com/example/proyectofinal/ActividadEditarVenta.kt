@@ -1,11 +1,13 @@
 package com.example.proyectofinal
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.*
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -21,6 +23,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import recyclers.anadirProductosVenta.LineaVentaAdapter
+import java.time.LocalDate
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -47,6 +50,7 @@ class ActividadEditarVenta : AppCompatActivity() {
      * Método onCreate() de la actividad, se llama al crear la actividad.
      * @param savedInstanceState estado de la actividad si se restaura.
      */
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -107,11 +111,12 @@ class ActividadEditarVenta : AppCompatActivity() {
                 // No se ha seleccionado ningún elemento
             }
         }
-
+        var tipoAlbaran=""
         //Si el checkBox presupuesto a sido marcado desmarco pedido y albaran.
         binding.checkBoxPresupuestoEditar.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
                 checkBoxVacio = false
+                tipoAlbaran="Presupuesto"
                 binding.checkBoxPedidoEditar.isChecked = false
                 binding.checkBoxAlbaranEditar.isChecked = false
             } else if (!binding.checkBoxPedidoEditar.isChecked && !binding.checkBoxAlbaranEditar.isChecked) {
@@ -123,6 +128,7 @@ class ActividadEditarVenta : AppCompatActivity() {
         binding.checkBoxAlbaranEditar.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
                 checkBoxVacio = false
+                tipoAlbaran="Albaran"
                 binding.checkBoxPedidoEditar.isChecked = false
                 binding.checkBoxPresupuestoEditar.isChecked = false
             } else if (!binding.checkBoxPedidoEditar.isChecked && !binding.checkBoxPresupuestoEditar.isChecked) {
@@ -134,6 +140,7 @@ class ActividadEditarVenta : AppCompatActivity() {
         binding.checkBoxPedidoEditar.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
                 checkBoxVacio = false
+                tipoAlbaran="Pedido"
                 binding.checkBoxPresupuestoEditar.isChecked = false
                 binding.checkBoxAlbaranEditar.isChecked = false
             } else if (!binding.checkBoxPresupuestoEditar.isChecked && !binding.checkBoxAlbaranEditar.isChecked) {
@@ -226,13 +233,15 @@ class ActividadEditarVenta : AppCompatActivity() {
             var valores = arrayListOf<Albaran>()
             CoroutineScope(Dispatchers.IO).launch {
                 launch(Dispatchers.IO) {
-                    //hago un select a la base de datos del albaran con el titulo para cargar los datos al latour de editar
+                    //hago un select a la base de datos del albaran con el titulo para cargar los datos al layout de editar
                     valores =
                         db.albaranDAO().buscarAlbaranPorTitulo(titulo!!) as ArrayList<Albaran>
                     withContext(Dispatchers.Main) {
                         for (valor in valores) {
+
+
                             binding.campoTituloEditarVenta.setText(valor.titulo)
-                            binding.textoFechaDesdeVentaEditar.setText(valor.fecha.toString())
+                            binding.textoFechaDesdeVentaEditar.setText((LocalDate.now()).toString())
                             binding.textoNumeroTotalBaseEditarVenta.setText(
                                 (valor.precioTotal / 1.21).toString()
                             )
@@ -258,7 +267,11 @@ class ActividadEditarVenta : AppCompatActivity() {
                     albaran_producto = db.albaran_ProductoDAO()
                         .buscarAlbaranProductoPorTitulo(titulo!!) as ArrayList<Albaran_Producto>
                     withContext(Dispatchers.Main) {
+                        var nombreCliente2=""
+                        var tipoAlbaran=""
                         for (albaranes in albaran_producto) {
+                            nombreCliente2= albaranes.nombreCliente.toString()
+                            tipoAlbaran=albaranes.tipoAlbaran.toString()
                             titulo = albaranes.tituloAlbaran.toString()
                             productos.add(
                                 Producto(
@@ -267,6 +280,21 @@ class ActividadEditarVenta : AppCompatActivity() {
                                     cantidad = albaranes.cantidad
                                 )
                             )
+                        }
+                        if(tipoAlbaran.contains("Presupuesto")){
+                            binding.checkBoxPresupuestoEditar.isChecked=true
+                        }
+                        if(tipoAlbaran.contains("Pedido")){
+                            binding.checkBoxPedidoEditar.isChecked=true
+                        }
+                        if(tipoAlbaran.contains("Albaran")){
+                            binding.checkBoxAlbaranEditar.isChecked=true
+                        }
+                        for (i in 0 until nombres.size) {
+                            if (nombres[i] == nombreCliente2) {
+                                spinner.setSelection(i)
+                                break
+                            }
                         }
 
                         recyclerView.adapter = LineaVentaAdapter(contexto, productos)
@@ -387,6 +415,8 @@ class ActividadEditarVenta : AppCompatActivity() {
                                         Albaran_Producto(
                                             tituloAlbaran = binding.campoTituloEditarVenta.text.toString(),
                                             nombreProducto = producto.nombre.toString(),
+                                            nombreCliente= nombreCliente,
+                                            tipoAlbaran=tipoAlbaran,
                                             precio = producto.precio,
                                             cantidad = producto.cantidad,
                                             total = producto.precio * producto.cantidad
@@ -399,7 +429,7 @@ class ActividadEditarVenta : AppCompatActivity() {
                                 db.albaranDAO().updateAlbaran(
                                     binding.campoTituloEditarVenta.text.toString(),
                                     nombreCliente,
-                                    binding.textoFechaDesdeVentaEditar.text.toString(),
+                                    LocalDate.now(),
                                     "Pendiente",
                                     (totalAlbaranFinal * 1.21).toFloat()
                                 )

@@ -70,18 +70,20 @@ class ActividadCatalogo : AppCompatActivity(), SearchView.OnQueryTextListener {
         GlobalScope.launch {
             valores = db.productoDAO().getAll() as ArrayList<Producto>
             listaProducto= db.productoDAO().getAll() as ArrayList<Producto>
-            val recyclerView: RecyclerView = findViewById<RecyclerView>(R.id.reciclerCatalogo)
-            recyclerView.adapter = ProductosAdapter(context, valores)
-            val staggeredManager: StaggeredGridLayoutManager = StaggeredGridLayoutManager(
-                1,
-                StaggeredGridLayoutManager.VERTICAL
-            )
-            staggeredManager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
-            recyclerView.layoutManager = staggeredManager
+            if(valores.size>0) {
+                val recyclerView: RecyclerView = findViewById<RecyclerView>(R.id.reciclerCatalogo)
+                recyclerView.adapter = ProductosAdapter(context, valores)
+                val staggeredManager: StaggeredGridLayoutManager = StaggeredGridLayoutManager(
+                    1,
+                    StaggeredGridLayoutManager.VERTICAL
+                )
+                staggeredManager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
+                recyclerView.layoutManager = staggeredManager
 
-            val spacingInPixels = resources.getDimensionPixelSize(R.dimen.item_spacing)
-            val itemSpacingDecoration = ItemSpacingDecoration(spacingInPixels)
-            recyclerView.addItemDecoration(itemSpacingDecoration)
+                val spacingInPixels = resources.getDimensionPixelSize(R.dimen.item_spacing)
+                val itemSpacingDecoration = ItemSpacingDecoration(spacingInPixels)
+                recyclerView.addItemDecoration(itemSpacingDecoration)
+            }
             setupRecyclerView()
         }
 

@@ -119,10 +119,12 @@ class ActividadAnadirCompra : AppCompatActivity() {
         var cantidadLlena = false
         var checkBoxVacio = true
 
+        var tipoAlbaran=""
         //Si el checkBox abono a sido marcado desmarco factura.
         binding.checkBoxDevolucion.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
                 checkBoxVacio = false
+                tipoAlbaran="Devolucion"
                 binding.checkBoxFactura.isChecked = false
             } else if (!binding.checkBoxFactura.isChecked ) {
                 checkBoxVacio = true
@@ -132,6 +134,7 @@ class ActividadAnadirCompra : AppCompatActivity() {
         binding.checkBoxFactura.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
                 checkBoxVacio = false
+                tipoAlbaran="Compra"
                 binding.checkBoxDevolucion.isChecked = false
             } else if (!binding.checkBoxDevolucion.isChecked) {
                 checkBoxVacio = true
@@ -344,6 +347,8 @@ class ActividadAnadirCompra : AppCompatActivity() {
                                                 Albaran_Producto(
                                                     tituloAlbaran = binding.campoTituloAnadirCompra.text.toString(),
                                                     nombreProducto = producto.nombre.toString(),
+                                                    nombreCliente= nombreCliente,
+                                                    tipoAlbaran=tipoAlbaran,
                                                     precio = producto.precio,
                                                     cantidad = producto.cantidad,
                                                     total = producto.precio * producto.cantidad

@@ -35,6 +35,8 @@ data class Albaran(
      * Aqui es donde se guardara el estado del albaran que sera pendiente o Cerrado
      */
     @ColumnInfo("estado") var estado: String?,
+
+
     /**
      * Precio total del importe del albaran
      */

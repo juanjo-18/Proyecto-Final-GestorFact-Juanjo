@@ -120,8 +120,10 @@ class ActividadAnadirVenta : AppCompatActivity() {
         var checkBoxVacio = true
 
         //Si el checkBox presupuesto a sido marcado desmarco pedido y albaran.
+        var tipoAlbaran= ""
         binding.checkBoxAbono.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
+                tipoAlbaran="Presupuesto"
                 checkBoxVacio = false
                 binding.checkBoxFactura.isChecked = false
                 binding.checkBoxAlbaran.isChecked = false
@@ -133,6 +135,7 @@ class ActividadAnadirVenta : AppCompatActivity() {
         binding.checkBoxAlbaran.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
                 checkBoxVacio = false
+                tipoAlbaran="Albaran"
                 binding.checkBoxFactura.isChecked = false
                 binding.checkBoxAbono.isChecked = false
             } else if (!binding.checkBoxFactura.isChecked && !binding.checkBoxAbono.isChecked) {
@@ -144,6 +147,7 @@ class ActividadAnadirVenta : AppCompatActivity() {
         binding.checkBoxFactura.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
                 checkBoxVacio = false
+                tipoAlbaran="Pedido"
                 binding.checkBoxAbono.isChecked = false
                 binding.checkBoxAlbaran.isChecked = false
             } else if (!binding.checkBoxAbono.isChecked && !binding.checkBoxAlbaran.isChecked) {
@@ -355,6 +359,8 @@ class ActividadAnadirVenta : AppCompatActivity() {
                                                 Albaran_Producto(
                                                     tituloAlbaran = binding.campoTituloAnadirVenta.text.toString(),
                                                     nombreProducto = producto.nombre.toString(),
+                                                    nombreCliente= nombreCliente,
+                                                    tipoAlbaran=tipoAlbaran,
                                                     precio = producto.precio,
                                                     cantidad = producto.cantidad,
                                                     total = producto.precio * producto.cantidad

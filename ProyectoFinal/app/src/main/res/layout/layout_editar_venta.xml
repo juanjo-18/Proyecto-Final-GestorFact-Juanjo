@@ -36,7 +36,7 @@
                 style="@style/tituloParaEditar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/nuevaVenta" />
+                android:text="Editar venta" />
         </LinearLayout>
 
 
@@ -71,13 +71,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/pedido" />
-
-            <CheckBox
-                style="@style/texto"
-                android:id="@+id/checkBoxEstadoAlbaran"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/estadoAlbaran" />
 
         </LinearLayout>
 

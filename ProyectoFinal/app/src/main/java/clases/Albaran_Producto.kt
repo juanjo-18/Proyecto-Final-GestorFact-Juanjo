@@ -28,6 +28,10 @@ data class Albaran_Producto(
      * Nombre del producto que se añade al albaran
      */
     @ColumnInfo("nombreProducto") var nombreProducto: String?,
+
+    @ColumnInfo("nombreCliente") var nombreCliente: String?,
+
+    @ColumnInfo("tipoAlbaran") var tipoAlbaran: String?,
     /**
      * Precio que cuesta el producto
      */
@@ -47,6 +51,6 @@ data class Albaran_Producto(
  * Esta funcion devuelve un objeto Albaran_Producto
  */
 fun Albaran_Producto():Albaran_Producto{
-    val albaran_producto = Albaran_Producto(tituloAlbaran = null, nombreProducto = null, precio = 0f, cantidad = 0, total = 0f)
+    val albaran_producto = Albaran_Producto(tituloAlbaran = null, nombreProducto = null, nombreCliente = null, tipoAlbaran = null, precio = 0f, cantidad = 0, total = 0f)
     return albaran_producto
 }

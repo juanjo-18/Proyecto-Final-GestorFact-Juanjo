@@ -3,6 +3,7 @@ package dataBase
 import androidx.room.*
 import clases.Albaran
 import clases.Cliente
+import java.time.LocalDate
 
 /**
  *Esta interfaz se utiliza par hacer las consultas y modificaciones a la base de datos
@@ -40,7 +41,7 @@ interface AlbaranDAO {
      * Actualiza un objeto albaran pasandole todos los datos por parametros
      */
     @Query("UPDATE albaran SET nombreCliente= :nombreCliente,fecha= :fecha,estado= :estado,precio= :precio where titulo= :titulo")
-    fun updateAlbaran(titulo:String,nombreCliente:String,fecha:String,estado:String,precio:Float):Int
+    fun updateAlbaran(titulo:String, nombreCliente:String, fecha: LocalDate, estado:String, precio:Float):Int
 
     /**
      * Busca un albaran por el titulo que se le pasa por parametros devuelve una lista de albaran
