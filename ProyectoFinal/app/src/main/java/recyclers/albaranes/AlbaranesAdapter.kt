@@ -8,21 +8,25 @@ import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.graphics.*
 import android.graphics.pdf.PdfDocument
+import android.os.Build
 import android.os.Environment
 import android.text.TextPaint
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import clases.*
+import com.example.proyectofinal.ActividadEditarFactura
 import com.example.proyectofinal.ActividadEditarVenta
 import com.example.proyectofinal.R
 import dataBase.AppDataBase
 import kotlinx.coroutines.*
 import java.io.File
 import java.io.FileOutputStream
+import java.time.LocalDate
 
 
 /**
@@ -57,6 +61,7 @@ class AlbaranesAdapter(val actividadMadre: Activity, var datos: ArrayList<Albara
                 false
             )
         )
+
     }
 
     /**
@@ -65,6 +70,7 @@ class AlbaranesAdapter(val actividadMadre: Activity, var datos: ArrayList<Albara
      * @param holder instancia de AlbaranesViewHolder que contiene la vista de un elemento de la lista
      * @param position la posición del elemento de la lista en la que se encuentra la vista que se va a actualizar
      */
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: AlbaranesViewHolder, position: Int) {
         // Obtiene el objeto Albaran correspondiente a la posición actual
         val albaran: Albaran = datos.get(position)
@@ -75,8 +81,81 @@ class AlbaranesAdapter(val actividadMadre: Activity, var datos: ArrayList<Albara
         holder.estado.text=albaran.estado
         holder.precio.text=""+albaran.precioTotal
 
+        //cambiar color
+        if(holder.estado.text.equals("Cerrado")) {
+            val backgroundDrawable =
+                ContextCompat.getDrawable(actividadMadre, R.drawable.bordes_redondos_texto1)
+            holder.estado.background = backgroundDrawable
+        }
+
+        holder.crearFactura.setOnClickListener {
+            //Lo que tengo que hacer una vez saco el objeto en el que estoy lo inserto en factura y luego lo borro
+            // Y despues abrir la pantalla editar factura
+            var albaran_producto = arrayListOf<Albaran_Producto>()
+            var productos = arrayListOf<Producto>()
+            CoroutineScope(Dispatchers.IO).launch {
+                launch(Dispatchers.IO) {
+                    // Obtiene los datos de la tabla de Albaran_Producto de la base de datos para el título correspondiente
+                    albaran_producto = db.albaran_ProductoDAO()
+                        .buscarAlbaranProductoPorTitulo(holder.titulo.text.toString()) as ArrayList<Albaran_Producto>
+                    withContext(Dispatchers.Main) {
+                        // Crea una lista de productos a partir de los datos de Albaran_Producto
+                        for (albaranes in albaran_producto) {
+                            // Se agregan los productos a la lista 'productos', se utiliza la clase Producto y se llenan sus propiedades
+                            productos.add(
+                                Producto(
+                                    nombre = albaranes.nombreProducto,
+                                    precio = albaranes.precio,
+                                    cantidad = albaranes.cantidad
+                                )
+                            )
+                        }
+                    }
+
+                    var totalAlbaranFinal=0.4
+                    //Inserto los datos del albaran a la factura
+                    for (producto in productos) {
+                        db.factura_ProductoDAO().insert(
+                            Factura_Producto(
+                                tituloFactura = albaran.titulo.toString(),
+                                nombreProducto = producto.nombre.toString(),
+                                precio = producto.precio,
+                                cantidad = producto.cantidad,
+                                total = producto.precio * producto.cantidad
+                            )
+                        )
+                        totalAlbaranFinal += producto.precio * producto.cantidad
+                    }
+
+                    //Aqui insertamos la factura a la base de datos factura
+                    db.facturaDAO().insert(
+                        Factura(
+                            titulo = albaran.titulo,
+                            nombreCliente = albaran.nombreCliente,
+                            fecha = LocalDate.now(),
+                            tipoFactura = "Factura",
+                            cobrada = false,
+                            precioTotal = (totalAlbaranFinal * 1.21).toFloat()
+                        )
+                    )
+
+                    holder.estado.text="Cerrado"
+                    // hacer update al albaran
+                    db.albaranDAO().updateAlbaran(albaran.titulo,albaran.titulo,albaran.nombreCliente.toString(),
+                        LocalDate.now(),"Cerrado",(totalAlbaranFinal * 1.21).toFloat())
+                    val backgroundDrawable = ContextCompat.getDrawable(actividadMadre, R.drawable.bordes_redondos_texto1)
+                    holder.estado.background = backgroundDrawable
+
+                    // Se crea un intent para iniciar la actividad de editar factura, y se le pasan algunos datos
+                    val intent: Intent = Intent(actividadMadre, ActividadEditarFactura::class.java)
+                    intent.putExtra("titulo", albaran.titulo)
+                    actividadMadre.startActivity(intent)
+                }
+            }
+        }
+
         // Agrega un listener al botón "crear factura"
-        holder.crearFactura.setOnClickListener{
+        holder.crearPDF.setOnClickListener{
             // Crea y lanza un hilo en segundo plano para obtener los datos de la factura
             var albaran_producto = arrayListOf<Albaran_Producto>()
             var productos = arrayListOf<Producto>()

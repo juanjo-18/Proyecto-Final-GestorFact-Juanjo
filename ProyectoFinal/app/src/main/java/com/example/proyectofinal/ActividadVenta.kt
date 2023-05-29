@@ -178,6 +178,7 @@ class ActividadVenta : AppCompatActivity() {
     fun setupRecyclerView(){
         val recyclerView: RecyclerView = findViewById<RecyclerView>(R.id.reciclerVenta)
         recyclerView.layoutManager= LinearLayoutManager(this)
+        //(recyclerView.layoutManager as LinearLayoutManager).reverseLayout = true
         adaptador = AlbaranesAdapter(this,listaVenta)
         recyclerView.adapter=adaptador
     }

@@ -60,17 +60,34 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/papelera" />
+
         </LinearLayout>
 
     </LinearLayout>
 
-    <ImageButton
-        android:id="@+id/botonCrearFactura"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="61dp"
-        android:layout_marginTop="5dp"
-        android:layout_weight="3"
-        app:srcCompat="@drawable/upload" />
+        android:layout_height="match_parent"
+        android:layout_weight="2.4"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/botonCrearFactura"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_margin="5dp"
+            android:layout_weight="3"
+            app:srcCompat="@drawable/upload" />
+
+        <ImageButton
+            android:id="@+id/botonCrearFacturaBueno"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_margin="5dp"
+            android:layout_weight="3"
+            app:srcCompat="@drawable/file_document" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/contenedorLateralVenta"
@@ -106,7 +123,7 @@
                 style="@style/textoElementos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="27dp"
+                android:layout_marginLeft="12dp"
                 android:text="TextView" />
 
             <ImageView
@@ -119,4 +136,5 @@
         </LinearLayout>
 
     </LinearLayout>
+
 </LinearLayout>

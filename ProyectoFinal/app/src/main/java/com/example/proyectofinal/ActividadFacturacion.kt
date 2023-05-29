@@ -67,19 +67,11 @@ class ActividadFacturacion : AppCompatActivity() {
         GlobalScope.launch {
             valores = db.facturaDAO().getAll() as ArrayList<Factura>
             listaFactura= db.facturaDAO().getAll() as ArrayList<Factura>
-            val recyclerView: RecyclerView = findViewById<RecyclerView>(R.id.reciclerFactura)
-            recyclerView.adapter = FacturacionAdapter(context, valores)
-            val staggeredManager: StaggeredGridLayoutManager = StaggeredGridLayoutManager(
-                1,
-                StaggeredGridLayoutManager.VERTICAL
-            )
-            staggeredManager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
-            recyclerView.layoutManager = staggeredManager
+            if(valores.size>0){
+                setupRecyclerView()
+            }
 
-            val spacingInPixels = resources.getDimensionPixelSize(R.dimen.item_spacing)
-            val itemSpacingDecoration = ItemSpacingDecoration(spacingInPixels)
-            recyclerView.addItemDecoration(itemSpacingDecoration)
-            setupRecyclerView()
+
         }
         binding.buscadorFactura.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(
@@ -157,8 +149,12 @@ class ActividadFacturacion : AppCompatActivity() {
     }
     fun setupRecyclerView(){
         binding.reciclerFactura.layoutManager= LinearLayoutManager(this)
+        //(binding.reciclerFactura.layoutManager as LinearLayoutManager).reverseLayout = true
         adaptador = FacturacionAdapter(this,listaFactura)
         binding.reciclerFactura.adapter=adaptador
+        val spacingInPixels = resources.getDimensionPixelSize(R.dimen.item_spacing)
+        val itemSpacingDecoration = ItemSpacingDecoration(spacingInPixels)
+        binding.reciclerFactura.addItemDecoration(itemSpacingDecoration)
     }
     fun filtrar(texto: String){
         var listaFiltrada= arrayListOf<Factura>()

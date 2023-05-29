@@ -3,6 +3,7 @@ package recyclers.facturacion
 import android.app.Activity
 import android.content.Intent
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import clases.Factura
@@ -55,7 +56,15 @@ class FacturacionAdapter (val actividadMadre: Activity, var datos: ArrayList<Fac
         holder.titulo.text=factura.titulo
         holder.nombreCliente.text=factura.nombreCliente
         holder.fecha.text= factura.fecha.toString()
-        holder.cobrada.text=""+factura.cobrada
+        if(factura.cobrada==true){
+            holder.cobrada.text="Cobrada"
+            val backgroundDrawable = ContextCompat.getDrawable(actividadMadre, R.drawable.bordes_redondos_texto1)
+            holder.cobrada.background = backgroundDrawable
+        }else{
+            holder.cobrada.text="Pendiente"
+            val backgroundDrawable = ContextCompat.getDrawable(actividadMadre, R.drawable.bordes_redondos_texto)
+            holder.cobrada.background = backgroundDrawable
+        }
         holder.precio.text=""+factura.precioTotal
 
         /***

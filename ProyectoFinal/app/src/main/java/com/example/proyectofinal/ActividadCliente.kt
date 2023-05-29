@@ -58,6 +58,7 @@ class ActividadCliente : AppCompatActivity() {
             valores = db.clienteDAO().getAll() as ArrayList<Cliente>
             listaCliente= db.clienteDAO().getAll() as ArrayList<Cliente>
             if(valores.size>0) {
+                /*
                 val recyclerView: RecyclerView = findViewById<RecyclerView>(R.id.reciclerCliente)
                 recyclerView.adapter = ClientesAdapter(context, valores)
                 val staggeredManager: StaggeredGridLayoutManager = StaggeredGridLayoutManager(
@@ -67,10 +68,9 @@ class ActividadCliente : AppCompatActivity() {
                 staggeredManager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
                 recyclerView.layoutManager = staggeredManager
 
-                //ajustamos el recycler a la pantalla
-                val spacingInPixels = resources.getDimensionPixelSize(R.dimen.item_spacing)
-                val itemSpacingDecoration = ItemSpacingDecoration(spacingInPixels)
-                recyclerView.addItemDecoration(itemSpacingDecoration)
+
+
+                 */
                 setupRecyclerView()
             }
         }
@@ -168,6 +168,11 @@ class ActividadCliente : AppCompatActivity() {
         recyclerView.layoutManager= LinearLayoutManager(this)
         adaptador = ClientesAdapter(this,listaCliente)
         recyclerView.adapter=adaptador
+
+        //ajustamos el recycler a la pantalla
+        val spacingInPixels = resources.getDimensionPixelSize(R.dimen.item_spacing)
+        val itemSpacingDecoration = ItemSpacingDecoration(spacingInPixels)
+        recyclerView.addItemDecoration(itemSpacingDecoration)
     }
 
     fun filtrar(texto: String){

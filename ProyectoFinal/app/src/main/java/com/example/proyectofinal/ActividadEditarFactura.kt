@@ -210,6 +210,7 @@ class ActividadEditarFactura : AppCompatActivity() {
             var valores = arrayListOf<Factura>()
             var nombreCliente2 = ""
             var tipoFactura = ""
+            var cobradaComprobar=false
 
             CoroutineScope(Dispatchers.IO).launch {
                 launch(Dispatchers.IO) {
@@ -221,6 +222,7 @@ class ActividadEditarFactura : AppCompatActivity() {
                         for (valor in valores) {
                             nombreCliente2 = valor.nombreCliente.toString()
                             tipoFactura = valor.tipoFactura.toString()
+                            cobradaComprobar=valor.cobrada
                             binding.campoTituloEditarFactura.setText(valor.titulo)
                             binding.textoFechaDesdeFactura.setText((LocalDate.now()).toString())
                             binding.textoNumeroTotalBaseEditarFactura.setText(
@@ -235,6 +237,9 @@ class ActividadEditarFactura : AppCompatActivity() {
 
                             )
 
+                        }
+                        if(cobradaComprobar==true){
+                            binding.checkBoxCobrada.isChecked=true
                         }
                        if (tipoFactura.contains("Factura")) {
                             binding.checkBoxFactura.isChecked = true
@@ -255,7 +260,8 @@ class ActividadEditarFactura : AppCompatActivity() {
             }
 
             val contexto = this
-                CoroutineScope(Dispatchers.IO).launch {
+
+            CoroutineScope(Dispatchers.IO).launch {
                     launch(Dispatchers.IO) {
                         //Aqui traigo todos los productos que tiene ese titulo y los cargo al layout
                         factura_producto = db.factura_ProductoDAO()
@@ -393,6 +399,10 @@ class ActividadEditarFactura : AppCompatActivity() {
                     if (!clienteIncorrecto) {
                         if (!camposVacios) {
                             if (productos.size >= 1) {
+                                var cobrada=false
+                                if(binding.checkBoxCobrada.isChecked){
+                                    cobrada=true
+                                }
                                 var totalFacturaFinal: Float = 0f
                                 CoroutineScope(Dispatchers.IO).launch {
                                     db.factura_ProductoDAO().borrarTodosPorTitulo(titulo.toString())
@@ -417,7 +427,7 @@ class ActividadEditarFactura : AppCompatActivity() {
                                         nombreCliente,
                                         LocalDate.now(),
                                         tipoFactura,
-                                        false,
+                                        cobrada,
                                         (totalFacturaFinal * 1.21).toFloat()
                                     )
                                 }

@@ -29,5 +29,8 @@ class AlbaranesViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     // TextView para mostrar el estado del albarán (pendiente o completado)
     val estado: TextView by lazy{ view.findViewById<TextView>(R.id.textoPendienteVenta)}
     // Botón para crear una factura a partir del albarán
-    val crearFactura: ImageButton by lazy{ view.findViewById<ImageButton>(R.id.botonCrearFactura)}
+    val crearPDF: ImageButton by lazy{ view.findViewById<ImageButton>(R.id.botonCrearFactura)}
+    val crearFactura: ImageButton by lazy{ view.findViewById<ImageButton>(R.id.botonCrearFacturaBueno)}
+
+
 }
