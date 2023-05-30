@@ -433,7 +433,7 @@ class ActividadEditarFactura : AppCompatActivity() {
                                 }
 
                                 val intent: Intent = Intent(
-                                    this, ActividadFacturacion::class.java
+                                    this, ActividadCompra::class.java
                                 )
                                 this.startActivity(intent)
                             } else {

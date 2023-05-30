@@ -12,10 +12,7 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.room.Room
-import clases.Albaran
-import clases.Albaran_Producto
-import clases.Cliente
-import clases.Producto
+import clases.*
 import com.example.proyectofinal.databinding.LayoutAnadirCompraBinding
 import dataBase.AppDataBase
 import kotlinx.coroutines.CoroutineScope
@@ -327,11 +324,11 @@ class ActividadAnadirCompra : AppCompatActivity() {
                         if (productos.size >= 1) {
 
                             CoroutineScope(Dispatchers.IO).launch {
-                                var albaranes = db.albaranDAO().getAll()
+                                var compras = db.compraDAO().getAll()
                                 var tituloRepetido = false
                                 var titulo = ""
 
-                                for (albaran in albaranes) {
+                                for (albaran in compras) {
                                     if (albaran.titulo == binding.campoTituloAnadirCompra.text.toString()) {
                                         tituloRepetido = true
                                         titulo = albaran.titulo
@@ -339,15 +336,13 @@ class ActividadAnadirCompra : AppCompatActivity() {
                                 }
 
                                 if (!tituloRepetido) {
-                                    //Aqui inserto todos los productos a la tabla intermedia albaran_producto
+                                    //Aqui inserto todos los productos a la tabla intermedia compra_producto
                                     launch(Dispatchers.IO) {
                                         for (producto in productos) {
-                                            db.albaran_ProductoDAO().insert(
-                                                Albaran_Producto(
-                                                    tituloAlbaran = binding.campoTituloAnadirCompra.text.toString(),
+                                            db.compra_ProductoDAO().insert(
+                                                Compra_Producto(
+                                                    tituloComrpa = binding.campoTituloAnadirCompra.text.toString(),
                                                     nombreProducto = producto.nombre.toString(),
-                                                    nombreCliente= nombreCliente,
-                                                    tipoAlbaran=tipoAlbaran,
                                                     precio = producto.precio,
                                                     cantidad = producto.cantidad,
                                                     total = producto.precio * producto.cantidad
@@ -356,13 +351,14 @@ class ActividadAnadirCompra : AppCompatActivity() {
                                             totalAlbaranFinal += producto.precio * producto.cantidad
                                         }
 
-                                        //Aqui insertamos la venta a la base de datos Albaran
-                                        db.albaranDAO().insert(
-                                            Albaran(
+                                        //Aqui insertamos la venta a la base de datos compra
+                                        db.compraDAO().insert(
+                                            Compra(
                                                 titulo = binding.campoTituloAnadirCompra.text.toString(),
-                                                nombreCliente = nombreCliente,
+                                                nombreProveedor = nombreCliente,
                                                 fecha = LocalDate.now(),
-                                                estado = "Pendiente",
+                                                tipoCompra = tipoAlbaran,
+                                                pagada = false,
                                                 precioTotal = (totalAlbaranFinal * 1.21).toFloat()
                                             )
                                         )
@@ -370,7 +366,7 @@ class ActividadAnadirCompra : AppCompatActivity() {
 
                                     withContext(Dispatchers.Main) {
                                         val intent: Intent = Intent(
-                                            this@ActividadAnadirCompra, ActividadVenta::class.java
+                                            this@ActividadAnadirCompra, ActividadCompra::class.java
                                         )
                                         startActivity(intent)
                                     }
