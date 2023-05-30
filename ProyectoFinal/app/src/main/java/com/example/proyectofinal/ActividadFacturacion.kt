@@ -65,14 +65,12 @@ class ActividadFacturacion : AppCompatActivity() {
          *
          */
         GlobalScope.launch {
-            valores = db.facturaDAO().getAll() as ArrayList<Factura>
-            listaFactura= db.facturaDAO().getAll() as ArrayList<Factura>
-            if(valores.size>0){
+             listaFactura= db.facturaDAO().getAll() as ArrayList<Factura>
+            if(listaFactura.size>0){
                 setupRecyclerView()
             }
-
-
         }
+
         binding.buscadorFactura.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(
                 s: CharSequence?,

@@ -30,28 +30,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="157dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <SearchView
-                    android:id="@+id/buscadorDeCompra"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="1dp"
-                    android:layout_marginEnd="1dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <ImageButton
-                android:id="@+id/botonBuscadorCompra"
-                android:layout_width="70dp"
+            <EditText
+                android:id="@+id/buscadorCompra"
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/lupa" />
-
+                android:background="@color/white"
+                android:ems="10"
+                android:hint="Buscar compra"
+                android:inputType="textPersonName"
+                android:textColorHint="#575757" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -135,6 +122,7 @@
             app:layout_constraintBottom_toTopOf="@+id/contenedorMenuBotonesCompra"
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@android:drawable/ic_menu_add" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

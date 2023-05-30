@@ -43,6 +43,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_marginStart="50dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginEnd="120dp"
                     android:orientation="vertical"
                     android:textAlignment="center"
@@ -57,13 +58,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/facturacion" />
-
-                    <TextView
-                        android:id="@+id/textoPendiente"
-                        style="@style/texto"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/pendiente" />
 
                     <TextView
                         android:id="@+id/textoFacturas"
@@ -114,13 +108,6 @@
                         android:text="@string/ventas" />
 
                     <TextView
-                        android:id="@+id/textoPendiente3"
-                        style="@style/texto"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/pendiente" />
-
-                    <TextView
                         android:id="@+id/textoPresupuesto"
                         style="@style/negrita"
                         android:layout_width="match_parent"
@@ -128,7 +115,7 @@
                         android:text="@string/presupuestoas" />
 
                     <TextView
-                        android:id="@+id/textoNumerosFacturas2"
+                        android:id="@+id/textoNumeroPresupuestoVenta"
                         style="@style/texto"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -142,7 +129,7 @@
                         android:text="@string/pedidos" />
 
                     <TextView
-                        android:id="@+id/textoNumerosFacturas3"
+                        android:id="@+id/textoNumeroPedidoVenta"
                         style="@style/texto"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -156,7 +143,7 @@
                         android:text="@string/albaranes" />
 
                     <TextView
-                        android:id="@+id/textoNumerosFacturas4"
+                        android:id="@+id/textoNumeroAlbaranVenta"
                         style="@style/texto"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -180,13 +167,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/compras" />
-
-                    <TextView
-                        android:id="@+id/textoPendiente4"
-                        style="@style/texto"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/pendiente" />
 
                     <TextView
                         android:id="@+id/textoPedidosCompras"
@@ -235,7 +215,7 @@
                     android:id="@+id/imagenFolio"
                     android:layout_width="50dp"
                     android:layout_height="45dp"
-                    android:layout_marginTop="80dp"
+                    android:layout_marginTop="70dp"
                     android:layout_marginEnd="36dp"
                     android:src="@drawable/file_document"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -255,7 +235,7 @@
                     android:id="@+id/imagenCarrito"
                     android:layout_width="50dp"
                     android:layout_height="45dp"
-                    android:layout_marginTop="210dp"
+                    android:layout_marginTop="180dp"
                     android:layout_marginEnd="36dp"
                     android:src="@drawable/cart"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -266,7 +246,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="26dp"
+                android:layout_marginTop="40dp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

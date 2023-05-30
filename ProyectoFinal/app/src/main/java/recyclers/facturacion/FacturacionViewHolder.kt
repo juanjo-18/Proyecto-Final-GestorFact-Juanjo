@@ -32,4 +32,6 @@ class FacturacionViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     // TextView para indicar si la factura ha sido cobrada o no
     val cobrada: TextView by lazy{ view.findViewById<TextView>(R.id.textoPendienteFactura)}
+    // Botón para crear una factura a partir de la factura
+    val crearPDF: ImageButton by lazy{ view.findViewById<ImageButton>(R.id.botonDescargarPDF)}
 }

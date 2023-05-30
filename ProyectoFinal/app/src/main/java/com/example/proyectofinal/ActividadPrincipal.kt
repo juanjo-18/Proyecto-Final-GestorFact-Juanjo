@@ -30,6 +30,7 @@ class ActividadPrincipal : AppCompatActivity() {
      */
     private lateinit var binding: LayoutLoginBinding
 
+    private lateinit var auth: FirebaseAuth
     /**
      * Método onCreate() de la actividad, se llama al crear la actividad.
      * @param savedInstanceState estado de la actividad si se restaura.
@@ -48,7 +49,7 @@ class ActividadPrincipal : AppCompatActivity() {
         //Boton que se encarga de iniciar sesion comprueba los datos con fire base
         botonIrAInico.setOnClickListener {
             if(binding.campoCorreo.text.isNotBlank() && binding.campoContrasena.text.isNotBlank()) {
-                val auth: FirebaseAuth = FirebaseAuth.getInstance()
+                auth= FirebaseAuth.getInstance()
                 auth.signInWithEmailAndPassword(
                     binding.campoCorreo.text.toString(),
                     binding.campoContrasena.text.toString()

@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
@@ -65,24 +66,14 @@ class ActividadVenta : AppCompatActivity() {
 
         //Aqui recogo todos los albaranes de la base de datos y lo muestro en un recycler view
         GlobalScope.launch {
-            valores = db.albaranDAO().getAll() as ArrayList<Albaran>
             listaVenta= db.albaranDAO().getAll() as ArrayList<Albaran>
-            if(valores.size>0) {
-                val recyclerView: RecyclerView = findViewById<RecyclerView>(R.id.reciclerVenta)
-                recyclerView.adapter = AlbaranesAdapter(context, valores)
-                val staggeredManager: StaggeredGridLayoutManager = StaggeredGridLayoutManager(
-                    1,
-                    StaggeredGridLayoutManager.VERTICAL
-                )
-                staggeredManager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
-                recyclerView.layoutManager = staggeredManager
+            if(listaVenta.size>0) {
 
-                val spacingInPixels = resources.getDimensionPixelSize(R.dimen.item_spacing)
-                val itemSpacingDecoration = ItemSpacingDecoration(spacingInPixels)
-                recyclerView.addItemDecoration(itemSpacingDecoration)
                 setupRecyclerView()
             }
         }
+
+
         val buscadorAlbaran: EditText = findViewById(R.id.buscadorVenta)
 
         buscadorAlbaran.addTextChangedListener(object: TextWatcher {
@@ -117,7 +108,7 @@ class ActividadVenta : AppCompatActivity() {
         val botonIrACliente: ImageButton =
             findViewById<ImageButton>(R.id.botonIrAClientesDesdeVenta)
         val botonIrACatalogo: ImageButton =
-            findViewById<ImageButton>(R.id.botonIrACatalogoDesdeVenta)
+          findViewById<ImageButton>(R.id.botonIrACatalogoDesdeVenta)
         val botonIrAFacturacion: ImageButton =
             findViewById<ImageButton>(R.id.botonIrAFacturacionDesdeVenta)
         val botonIrACompras: ImageButton =
@@ -181,6 +172,9 @@ class ActividadVenta : AppCompatActivity() {
         //(recyclerView.layoutManager as LinearLayoutManager).reverseLayout = true
         adaptador = AlbaranesAdapter(this,listaVenta)
         recyclerView.adapter=adaptador
+        val spacingInPixels = resources.getDimensionPixelSize(R.dimen.item_spacing)
+        val itemSpacingDecoration = ItemSpacingDecoration(spacingInPixels)
+        recyclerView.addItemDecoration(itemSpacingDecoration)
     }
     fun filtrar(texto: String){
         var listaFiltrada= arrayListOf<Albaran>()

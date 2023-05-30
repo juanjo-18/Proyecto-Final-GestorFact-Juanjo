@@ -6,11 +6,13 @@ import android.graphics.*
 import android.graphics.pdf.PdfDocument
 import android.os.Environment
 import android.text.TextPaint
+import android.util.FloatMath
 import android.widget.Toast
 import com.example.proyectofinal.R
 import java.io.File
 import java.io.FileOutputStream
 import java.text.DecimalFormat
+import java.time.LocalDate
 
 /**
  * Esta clase lo que se encarga de recibir tanto una factura o un albaran y creara un pdf con todos los
@@ -30,22 +32,22 @@ class CrearPDF {
      */
     fun generarPdf(
         resources: Resources, context: Context,
-        albaran:Albaran,
-        productos: ArrayList<Producto>,cliente:Cliente
+        referencia:Int,tipoCabezera: String, numeroFactura: String, fecha: LocalDate, precioTotal:Float,
+        productos: ArrayList<Producto>, cliente:Cliente
     ) {
-
-        //Datos de nuestra empresa
+       //Datos de nuestra empresa
         //var nombreEmpresaText = "Juanjo Medina Díaz"
         // var calleEmpresaText = "Manolito, 14"
         //var direccionEmpresaText = "29580, Cártama, Málaga"
         //var dniEmpresaText = "72746587R"
         //var telefonoEmpresaText = "654878290"
+        var correo:String="juanjo@gmail.com"
 
 
 
         //Datos de factura ordinaria
         var encabezadoTexto = "DATOS DE FACTURA ORDINARIA"
-        var numeroPedidoTexto = "FAC0000001502"
+        var numeroPedidoTexto = "FAC000000"+referencia.toString()
         var numeroDePedidoTexto = "Número De Pedido: "
         var fechaEncabezadoTexto = "Fecha: "
         var tipoDePagoTexto = "Transferencia bancaria"
@@ -63,11 +65,13 @@ class CrearPDF {
         var totalTexto = "TOTAL"
 
 
-        var correoEmpresaText = "juanjomedinadiaz@gmail.com"
+        var correoEmpresaText = ""+correo
 
-        var tipoFacturaTexto = "Factura"
-        var numeroFacturaTexto = ""+albaran.titulo
-        var fechaTexto = ""+albaran.fecha
+        var tipoFacturaTexto = ""+tipoCabezera
+        var numeroFacturaTexto = ""+numeroFactura
+        var fechaTexto = ""+fecha
+
+        var nombreArchivo=tipoCabezera.toString()+"_"+numeroFactura
 
         var nombreClienteTexto = cliente.nombre.toString()
         var dniClienteTexto = cliente.nif.toString()
@@ -75,10 +79,10 @@ class CrearPDF {
         var direccionClienteTexto = cliente.codigoPostal.toString()+", "+cliente.localidad.toString()+", "+cliente.provincia.toString()
 
         val formato = DecimalFormat("#.##")
-        var precio=albaran.precioTotal
+        var precio=precioTotal
         var baseEnEurosTexto = formato.format((precio/1.21)).toString()+"€"
         var ivaNumeroTexto = formato.format((precio.toFloat()-(precio/1.21))).toString()
-        var totalNumeroTexto = formato.format(albaran.precioTotal).toString()+"€"
+        var totalNumeroTexto = formato.format(precioTotal).toString()+"€"
 
         //Tabla de productos (Actual maximo de productos de 18)
         //Esta es la cabezera de la tabla para mostrar los productos tambien una lista con todos los datos sacado
@@ -284,15 +288,18 @@ class CrearPDF {
             file.delete()
         }
 
+
         //El pdf se va a guardar en descargas
         file = File(
             Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
-            "ArchivoPersonalizado.pdf"
+            nombreArchivo+".pdf"
         )
+
         try {
             pdfDocument.writeTo(FileOutputStream(file))
             Toast.makeText(context, "Se creo el PDF correctamente", Toast.LENGTH_LONG).show()
         } catch (e: Exception) {
+            Toast.makeText(context, "No se creo el pdf", Toast.LENGTH_SHORT).show()
             e.printStackTrace()
         }
 

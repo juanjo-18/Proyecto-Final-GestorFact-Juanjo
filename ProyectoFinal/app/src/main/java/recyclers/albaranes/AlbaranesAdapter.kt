@@ -112,7 +112,7 @@ class AlbaranesAdapter(val actividadMadre: Activity, var datos: ArrayList<Albara
                         }
                     }
 
-                    var totalAlbaranFinal=0.4
+                    var totalAlbaranFinal=0f
                     //Inserto los datos del albaran a la factura
                     for (producto in productos) {
                         db.factura_ProductoDAO().insert(
@@ -159,8 +159,16 @@ class AlbaranesAdapter(val actividadMadre: Activity, var datos: ArrayList<Albara
             // Crea y lanza un hilo en segundo plano para obtener los datos de la factura
             var albaran_producto = arrayListOf<Albaran_Producto>()
             var productos = arrayListOf<Producto>()
+            var albaranBusqueda= arrayListOf<Albaran>()
+            var tipo: String=""
+            var total: Float=0f
+            var numeroAlbaran:String=""
+            var fecha: LocalDate= LocalDate.now()
+            var referencia:Int=0
             CoroutineScope(Dispatchers.IO).launch {
                 launch(Dispatchers.IO) {
+                    //Obtengo la factura
+                    albaranBusqueda = db.albaranDAO().buscarAlbaranPorTitulo(holder.titulo.text.toString()) as ArrayList<Albaran>
                     // Obtiene los datos de la tabla de Albaran_Producto de la base de datos para el título correspondiente
                     albaran_producto = db.albaran_ProductoDAO()
                         .buscarAlbaranProductoPorTitulo(holder.titulo.text.toString()) as ArrayList<Albaran_Producto>
@@ -170,6 +178,7 @@ class AlbaranesAdapter(val actividadMadre: Activity, var datos: ArrayList<Albara
                         // Crea una lista de productos a partir de los datos de Albaran_Producto
                         for (albaranes in albaran_producto) {
                             // Se agregan los productos a la lista 'productos', se utiliza la clase Producto y se llenan sus propiedades
+                           tipo=albaranes.tipoAlbaran.toString()
                             productos.add(
                                 Producto(
                                     nombre = albaranes.nombreProducto,
@@ -178,6 +187,14 @@ class AlbaranesAdapter(val actividadMadre: Activity, var datos: ArrayList<Albara
                                 )
                             )
                         }
+                        for(albaran in albaranBusqueda){
+                            fecha= albaran.fecha!!
+                            numeroAlbaran=albaran.titulo
+                            total=albaran.precioTotal
+                            referencia=albaran.referencia
+
+                        }
+
                         if (cliente != null) {
                             // Se verifica si se tienen los permisos de almacenamiento, para esto se llama a la función 'checkStoragePermissions'
                             checkStoragePermissions(actividadMadre)
@@ -190,7 +207,7 @@ class AlbaranesAdapter(val actividadMadre: Activity, var datos: ArrayList<Albara
                                 personalizado.generarPdf(
                                     actividadMadre.resources,
                                     actividadMadre,
-                                    albaran,
+                                    referencia,tipo,numeroAlbaran,fecha, total,
                                     productos,
                                     cliente
                                 )
@@ -204,11 +221,10 @@ class AlbaranesAdapter(val actividadMadre: Activity, var datos: ArrayList<Albara
                         }
 
 
+
                     }
                 }
             }
-
-
         }
         holder.botonEditar.setOnClickListener{
             // Se crea un intent para iniciar la actividad de editar venta, y se le pasan algunos datos

@@ -1,13 +1,18 @@
 package recyclers.facturacion
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
-import clases.Factura
-import clases.Producto
+import clases.*
 import com.example.proyectofinal.ActividadEditarFactura
 import com.example.proyectofinal.ActividadEditarVenta
 import com.example.proyectofinal.R
@@ -15,6 +20,9 @@ import dataBase.AppDataBase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 /**
  * Clase que extiende RecyclerView.Adapter para crear un adaptador personalizado
@@ -51,6 +59,7 @@ class FacturacionAdapter (val actividadMadre: Activity, var datos: ArrayList<Fac
      * El contenido se establece utilizando los datos de la lista de facturas que se
      * pasó al constructor del adaptador.
      ***/
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: FacturacionViewHolder, position: Int) {
         val factura: Factura = datos.get(position)
         holder.titulo.text=factura.titulo
@@ -88,6 +97,79 @@ class FacturacionAdapter (val actividadMadre: Activity, var datos: ArrayList<Fac
             actividadMadre.startActivity(intent)
         }
 
+        // Agrega un listener al botón "crear factura"
+        holder.crearPDF.setOnClickListener{
+
+            // Crea y lanza un hilo en segundo plano para obtener los datos de la factura
+            var factura_producto = arrayListOf<Factura_Producto>()
+            var facturaBusqueda= arrayListOf<Factura>()
+            var productos = arrayListOf<Producto>()
+            var tipo: String=""
+            var total: Float=0f
+            var numero:String=""
+            var fecha: LocalDate= LocalDate.now()
+            var referencia:Int=0
+            CoroutineScope(Dispatchers.IO).launch {
+                launch(Dispatchers.IO) {
+                    //Obtengo la factura
+                    facturaBusqueda = db.facturaDAO().buscarFacturaPorTitulo(holder.titulo.text.toString()) as ArrayList<Factura>
+                    // Obtiene los datos de la tabla de Factura_Producto de la base de datos para el título correspondiente
+                    factura_producto = db.factura_ProductoDAO()
+                        .buscarFacturaProductoPorTitulo(holder.titulo.text.toString()) as ArrayList<Factura_Producto>
+                    // Obtiene los datos del cliente correspondiente de la base de datos
+                    var cliente= db.clienteDAO().buscarClientePorNombre(factura.nombreCliente.toString())
+                    withContext(Dispatchers.Main) {
+                        // Crea una lista de productos a partir de los datos de Factura_Producto
+                        for (factura in factura_producto) {
+                            // Se agregan los productos a la lista 'productos', se utiliza la clase Producto y se llenan sus propiedades
+                            productos.add(
+                                Producto(
+                                    nombre = factura.nombreProducto,
+                                    precio = factura.precio,
+                                    cantidad = factura.cantidad
+                                )
+                            )
+                        }
+
+                        for(factura in facturaBusqueda){
+                            fecha= factura.fecha!!
+                            numero=factura.titulo
+                            total=factura.precioTotal
+                            tipo= factura.tipoFactura.toString()
+                            referencia=factura.referencia
+
+                        }
+                        if (cliente != null) {
+                            // Se verifica si se tienen los permisos de almacenamiento, para esto se llama a la función 'checkStoragePermissions'
+                            checkStoragePermissions(actividadMadre)
+                            // Se crea una instancia de la clase CrearPDF
+                            var personalizado = CrearPDF()
+                            if (checkPermission()) {
+                                // Si se tienen los permisos de almacenamiento, se muestra un mensaje en pantalla
+                                Toast.makeText(actividadMadre, "Ha entrado en pdf", Toast.LENGTH_SHORT).show()
+                                // Se genera el PDF llamando al método 'generarPdf' de la instancia de CrearPDF
+                                personalizado.generarPdf(
+                                    actividadMadre.resources,
+                                    actividadMadre,
+                                    referencia,tipo,numero,fecha, total,
+                                    productos,
+                                    cliente
+                                )
+                            } else {
+                                // Si no se tienen los permisos de almacenamiento, se solicitan llamando a la función 'requestPermissions'
+                                requestPermissions()
+                            }
+                        } else {
+                            // Si no se tiene cliente, se muestra un mensaje con el nombre del cliente del albarán
+                            Toast.makeText(actividadMadre, "Cliente: " + factura.nombreCliente, Toast.LENGTH_SHORT).show()
+                        }
+
+
+                    }
+                }
+            }
+        }
+
 
     }
 
@@ -97,6 +179,53 @@ class FacturacionAdapter (val actividadMadre: Activity, var datos: ArrayList<Fac
      ***/
     override fun getItemCount(): Int {
         return datos.size
+    }
+    /**
+     *Función que verifica si se tienen los permisos de almacenamiento necesarios.
+     */
+    private fun checkPermission(): Boolean {
+        val permission1 = ContextCompat.checkSelfPermission(actividadMadre,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+        )
+        val permission2 = ContextCompat.checkSelfPermission(actividadMadre,
+            Manifest.permission.READ_EXTERNAL_STORAGE
+        )
+        return permission1 == PackageManager.PERMISSION_GRANTED && permission2 == PackageManager.PERMISSION_GRANTED
+    }
+
+    /**
+     *  Función que solicita los permisos de almacenamiento necesarios:
+     */
+    private fun requestPermissions() {
+        ActivityCompat.requestPermissions(
+            actividadMadre,
+            arrayOf(
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            ),
+            200
+        )
+    }
+
+    /**
+     *  Función que comprueba si se han concedido permisos de almacenamiento a la aplicación
+     */
+    private fun checkStoragePermissions(activity: Activity) {
+        // Comprueba si la aplicación tiene permiso para escribir en el almacenamiento externo
+        if (ContextCompat.checkSelfPermission(
+                activity,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ) != PackageManager.PERMISSION_GRANTED // Si no se han concedido permisos de escritura en el almacenamiento externo
+        ) {
+            ActivityCompat.requestPermissions( // Solicita los permisos de almacenamiento externo al usuario
+                activity,
+                arrayOf(
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE, // Se solicita permiso de escritura en el almacenamiento externo
+                    Manifest.permission.READ_EXTERNAL_STORAGE // Se solicita permiso de lectura en el almacenamiento externo
+                ),
+                200 // Código de petición para identificar la solicitud
+            )
+        }
     }
     fun filtrar(listaFiltrada: ArrayList<Factura>){
         this.datos=listaFiltrada

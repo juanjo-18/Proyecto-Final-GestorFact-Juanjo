@@ -55,9 +55,8 @@ class ActividadCliente : AppCompatActivity() {
 
         //Aqui recogo todos los clientes de la base de datos y los muestro en el recycler view
         GlobalScope.launch {
-            valores = db.clienteDAO().getAll() as ArrayList<Cliente>
-            listaCliente= db.clienteDAO().getAll() as ArrayList<Cliente>
-            if(valores.size>0) {
+           listaCliente= db.clienteDAO().getAll() as ArrayList<Cliente>
+            if(listaCliente.size>0) {
                 /*
                 val recyclerView: RecyclerView = findViewById<RecyclerView>(R.id.reciclerCliente)
                 recyclerView.adapter = ClientesAdapter(context, valores)

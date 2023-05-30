@@ -68,24 +68,12 @@ class ActividadCatalogo : AppCompatActivity(), SearchView.OnQueryTextListener {
 
         //Aqui traigo todos los productos de la base de datos y los muestro en un recyclerview
         GlobalScope.launch {
-            valores = db.productoDAO().getAll() as ArrayList<Producto>
-            listaProducto= db.productoDAO().getAll() as ArrayList<Producto>
-            if(valores.size>0) {
-                val recyclerView: RecyclerView = findViewById<RecyclerView>(R.id.reciclerCatalogo)
-                recyclerView.adapter = ProductosAdapter(context, valores)
-                val staggeredManager: StaggeredGridLayoutManager = StaggeredGridLayoutManager(
-                    1,
-                    StaggeredGridLayoutManager.VERTICAL
-                )
-                staggeredManager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
-                recyclerView.layoutManager = staggeredManager
-
-                val spacingInPixels = resources.getDimensionPixelSize(R.dimen.item_spacing)
-                val itemSpacingDecoration = ItemSpacingDecoration(spacingInPixels)
-                recyclerView.addItemDecoration(itemSpacingDecoration)
+           listaProducto= db.productoDAO().getAll() as ArrayList<Producto>
+            if(listaProducto.size>0) {
+                setupRecyclerView()
             }
-            setupRecyclerView()
         }
+
 
         binding.buscadorProductos.addTextChangedListener(object:TextWatcher{
                 override fun beforeTextChanged(
@@ -191,6 +179,9 @@ class ActividadCatalogo : AppCompatActivity(), SearchView.OnQueryTextListener {
         binding.reciclerCatalogo.layoutManager=LinearLayoutManager(this)
         adaptador = ProductosAdapter(this,listaProducto)
         binding.reciclerCatalogo.adapter=adaptador
+        val spacingInPixels = resources.getDimensionPixelSize(R.dimen.item_spacing)
+        val itemSpacingDecoration = ItemSpacingDecoration(spacingInPixels)
+        binding.reciclerCatalogo.addItemDecoration(itemSpacingDecoration)
     }
 
 
