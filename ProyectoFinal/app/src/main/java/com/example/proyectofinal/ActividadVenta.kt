@@ -70,8 +70,7 @@ class ActividadVenta : AppCompatActivity() {
             if(listaVenta.size>0) {
 
                 setupRecyclerView()
-            }
-        }
+
 
 
         val buscadorAlbaran: EditText = findViewById(R.id.buscadorVenta)
@@ -93,8 +92,9 @@ class ActividadVenta : AppCompatActivity() {
             override fun afterTextChanged(s: Editable?) {
                 filtrar(s.toString())
             }
-        })
-
+            })
+            }
+        }
         //Boton que cambia la panatalla para añadir una nueva venta
         val botonIrAnadirVenta: FloatingActionButton = findViewById(R.id.botonAnadirVenta)
         botonIrAnadirVenta.setOnClickListener {

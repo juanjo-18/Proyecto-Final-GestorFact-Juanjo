@@ -303,7 +303,7 @@ class ActividadEditarCompra : AppCompatActivity() {
          * Este boton se encarga de añadir una nueva linea al recyclerview y comprobar todos los valores
          * esten correctos
          */
-        val añadirLinea: ImageButton = findViewById<ImageButton>(R.id.botonEditarFactura)
+        val añadirLinea: ImageButton = findViewById<ImageButton>(R.id.botonEditarCompra)
         añadirLinea.setOnClickListener {
             contieneTexto = false
             cantidadNegativa = false
@@ -406,37 +406,63 @@ class ActividadEditarCompra : AppCompatActivity() {
                             }
                             var totalCompraFinal: Float = 0f
                             CoroutineScope(Dispatchers.IO).launch {
-                                db.compra_ProductoDAO().borrarTodosPorTitulo(titulo.toString())
-                                for (producto in productos) {
-                                    //Inserto los productos
-                                    db.compra_ProductoDAO().insert(
-                                        Compra_Producto(
-                                            tituloComrpa = binding.campoTituloEditarCompra.text.toString(),
-                                            nombreProducto = producto.nombre.toString(),
-                                            precio = producto.precio,
-                                            cantidad = producto.cantidad,
-                                            total = producto.precio * producto.cantidad
-                                        )
-                                    )
-                                    totalCompraFinal += producto.precio * producto.cantidad
+                                var compras = db.compraDAO().getAll()
+                                var tituloRepetido = false
+                                var titulo = ""
+
+                                for (albaran in compras) {
+                                    if (albaran.titulo == binding.campoTituloEditarCompra.text.toString()) {
+                                        tituloRepetido = true
+                                        titulo = albaran.titulo
+                                    }
                                 }
 
-                                //Inserto la compra
-                                db.compraDAO().updateCompra(
-                                    binding.campoTituloEditarCompra.text.toString(),
-                                    titulo.toString(),
-                                    nombreCliente,
-                                    LocalDate.now(),
-                                    tipoCompra,
-                                    cobrada,
-                                    (totalCompraFinal * 1.21).toFloat()
-                                )
-                            }
+                                if (!tituloRepetido) {
+                                    //Aqui inserto todos los productos a la tabla intermedia compra_producto
+                                    launch(Dispatchers.IO) {
+                                        db.compra_ProductoDAO().borrarTodosPorTitulo(titulo.toString())
+                                        for (producto in productos) {
+                                            //Inserto los productos
+                                            db.compra_ProductoDAO().insert(
+                                                Compra_Producto(
+                                                    tituloComrpa = binding.campoTituloEditarCompra.text.toString(),
+                                                    nombreProducto = producto.nombre.toString(),
+                                                    precio = producto.precio,
+                                                    cantidad = producto.cantidad,
+                                                    total = producto.precio * producto.cantidad
+                                                )
+                                            )
+                                            totalCompraFinal += producto.precio * producto.cantidad
+                                        }
 
-                            val intent: Intent = Intent(
-                                this, ActividadFacturacion::class.java
-                            )
-                            this.startActivity(intent)
+                                        //Inserto la compra
+                                        db.compraDAO().updateCompra(
+                                            binding.campoTituloEditarCompra.text.toString(),
+                                            titulo.toString(),
+                                            nombreCliente,
+                                            LocalDate.now(),
+                                            tipoCompra,
+                                            cobrada,
+                                            (totalCompraFinal * 1.21).toFloat()
+                                        )
+                                    }.join()
+
+                                    withContext(Dispatchers.Main) {
+                                        val intent: Intent = Intent(
+                                            this@ActividadEditarCompra, ActividadCompra::class.java
+                                        )
+                                        startActivity(intent)
+                                    }
+                                } else {
+                                    withContext(Dispatchers.Main) {
+                                        Toast.makeText(
+                                            this@ActividadEditarCompra,
+                                            R.string.tituloRepetido,
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+                                }
+                            }
                         } else {
                             Toast.makeText(this, R.string.camposVacios, Toast.LENGTH_SHORT)
                                 .show()

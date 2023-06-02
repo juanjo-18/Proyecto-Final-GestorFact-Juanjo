@@ -47,15 +47,19 @@ class ActividadInicio : AppCompatActivity() {
 
         var listaVenta= arrayListOf<Albaran>()
         var listaFactura= arrayListOf<Factura>()
+        var listaCompra= arrayListOf<Compra>()
         var productos_venta= arrayListOf<Albaran_Producto>()
         var totalVentaPresupuesto=0f
         var totalVentaPedido=0f
         var totalVentaAlbaran=0f
         var totalFactura=0f
         var totalAbono=0f
+        var totalCompra=0f
+        var totalDevolucion=0f
         GlobalScope.launch {
             listaVenta= db.albaranDAO().getAll() as ArrayList<Albaran>
             listaFactura= db.facturaDAO().getAll() as ArrayList<Factura>
+            listaCompra= db.compraDAO().getAll() as ArrayList<Compra>
 
 
             if(listaVenta.size>0){
@@ -82,11 +86,23 @@ class ActividadInicio : AppCompatActivity() {
                     }
                 }
             }
+            if(listaCompra.size>0){
+                for(compra in listaCompra){
+                    if(compra.tipoCompra.equals("Compra")){
+                        totalCompra+=compra.precioTotal
+                    }
+                    if(compra.tipoCompra.equals("Devolucion")){
+                        totalDevolucion+=compra.precioTotal
+                    }
+                }
+            }
             binding.textoNumeroAbono.setText(totalAbono.toString()+"€")
             binding.textoNumerosFacturas.setText(totalFactura.toString()+"€")
             binding.textoNumeroAlbaranVenta.setText(totalVentaAlbaran.toString()+"€")
             binding.textoNumeroPedidoVenta.setText(totalVentaPedido.toString()+"€")
             binding.textoNumeroPresupuestoVenta.setText(totalVentaPresupuesto.toString()+"€")
+            binding.textoNumeroDevolucion.setText(totalDevolucion.toString()+"€")
+            binding.textoNumeroCompra.setText(totalCompra.toString()+"€")
         }
 
 

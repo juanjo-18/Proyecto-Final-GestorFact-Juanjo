@@ -91,66 +91,77 @@ class AlbaranesAdapter(val actividadMadre: Activity, var datos: ArrayList<Albara
         holder.crearFactura.setOnClickListener {
             //Lo que tengo que hacer una vez saco el objeto en el que estoy lo inserto en factura y luego lo borro
             // Y despues abrir la pantalla editar factura
-            var albaran_producto = arrayListOf<Albaran_Producto>()
-            var productos = arrayListOf<Producto>()
-            CoroutineScope(Dispatchers.IO).launch {
-                launch(Dispatchers.IO) {
-                    // Obtiene los datos de la tabla de Albaran_Producto de la base de datos para el título correspondiente
-                    albaran_producto = db.albaran_ProductoDAO()
-                        .buscarAlbaranProductoPorTitulo(holder.titulo.text.toString()) as ArrayList<Albaran_Producto>
-                    withContext(Dispatchers.Main) {
-                        // Crea una lista de productos a partir de los datos de Albaran_Producto
-                        for (albaranes in albaran_producto) {
-                            // Se agregan los productos a la lista 'productos', se utiliza la clase Producto y se llenan sus propiedades
-                            productos.add(
-                                Producto(
-                                    nombre = albaranes.nombreProducto,
-                                    precio = albaranes.precio,
-                                    cantidad = albaranes.cantidad
+            if(holder.estado.text.equals("Pendiente")) {
+                var albaran_producto = arrayListOf<Albaran_Producto>()
+                var productos = arrayListOf<Producto>()
+                CoroutineScope(Dispatchers.IO).launch {
+                    launch(Dispatchers.IO) {
+                        // Obtiene los datos de la tabla de Albaran_Producto de la base de datos para el título correspondiente
+                        albaran_producto = db.albaran_ProductoDAO()
+                            .buscarAlbaranProductoPorTitulo(holder.titulo.text.toString()) as ArrayList<Albaran_Producto>
+
+                        withContext(Dispatchers.Main) {
+                            // Crea una lista de productos a partir de los datos de Albaran_Producto
+                            for (albaranes in albaran_producto) {
+                                // Se agregan los productos a la lista 'productos', se utiliza la clase Producto y se llenan sus propiedades
+                                productos.add(
+                                    Producto(
+                                        nombre = albaranes.nombreProducto,
+                                        precio = albaranes.precio,
+                                        cantidad = albaranes.cantidad
+                                    )
+                                )
+                            }
+                        }
+
+                        var totalAlbaranFinal = 0f
+                        //Inserto los datos del albaran a la factura
+                        for (producto in productos) {
+                            db.factura_ProductoDAO().insert(
+                                Factura_Producto(
+                                    tituloFactura = albaran.titulo.toString(),
+                                    nombreProducto = producto.nombre.toString(),
+                                    precio = producto.precio,
+                                    cantidad = producto.cantidad,
+                                    total = producto.precio * producto.cantidad
                                 )
                             )
+                            totalAlbaranFinal += producto.precio * producto.cantidad
                         }
-                    }
 
-                    var totalAlbaranFinal=0f
-                    //Inserto los datos del albaran a la factura
-                    for (producto in productos) {
-                        db.factura_ProductoDAO().insert(
-                            Factura_Producto(
-                                tituloFactura = albaran.titulo.toString(),
-                                nombreProducto = producto.nombre.toString(),
-                                precio = producto.precio,
-                                cantidad = producto.cantidad,
-                                total = producto.precio * producto.cantidad
+                        //Aqui insertamos la factura a la base de datos factura
+                        db.facturaDAO().insert(
+                            Factura(
+                                titulo = albaran.titulo,
+                                nombreCliente = albaran.nombreCliente,
+                                fecha = LocalDate.now(),
+                                tipoFactura = "Factura",
+                                cobrada = false,
+                                precioTotal = (totalAlbaranFinal * 1.21).toFloat()
                             )
                         )
-                        totalAlbaranFinal += producto.precio * producto.cantidad
-                    }
 
-                    //Aqui insertamos la factura a la base de datos factura
-                    db.facturaDAO().insert(
-                        Factura(
-                            titulo = albaran.titulo,
-                            nombreCliente = albaran.nombreCliente,
-                            fecha = LocalDate.now(),
-                            tipoFactura = "Factura",
-                            cobrada = false,
-                            precioTotal = (totalAlbaranFinal * 1.21).toFloat()
+                        holder.estado.text = "Cerrado"
+                        // hacer update al albaran
+                        db.albaranDAO().updateAlbaran(
+                            albaran.titulo, albaran.titulo, albaran.nombreCliente.toString(),
+                            LocalDate.now(), "Cerrado", (totalAlbaranFinal * 1.21).toFloat()
                         )
-                    )
+                        val backgroundDrawable = ContextCompat.getDrawable(
+                            actividadMadre,
+                            R.drawable.bordes_redondos_texto1
+                        )
+                        holder.estado.background = backgroundDrawable
 
-                    holder.estado.text="Cerrado"
-                    // hacer update al albaran
-                    db.albaranDAO().updateAlbaran(albaran.titulo,albaran.titulo,albaran.nombreCliente.toString(),
-                        LocalDate.now(),"Cerrado",(totalAlbaranFinal * 1.21).toFloat())
-                    val backgroundDrawable = ContextCompat.getDrawable(actividadMadre, R.drawable.bordes_redondos_texto1)
-                    holder.estado.background = backgroundDrawable
-
-                    // Se crea un intent para iniciar la actividad de editar factura, y se le pasan algunos datos
-                    val intent: Intent = Intent(actividadMadre, ActividadEditarFactura::class.java)
-                    intent.putExtra("titulo", albaran.titulo)
-                    actividadMadre.startActivity(intent)
+                        // Se crea un intent para iniciar la actividad de editar factura, y se le pasan algunos datos
+                        val intent: Intent =
+                            Intent(actividadMadre, ActividadEditarFactura::class.java)
+                        intent.putExtra("titulo", albaran.titulo)
+                        actividadMadre.startActivity(intent)
+                    }
                 }
+            }else{
+                Toast.makeText(actividadMadre, "La factura ya ha sido creada.", Toast.LENGTH_SHORT).show()
             }
         }
 

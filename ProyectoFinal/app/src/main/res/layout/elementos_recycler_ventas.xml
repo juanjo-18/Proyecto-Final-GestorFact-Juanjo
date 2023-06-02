@@ -123,14 +123,15 @@
                 style="@style/textoElementos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
+                android:layout_marginLeft="8dp"
                 android:text="TextView" />
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="7dp"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/euro" />
         </LinearLayout>

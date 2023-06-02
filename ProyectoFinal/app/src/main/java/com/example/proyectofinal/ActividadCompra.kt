@@ -59,8 +59,7 @@ class ActividadCompra : AppCompatActivity() {
             listaCompra= db.compraDAO().getAll() as ArrayList<Compra>
             if(listaCompra.size>0){
                 setupRecyclerView()
-            }
-        }
+
 
         binding.buscadorCompra.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(
@@ -79,8 +78,10 @@ class ActividadCompra : AppCompatActivity() {
             override fun afterTextChanged(s: Editable?) {
                 filtrar(s.toString())
             }
-        })
+            })
 
+            }
+        }
 
         //Boton que cambia la panatalla catalogo
         binding.botonIrACatalogoDesdeCompra.setOnClickListener{

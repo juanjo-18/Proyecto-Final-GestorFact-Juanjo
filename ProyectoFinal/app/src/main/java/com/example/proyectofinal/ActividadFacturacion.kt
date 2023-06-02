@@ -68,8 +68,7 @@ class ActividadFacturacion : AppCompatActivity() {
              listaFactura= db.facturaDAO().getAll() as ArrayList<Factura>
             if(listaFactura.size>0){
                 setupRecyclerView()
-            }
-        }
+
 
         binding.buscadorFactura.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(
@@ -88,7 +87,9 @@ class ActividadFacturacion : AppCompatActivity() {
             override fun afterTextChanged(s: Editable?) {
                 filtrar(s.toString())
             }
-        })
+            })
+            }
+        }
 
         //Boton que cambia la panatalla catalogo
         binding.botonIrACatalogoDesdeFacturacion.setOnClickListener{

@@ -57,22 +57,9 @@ class ActividadCliente : AppCompatActivity() {
         GlobalScope.launch {
            listaCliente= db.clienteDAO().getAll() as ArrayList<Cliente>
             if(listaCliente.size>0) {
-                /*
-                val recyclerView: RecyclerView = findViewById<RecyclerView>(R.id.reciclerCliente)
-                recyclerView.adapter = ClientesAdapter(context, valores)
-                val staggeredManager: StaggeredGridLayoutManager = StaggeredGridLayoutManager(
-                    1,
-                    StaggeredGridLayoutManager.VERTICAL
-                )
-                staggeredManager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
-                recyclerView.layoutManager = staggeredManager
 
-
-
-                 */
                 setupRecyclerView()
-            }
-        }
+
         val buscadorCliente: EditText =findViewById(R.id.buscadorCliente)
 
         buscadorCliente.addTextChangedListener(object: TextWatcher {
@@ -93,8 +80,9 @@ class ActividadCliente : AppCompatActivity() {
                 filtrar(s.toString())
             }
 
-        })
-
+            })
+            }
+        }
 
         //Boton que cambia la panatalla a añadir cliente
         val botonIrAnadirCliente: FloatingActionButton =findViewById(R.id.botonAnadirCliente)

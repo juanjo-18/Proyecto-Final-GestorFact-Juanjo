@@ -71,8 +71,7 @@ class ActividadCatalogo : AppCompatActivity(), SearchView.OnQueryTextListener {
            listaProducto= db.productoDAO().getAll() as ArrayList<Producto>
             if(listaProducto.size>0) {
                 setupRecyclerView()
-            }
-        }
+
 
 
         binding.buscadorProductos.addTextChangedListener(object:TextWatcher{
@@ -94,6 +93,8 @@ class ActividadCatalogo : AppCompatActivity(), SearchView.OnQueryTextListener {
                 }
 
             })
+            }
+        }
 
 
 

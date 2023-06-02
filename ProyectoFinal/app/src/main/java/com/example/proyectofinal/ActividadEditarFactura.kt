@@ -405,37 +405,63 @@ class ActividadEditarFactura : AppCompatActivity() {
                                 }
                                 var totalFacturaFinal: Float = 0f
                                 CoroutineScope(Dispatchers.IO).launch {
-                                    db.factura_ProductoDAO().borrarTodosPorTitulo(titulo.toString())
-                                    for (producto in productos) {
-                                        //Inserto los productos
-                                        db.factura_ProductoDAO().insert(
-                                            Factura_Producto(
-                                                tituloFactura = binding.campoTituloEditarFactura.text.toString(),
-                                                nombreProducto = producto.nombre.toString(),
-                                                precio = producto.precio,
-                                                cantidad = producto.cantidad,
-                                                total = producto.precio * producto.cantidad
-                                            )
-                                        )
-                                        totalFacturaFinal += producto.precio * producto.cantidad
+                                    var facturas = db.facturaDAO().getAll()
+                                    var tituloRepetido = false
+                                    var titulo = ""
+
+                                    for (factura in facturas) {
+                                        if (factura.titulo == binding.campoTituloEditarFactura.text.toString()) {
+                                            tituloRepetido = true
+                                            titulo = factura.titulo
+                                        }
                                     }
 
-                                    //Inserto la factura
-                                    db.facturaDAO().updateFactura(
-                                        binding.campoTituloEditarFactura.text.toString(),
-                                        titulo.toString(),
-                                        nombreCliente,
-                                        LocalDate.now(),
-                                        tipoFactura,
-                                        cobrada,
-                                        (totalFacturaFinal * 1.21).toFloat()
-                                    )
-                                }
+                                    if (!tituloRepetido) {
+                                        launch(Dispatchers.IO) {
+                                            db.factura_ProductoDAO()
+                                                .borrarTodosPorTitulo(titulo.toString())
+                                            for (producto in productos) {
+                                                //Inserto los productos
+                                                db.factura_ProductoDAO().insert(
+                                                    Factura_Producto(
+                                                        tituloFactura = binding.campoTituloEditarFactura.text.toString(),
+                                                        nombreProducto = producto.nombre.toString(),
+                                                        precio = producto.precio,
+                                                        cantidad = producto.cantidad,
+                                                        total = producto.precio * producto.cantidad
+                                                    )
+                                                )
+                                                totalFacturaFinal += producto.precio * producto.cantidad
+                                            }
 
-                                val intent: Intent = Intent(
-                                    this, ActividadCompra::class.java
-                                )
-                                this.startActivity(intent)
+                                            //Inserto la factura
+                                            db.facturaDAO().updateFactura(
+                                                binding.campoTituloEditarFactura.text.toString(),
+                                                titulo.toString(),
+                                                nombreCliente,
+                                                LocalDate.now(),
+                                                tipoFactura,
+                                                cobrada,
+                                                (totalFacturaFinal * 1.21).toFloat()
+                                            )
+                                        }.join()
+
+                                        withContext(Dispatchers.Main) {
+                                            val intent: Intent = Intent(
+                                                this@ActividadEditarFactura, ActividadFacturacion::class.java
+                                            )
+                                            startActivity(intent)
+                                        }
+                                    } else {
+                                        withContext(Dispatchers.Main) {
+                                            Toast.makeText(
+                                                this@ActividadEditarFactura,
+                                                R.string.tituloRepetido,
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                        }
+                                    }
+                                }
                             } else {
                                 Toast.makeText(this, R.string.camposVacios, Toast.LENGTH_SHORT)
                                     .show()
