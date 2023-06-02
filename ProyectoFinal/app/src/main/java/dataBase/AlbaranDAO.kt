@@ -48,4 +48,7 @@ interface AlbaranDAO {
      */
     @Query("SELECT * FROM albaran WHERE titulo LIKE :searchText")
     fun buscarAlbaranPorTitulo(searchText: String): List<Albaran>
+
+    @Query("SELECT * FROM albaran WHERE titulo LIKE :searchText")
+    fun buscarAlbaranPorTituloSoloUno(searchText: String): Albaran
 }

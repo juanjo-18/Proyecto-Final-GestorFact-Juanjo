@@ -249,6 +249,7 @@ class AlbaranesAdapter(val actividadMadre: Activity, var datos: ArrayList<Albara
             CoroutineScope(Dispatchers.IO).launch {
                 launch(Dispatchers.IO) {
                     // Se elimina el albarán de la base de datos utilizando la función 'delete' de la clase 'AlbaranDAO'
+                    db.albaran_ProductoDAO().borrarTodosPorTitulo(albaran.titulo)
                     db.albaranDAO().delete(albaran)
                 }
             }

@@ -204,6 +204,8 @@ class ActividadEditarFactura : AppCompatActivity() {
         var productos = arrayListOf<Producto>()
         val recyclerView: RecyclerView =
             findViewById<RecyclerView>(R.id.recyclerLineasProductos)
+        var tituloActual=""
+        var estadoActual=false
 
         //Compruebo si el titulo esta relleno
         if (titulo != null) {
@@ -220,6 +222,8 @@ class ActividadEditarFactura : AppCompatActivity() {
                         db.facturaDAO().buscarFacturaPorTitulo(titulo!!) as ArrayList<Factura>
                     withContext(Dispatchers.Main) {
                         for (valor in valores) {
+                            estadoActual= valor.cobrada
+                            tituloActual=valor.titulo
                             nombreCliente2 = valor.nombreCliente.toString()
                             tipoFactura = valor.tipoFactura.toString()
                             cobradaComprobar=valor.cobrada
@@ -412,14 +416,17 @@ class ActividadEditarFactura : AppCompatActivity() {
                                     for (factura in facturas) {
                                         if (factura.titulo == binding.campoTituloEditarFactura.text.toString()) {
                                             tituloRepetido = true
-                                            titulo = factura.titulo
                                         }
+                                    }
+                                    if(tituloActual==binding.campoTituloEditarFactura.text.toString()){
+                                        tituloRepetido = false
+
                                     }
 
                                     if (!tituloRepetido) {
                                         launch(Dispatchers.IO) {
                                             db.factura_ProductoDAO()
-                                                .borrarTodosPorTitulo(titulo.toString())
+                                                .borrarTodosPorTitulo(tituloActual)
                                             for (producto in productos) {
                                                 //Inserto los productos
                                                 db.factura_ProductoDAO().insert(
@@ -437,7 +444,7 @@ class ActividadEditarFactura : AppCompatActivity() {
                                             //Inserto la factura
                                             db.facturaDAO().updateFactura(
                                                 binding.campoTituloEditarFactura.text.toString(),
-                                                titulo.toString(),
+                                                tituloActual,
                                                 nombreCliente,
                                                 LocalDate.now(),
                                                 tipoFactura,

@@ -84,6 +84,7 @@ class FacturacionAdapter (val actividadMadre: Activity, var datos: ArrayList<Fac
             CoroutineScope(Dispatchers.IO).launch {
                 launch(Dispatchers.IO) {
                     // Se elimina la factura de la base de datos utilizando la función 'delete' de la clase 'FacturaDAO'
+                    db.factura_ProductoDAO().borrarTodosPorTitulo(factura.titulo)
                     db.facturaDAO().delete(factura)
                 }
             }

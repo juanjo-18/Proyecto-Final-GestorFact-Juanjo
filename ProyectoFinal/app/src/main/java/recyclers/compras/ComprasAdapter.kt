@@ -77,8 +77,9 @@ class ComprasAdapter(val actividadMadre: Activity, var datos: ArrayList<Compra>)
                 CoroutineScope(Dispatchers.IO).launch {
                     launch(Dispatchers.IO) {
                         // Se elimina la compra de la base de datos utilizando la función 'delete' de la clase 'CompraDAO'
+                        db.compra_ProductoDAO().borrarTodosPorTitulo(compra.titulo)
                         db.compraDAO().delete(compra)
-                    }
+                     }
                 }
                 datos.removeAt(position)
                 this.notifyDataSetChanged()

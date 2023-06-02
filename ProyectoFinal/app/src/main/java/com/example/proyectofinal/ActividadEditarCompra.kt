@@ -205,6 +205,8 @@ class ActividadEditarCompra : AppCompatActivity() {
         var productos = arrayListOf<Producto>()
         val recyclerView: RecyclerView =
             findViewById<RecyclerView>(R.id.recyclerLineasProductos)
+        var tituloActual=""
+        var estadoActual=false
 
         //Compruebo si el titulo esta relleno
         if (titulo != null) {
@@ -221,6 +223,8 @@ class ActividadEditarCompra : AppCompatActivity() {
                         db.compraDAO().buscarCompraPorTitulo(titulo!!) as ArrayList<Compra>
                     withContext(Dispatchers.Main) {
                         for (valor in valores) {
+                            estadoActual= valor.pagada
+                            tituloActual=valor.titulo
                             nombreCliente2 = valor.nombreProveedor.toString()
                             tipoCompra = valor.tipoCompra.toString()
                             pagadaComprobar=valor.pagada
@@ -413,14 +417,17 @@ class ActividadEditarCompra : AppCompatActivity() {
                                 for (albaran in compras) {
                                     if (albaran.titulo == binding.campoTituloEditarCompra.text.toString()) {
                                         tituloRepetido = true
-                                        titulo = albaran.titulo
                                     }
+                                }
+                                if(tituloActual==binding.campoTituloEditarCompra.text.toString()){
+                                    tituloRepetido = false
+
                                 }
 
                                 if (!tituloRepetido) {
                                     //Aqui inserto todos los productos a la tabla intermedia compra_producto
                                     launch(Dispatchers.IO) {
-                                        db.compra_ProductoDAO().borrarTodosPorTitulo(titulo.toString())
+                                        db.compra_ProductoDAO().borrarTodosPorTitulo(tituloActual)
                                         for (producto in productos) {
                                             //Inserto los productos
                                             db.compra_ProductoDAO().insert(
@@ -438,7 +445,7 @@ class ActividadEditarCompra : AppCompatActivity() {
                                         //Inserto la compra
                                         db.compraDAO().updateCompra(
                                             binding.campoTituloEditarCompra.text.toString(),
-                                            titulo.toString(),
+                                            tituloActual,
                                             nombreCliente,
                                             LocalDate.now(),
                                             tipoCompra,

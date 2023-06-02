@@ -221,7 +221,8 @@ class ActividadEditarVenta : AppCompatActivity() {
             }
         })
 
-
+        var tituloActual=""
+        var estadoActual=""
         var titulo = intent.getStringExtra("titulo")
         var albaran_producto = arrayListOf<Albaran_Producto>()
         var productos = arrayListOf<Producto>()
@@ -238,8 +239,8 @@ class ActividadEditarVenta : AppCompatActivity() {
                         db.albaranDAO().buscarAlbaranPorTitulo(titulo!!) as ArrayList<Albaran>
                     withContext(Dispatchers.Main) {
                         for (valor in valores) {
-
-
+                            estadoActual= valor.estado.toString()
+                            tituloActual=valor.titulo
                             binding.campoTituloEditarVenta.setText(valor.titulo)
                             binding.textoFechaDesdeVentaEditar.setText((LocalDate.now()).toString())
                             binding.textoNumeroTotalBaseEditarVenta.setText(
@@ -407,45 +408,52 @@ class ActividadEditarVenta : AppCompatActivity() {
                     if (!camposVacios) {
                         if (productos.size >= 1) {
                             var totalAlbaranFinal: Float = 0f
-                            CoroutineScope(Dispatchers.IO).launch {
+                           CoroutineScope(Dispatchers.IO).launch {
                                 var albaranes = db.albaranDAO().getAll()
                                 var tituloRepetido = false
                                 var titulo = ""
 
+
                                 for (albaran in albaranes) {
-                                    if (albaran.titulo == binding.campoTituloEditarVenta.text.toString()) {
-                                        tituloRepetido = true
-                                        titulo = albaran.titulo
-                                    }
+
+                                        if (albaran.titulo == binding.campoTituloEditarVenta.text.toString()) {
+                                            tituloRepetido = true
+                                        }
                                 }
+                              if(tituloActual==binding.campoTituloEditarVenta.text.toString()){
+                                   tituloRepetido = false
+
+                               }
 
                                 if (!tituloRepetido) {
                                     //Aqui inserto todos los productos a la tabla intermedia albaran_producto
                                     launch(Dispatchers.IO) {
-                                        db.albaran_ProductoDAO().borrarTodosPorTitulo(titulo.toString())
-                                        for (producto in productos) {
-                                            //Inserto los productos
-                                            db.albaran_ProductoDAO().insert(
-                                                Albaran_Producto(
-                                                    tituloAlbaran = binding.campoTituloEditarVenta.text.toString(),
-                                                    nombreProducto = producto.nombre.toString(),
-                                                    nombreCliente= nombreCliente,
-                                                    tipoAlbaran=tipoAlbaran,
-                                                    precio = producto.precio,
-                                                    cantidad = producto.cantidad,
-                                                    total = producto.precio * producto.cantidad
+                                        db.albaran_ProductoDAO().borrarTodosPorTitulo(tituloActual)
+                                            for (producto in productos) {
+                                                //Inserto los productos
+                                                db.albaran_ProductoDAO().insert(
+                                                    Albaran_Producto(
+                                                        tituloAlbaran = binding.campoTituloEditarVenta.text.toString(),
+                                                        nombreProducto = producto.nombre.toString(),
+                                                        nombreCliente= nombreCliente,
+                                                        tipoAlbaran=tipoAlbaran,
+                                                        precio = producto.precio,
+                                                        cantidad = producto.cantidad,
+                                                        total = producto.precio * producto.cantidad
+                                                    )
                                                 )
-                                            )
-                                            totalAlbaranFinal += producto.precio * producto.cantidad
-                                        }
+                                                totalAlbaranFinal += producto.precio * producto.cantidad
+                                            }
+
+
 
                                         //Inserto los albaranes
                                         db.albaranDAO().updateAlbaran(
                                             binding.campoTituloEditarVenta.text.toString(),
-                                            titulo.toString(),
+                                            tituloActual,
                                             nombreCliente,
                                             LocalDate.now(),
-                                            "Pendiente",
+                                            estadoActual,
                                             (totalAlbaranFinal * 1.21).toFloat()
                                         )
                                     }.join()
