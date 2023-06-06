@@ -18,9 +18,12 @@
         android:theme="@style/Theme.ProyectoFinal"
         tools:targetApi="31">
         <activity
-            android:name=".ActividadEditarCompra"
-            android:windowSoftInputMode="adjustPan"
+            android:name=".ActividadDatosUsuario"
             android:exported="false" />
+        <activity
+            android:name=".ActividadEditarCompra"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ActividadEditarFactura"
             android:exported="false"

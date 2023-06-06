@@ -176,6 +176,7 @@ class AlbaranesAdapter(val actividadMadre: Activity, var datos: ArrayList<Albara
             var numeroAlbaran:String=""
             var fecha: LocalDate= LocalDate.now()
             var referencia:Int=0
+            var datosUsuario:DatosUsuario
             CoroutineScope(Dispatchers.IO).launch {
                 launch(Dispatchers.IO) {
                     //Obtengo la factura
@@ -183,6 +184,7 @@ class AlbaranesAdapter(val actividadMadre: Activity, var datos: ArrayList<Albara
                     // Obtiene los datos de la tabla de Albaran_Producto de la base de datos para el título correspondiente
                     albaran_producto = db.albaran_ProductoDAO()
                         .buscarAlbaranProductoPorTitulo(holder.titulo.text.toString()) as ArrayList<Albaran_Producto>
+                    datosUsuario=db.datosUsuarioDAO().getAll()
                     // Obtiene los datos del cliente correspondiente de la base de datos
                     var cliente= db.clienteDAO().buscarClientePorNombre(albaran.nombreCliente.toString())
                     withContext(Dispatchers.Main) {
@@ -220,7 +222,7 @@ class AlbaranesAdapter(val actividadMadre: Activity, var datos: ArrayList<Albara
                                     actividadMadre,
                                     referencia,tipo,numeroAlbaran,fecha, total,
                                     productos,
-                                    cliente
+                                    cliente,datosUsuario
                                 )
                             } else {
                                 // Si no se tienen los permisos de almacenamiento, se solicitan llamando a la función 'requestPermissions'

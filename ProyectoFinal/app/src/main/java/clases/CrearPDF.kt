@@ -33,15 +33,15 @@ class CrearPDF {
     fun generarPdf(
         resources: Resources, context: Context,
         referencia:Int,tipoCabezera: String, numeroFactura: String, fecha: LocalDate, precioTotal:Float,
-        productos: ArrayList<Producto>, cliente:Cliente
+        productos: ArrayList<Producto>, cliente:Cliente,datosUsuario:DatosUsuario
     ) {
        //Datos de nuestra empresa
-        //var nombreEmpresaText = "Juanjo Medina Díaz"
-        // var calleEmpresaText = "Manolito, 14"
-        //var direccionEmpresaText = "29580, Cártama, Málaga"
-        //var dniEmpresaText = "72746587R"
-        //var telefonoEmpresaText = "654878290"
-        var correo:String="juanjo@gmail.com"
+        var nombreEmpresaText = datosUsuario.nombre.toString()
+        var calleEmpresaText = datosUsuario.direccion.toString()
+        var direccionEmpresaText =datosUsuario.codigoPostal.toString()+", "+datosUsuario.localidad.toString()+", "+datosUsuario.provincia.toString()
+        var dniEmpresaText = datosUsuario.nif.toString()
+        var telefonoEmpresaText = datosUsuario.telefono.toString()
+        var correo=datosUsuario.email.toString()
 
 
 
@@ -51,7 +51,7 @@ class CrearPDF {
         var numeroDePedidoTexto = "Número De Pedido: "
         var fechaEncabezadoTexto = "Fecha: "
         var tipoDePagoTexto = "Transferencia bancaria"
-        //var numeroDeCuentaTexto = "ES15 0049 4762 22 2016078965"
+        var numeroDeCuentaTexto = datosUsuario.numeroCuenta.toString()
 
         //Datos del cliente
         var encabezadoDatosClienteTexto = "DATOS DEL CLIENTE"
@@ -129,11 +129,11 @@ class CrearPDF {
         telefonoEmpresa.textSize = 15f
 
         canvas.drawText(correoEmpresaText, 315f, 60f, correoEmpresa)
-       // canvas.drawText(calleEmpresaText, 315f, 80f, calleEmpresa)
-       // canvas.drawText(direccionEmpresaText, 315f, 100f, direccionEmpresa)
-       // canvas.drawText(dniEmpresaText, 315f, 120f, dniEmpresa)
-        //canvas.drawText(nombreEmpresaText, 565f, 60f, nombreEmpresa)
-        // canvas.drawText(telefonoEmpresaText, 565f, 80f, telefonoEmpresa)
+        canvas.drawText(calleEmpresaText, 315f, 80f, calleEmpresa)
+        canvas.drawText(direccionEmpresaText, 315f, 100f, direccionEmpresa)
+        canvas.drawText(dniEmpresaText, 315f, 120f, dniEmpresa)
+        canvas.drawText(nombreEmpresaText, 565f, 60f, nombreEmpresa)
+        canvas.drawText(telefonoEmpresaText, 565f, 80f, telefonoEmpresa)
 
 
         //Añadir el titulo y numero de factura centrado

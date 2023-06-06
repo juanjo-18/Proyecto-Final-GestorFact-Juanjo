@@ -103,6 +103,7 @@ class ComprasAdapter(val actividadMadre: Activity, var datos: ArrayList<Compra>)
                 var numero:String=""
                 var fecha: LocalDate = LocalDate.now()
                 var referencia:Int=0
+                var datosUsuario:DatosUsuario
                 CoroutineScope(Dispatchers.IO).launch {
                     launch(Dispatchers.IO) {
                         //Obtengo la compra
@@ -110,6 +111,7 @@ class ComprasAdapter(val actividadMadre: Activity, var datos: ArrayList<Compra>)
                         // Obtiene los datos de la tabla de Compra_Producto de la base de datos para el título correspondiente
                         compra_producto = db.compra_ProductoDAO()
                             .buscarCompraProductoPorTitulo(holder.titulo.text.toString()) as ArrayList<Compra_Producto>
+                        datosUsuario=db.datosUsuarioDAO().getAll()
                         // Obtiene los datos del cliente correspondiente de la base de datos
                         var cliente= db.clienteDAO().buscarClientePorNombre(compra.nombreProveedor.toString())
                         withContext(Dispatchers.Main) {
@@ -147,7 +149,7 @@ class ComprasAdapter(val actividadMadre: Activity, var datos: ArrayList<Compra>)
                                         actividadMadre,
                                         referencia,tipo,numero,fecha, total,
                                         productos,
-                                        cliente
+                                        cliente,datosUsuario
                                     )
                                 } else {
                                     // Si no se tienen los permisos de almacenamiento, se solicitan llamando a la función 'requestPermissions'

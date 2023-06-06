@@ -6,9 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.*
 import androidx.annotation.RequiresApi
+import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.room.Room
@@ -23,6 +26,7 @@ import recyclers.anadirProductosFactura.LineaFacturaAdapter
 import recyclers.anadirProductosVenta.LineaVentaAdapter
 import java.time.LocalDate
 import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * Esta es la clase que representa la actividad para añadir una nueva factura.
@@ -42,6 +46,9 @@ class ActividadAnadirFactura : AppCompatActivity() {
     private lateinit var db: AppDataBase
 
 
+
+
+
     /**
      * Método onCreate() de la actividad, se llama al crear la actividad.
      * @param savedInstanceState estado de la actividad si se restaura.
@@ -58,6 +65,16 @@ class ActividadAnadirFactura : AppCompatActivity() {
         db = Room.databaseBuilder(applicationContext, AppDataBase::class.java, "db")
             .addMigrations(AppDataBase.MIGRATION_1_2)
             .build()
+
+
+
+
+
+
+
+
+
+
 
         var clientes = ArrayList<Cliente>()
         var nombres = arrayListOf("Añadir nombre")
@@ -231,6 +248,7 @@ class ActividadAnadirFactura : AppCompatActivity() {
             cantidadLlena = false
             precioLleno = false
 
+
             if (binding.campoNombreAnadirLineaFactura.text.toString().isBlank()) {
                 campoVacio = true
             }
@@ -256,7 +274,10 @@ class ActividadAnadirFactura : AppCompatActivity() {
                     }
                     if (!cantidadNegativa) {
                         val producto = Producto()
+
                         producto.nombre = binding.campoNombreAnadirLineaFactura.text.toString()
+
+
                         producto.cantidad =
                             binding.campoCantidadAnadirLineaFactura.text.toString().toIntOrNull() ?: 0
                         producto.precio =
@@ -429,4 +450,8 @@ class ActividadAnadirFactura : AppCompatActivity() {
             binding.textoNumeroTotalAnadirFactura.setText("" + numeroTotalFinal)
         }
     }
+
+
+
+
 }

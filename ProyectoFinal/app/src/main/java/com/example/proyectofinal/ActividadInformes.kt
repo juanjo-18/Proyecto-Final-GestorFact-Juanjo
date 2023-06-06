@@ -42,6 +42,7 @@ class ActividadInformes : AppCompatActivity() {
         GlobalScope.launch {
             facturas = db.facturaDAO().getAll() as ArrayList<Factura>
             compras = db.compraDAO().getAll() as ArrayList<Compra>
+
             for(factura in facturas){
                 if(factura.tipoFactura.equals("Factura")){
                     totalFacturado+=factura.precioTotal
@@ -63,14 +64,18 @@ class ActividadInformes : AppCompatActivity() {
                 }
 
             }
+
+            val totalF = totalFacturado.toString().replace(",", ".").toFloat()
+            val totalC =totalComprado.toString().replace(",", ".").toFloat()
+            val totalCF =totalCobradoFactura.toString().replace(",", ".").toFloat()
             val formato = DecimalFormat("#.##")
 
 
             val puntos =ArrayList<Bar>()
-            graficarBarras(puntos,formato.format(totalFacturado).toFloat(),formato.format(totalComprado).toFloat())
+            graficarBarras(puntos,formato.format(totalF).toFloat(),formato.format(totalC).toFloat())
 
             val puntos1 =ArrayList<Bar>()
-            graficarBarras1(puntos1,formato.format(totalFacturado).toFloat(),formato.format(totalCobradoFactura).toFloat())
+            graficarBarras1(puntos1,formato.format(totalF).toFloat(),formato.format(totalCF).toFloat())
 
         }
 

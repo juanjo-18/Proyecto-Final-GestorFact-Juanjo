@@ -16,7 +16,7 @@ import clases.*
  * @author Juanjo medina
  */
 @TypeConverters(LocalDateConverter::class, ListConverter::class)
-@Database(entities = [Producto::class, Cliente::class, Albaran::class, Factura::class,Albaran_Producto::class,Factura_Producto::class,Compra::class,Compra_Producto::class], version = 7)
+@Database(entities = [Producto::class, Cliente::class, Albaran::class, Factura::class,Albaran_Producto::class,Factura_Producto::class,Compra::class,Compra_Producto::class,DatosUsuario::class], version = 8)
 abstract class AppDataBase:RoomDatabase() {
     abstract fun productoDAO(): ProductoDAO
 
@@ -27,6 +27,7 @@ abstract class AppDataBase:RoomDatabase() {
     abstract fun factura_ProductoDAO():Factura_ProductoDAO
     abstract fun compraDAO():CompraDAO
     abstract fun compra_ProductoDAO():Compra_ProductoDAO
+    abstract fun datosUsuarioDAO():DatosUsuarioDAO
 
 
 

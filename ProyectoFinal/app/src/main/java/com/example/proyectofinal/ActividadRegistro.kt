@@ -148,7 +148,7 @@ class ActividadRegistro : AppCompatActivity() {
                                     Toast.LENGTH_LONG
                                 ).show()
                                 val intent: Intent = Intent(
-                                    this, ActividadInicio::class.java
+                                    this, ActividadDatosUsuario::class.java
                                 )
                                 this.startActivity(intent)
                             } else {
