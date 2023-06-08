@@ -10,7 +10,7 @@ import java.time.LocalDate
 import java.util.*
 
 /**
- * Clase del usuario
+ * Clase del usuario donde se guardan los valores contraseña, email y fecha de nacimiento
  * @author Juanjo medina
  */
 class Usuario  : Parcelable {

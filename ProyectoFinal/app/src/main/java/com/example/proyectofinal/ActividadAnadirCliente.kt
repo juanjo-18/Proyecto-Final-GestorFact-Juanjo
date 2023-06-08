@@ -107,7 +107,8 @@ class ActividadAnadirCliente : AppCompatActivity() {
                         numeroMal = true
                     }
                     if (!numeroMal) {
-                        // Guardar el cliente en la base de datos
+                        if (binding.campoEmailAAndir.text.toString().endsWith("@gmail.com") || binding.campoEmailAAndir.text.toString().endsWith("@hotmail.com") || binding.campoEmailAAndir.text.toString().endsWith("@hotmail.es")) {
+                            // Guardar el cliente en la base de datos
                         GlobalScope.launch {
                             db.clienteDAO().insert(
                                 Cliente(
@@ -130,6 +131,9 @@ class ActividadAnadirCliente : AppCompatActivity() {
                             this, ActividadCliente::class.java
                         )
                         this.startActivity(intent)
+                        }else{
+                            Toast.makeText(this, "Correo electronico no valido", Toast.LENGTH_SHORT).show()
+                        }
                     } else {
                         Toast.makeText(this, R.string.numeroMal, Toast.LENGTH_SHORT).show()
                     }

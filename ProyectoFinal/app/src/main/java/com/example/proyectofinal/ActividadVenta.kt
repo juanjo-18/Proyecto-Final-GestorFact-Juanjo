@@ -41,8 +41,14 @@ class ActividadVenta : AppCompatActivity() {
      */
     private lateinit var db: AppDataBase
 
+    /**
+     * Viariable que recibira una lista de todos los albaranes de la base de datos para verlos en el recyclerview
+     */
     var listaVenta = arrayListOf<Albaran>()
 
+    /**
+     * Adaptardor de albaranes para hacer el recyclerview
+     */
     private lateinit var adaptador: AlbaranesAdapter
 
     /**

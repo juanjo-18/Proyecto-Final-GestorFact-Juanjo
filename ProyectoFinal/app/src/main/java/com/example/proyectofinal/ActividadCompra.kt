@@ -30,9 +30,19 @@ class ActividadCompra : AppCompatActivity() {
      * Variable para la instancia de la base de datos.
      */
     private lateinit var db: AppDataBase
+    /**
+     * Variable para el binding del layout.
+     */
     private lateinit var binding: LayoutCompraBinding
 
+    /**
+     * Viariable que recibira una lista de todas las comrpas de la base de datos para verlos en el recyclerview
+     */
     var listaCompra= arrayListOf<Compra>()
+
+    /**
+     * Adaptardor de compra para hacer el recyclerview
+     */
     private lateinit var adaptador: ComprasAdapter
 
 

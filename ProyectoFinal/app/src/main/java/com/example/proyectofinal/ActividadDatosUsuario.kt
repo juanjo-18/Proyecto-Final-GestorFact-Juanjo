@@ -86,30 +86,36 @@ class ActividadDatosUsuario : AppCompatActivity() {
                         numeroMal = true
                     }
                     if (!numeroMal) {
-                        // Guardar el usuario en la base de datos
-                        GlobalScope.launch {
-                            db.datosUsuarioDAO().insert(
-                                DatosUsuario(
-                                    nombre = binding.campoNombreEmpresaDatos.text.toString(),
-                                    email = binding.campoCorreoDatos.text.toString(),
-                                    nif = binding.campoNifDatos.text.toString(),
-                                    numeroCuenta= binding.CampoNumeroCuentaDatos.text.toString(),
-                                    telefono = binding.campoTelefonoDatos.text.toString()
-                                        .toInt(),
-                                    direccion = binding.campoDireccionDatos.text.toString(),
-                                    localidad = binding.campoLocalidadDatos.text.toString(),
-                                    provincia = binding.campoProvinciaDatos.text.toString(),
-                                    codigoPostal = binding.campoCodigoPostalDatos.text.toString()
-                                        .toInt()
-                                )
-                            )
-                        }
+                        if (binding.campoCorreoDatos.text.toString().endsWith("@gmail.com") || binding.campoCorreoDatos.text.toString().endsWith("@hotmail.com") || binding.campoCorreoDatos.text.toString().endsWith("@hotmail.es")) {
 
-                        // Mostrar la pantalla de clientes
-                        val intent: Intent = Intent(
-                            this, ActividadInicio::class.java
-                        )
-                        this.startActivity(intent)
+
+                            // Guardar el usuario en la base de datos
+                            GlobalScope.launch {
+                                db.datosUsuarioDAO().insert(
+                                    DatosUsuario(
+                                        nombre = binding.campoNombreEmpresaDatos.text.toString(),
+                                        email = binding.campoCorreoDatos.text.toString(),
+                                        nif = binding.campoNifDatos.text.toString(),
+                                        numeroCuenta = binding.CampoNumeroCuentaDatos.text.toString(),
+                                        telefono = binding.campoTelefonoDatos.text.toString()
+                                            .toInt(),
+                                        direccion = binding.campoDireccionDatos.text.toString(),
+                                        localidad = binding.campoLocalidadDatos.text.toString(),
+                                        provincia = binding.campoProvinciaDatos.text.toString(),
+                                        codigoPostal = binding.campoCodigoPostalDatos.text.toString()
+                                            .toInt()
+                                    )
+                                )
+                            }
+
+                            // Mostrar la pantalla de clientes
+                            val intent: Intent = Intent(
+                                this, ActividadInicio::class.java
+                            )
+                            this.startActivity(intent)
+                        }else{
+                            Toast.makeText(this, "Correo electronico no valido", Toast.LENGTH_SHORT).show()
+                        }
                     } else {
                         Toast.makeText(this, R.string.numeroMal, Toast.LENGTH_SHORT).show()
                     }

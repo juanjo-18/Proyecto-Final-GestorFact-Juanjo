@@ -37,7 +37,7 @@ import kotlin.collections.ArrayList
 class ActividadEditarVenta : AppCompatActivity() {
 
     /**
-     * Variable para la instancia de la base de datos.
+     * Variable para el binding del layout.
      */
     private lateinit var binding: LayoutEditarVentaBinding
 

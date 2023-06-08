@@ -38,12 +38,18 @@ class ActividadCatalogo : AppCompatActivity(), SearchView.OnQueryTextListener {
     private lateinit var db: AppDataBase
 
     /**
-     * Variable para la instancia de la base de datos.
+     * Variable para el binding del layout.
      */
     private lateinit var binding: LayoutCatalogoBinding
 
+    /**
+     * Variable para insertar una lista de productos
+     */
     var listaProducto = arrayListOf<Producto>()
 
+    /**
+     * Adaptardor de productos para hacer el recyclerview
+     */
     private lateinit var adaptador: ProductosAdapter
     /**
      * Método onCreate() de la actividad, se llama al crear la actividad.
@@ -72,9 +78,10 @@ class ActividadCatalogo : AppCompatActivity(), SearchView.OnQueryTextListener {
             if(listaProducto.size>0) {
                 setupRecyclerView()
 
-
-
-        binding.buscadorProductos.addTextChangedListener(object:TextWatcher{
+                /**
+                 * Se encarga de buscar los productos que añado en el buscardor y filtralos
+                 */
+                binding.buscadorProductos.addTextChangedListener(object:TextWatcher{
                 override fun beforeTextChanged(
                     s: CharSequence?,
                     start: Int,
@@ -176,6 +183,10 @@ class ActividadCatalogo : AppCompatActivity(), SearchView.OnQueryTextListener {
         adaptador.filtrar(listaFiltrada)
     }
 
+    /**
+     * Funcion para hcar el recycler view de productos con la listaProductos que ya vienen todos los productos
+     * y se le añade un espaciado.
+     */
     fun setupRecyclerView(){
         binding.reciclerCatalogo.layoutManager=LinearLayoutManager(this)
         adaptador = ProductosAdapter(this,listaProducto)
@@ -185,13 +196,11 @@ class ActividadCatalogo : AppCompatActivity(), SearchView.OnQueryTextListener {
         binding.reciclerCatalogo.addItemDecoration(itemSpacingDecoration)
     }
 
-
     override fun onQueryTextSubmit(query: String?): Boolean {
         return false
     }
 
     override fun onQueryTextChange(newText: String?): Boolean {
-
         return false
     }
 }

@@ -29,15 +29,21 @@ import recyclers.facturacion.FacturacionAdapter
 class ActividadFacturacion : AppCompatActivity() {
 
     /**
-     * Variable para la instancia de la base de datos.
+     * Variable para el binding del layout.
      */
     private lateinit var binding: LayoutFacturacionBinding
     /**
      * Variable para la instancia de la base de datos.
      */
     private lateinit var db: AppDataBase
+    /**
+     * Viariable que recibira una lista de todas las facturas de la base de datos para verlos en el recyclerview
+     */
     var listaFactura= arrayListOf<Factura>()
 
+    /**
+     * Adaptardor de facturas para hacer el recyclerview
+     */
     private lateinit var adaptador: FacturacionAdapter
 
     /**

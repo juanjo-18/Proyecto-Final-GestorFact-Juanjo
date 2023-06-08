@@ -32,8 +32,14 @@ class ActividadCliente : AppCompatActivity() {
      * Variable para la instancia de la base de datos.
      */
     private lateinit var db: AppDataBase
-    var listaCliente = arrayListOf<Cliente>()
 
+    /**
+     * Viariable que recibira una lista de todos los clientes de la base de datos para verlos en el recyclerview
+     */
+    var listaCliente = arrayListOf<Cliente>()
+    /**
+     * Adaptardor de cliente para hacer el recyclerview
+     */
     private lateinit var adaptador: ClientesAdapter
 
     /**

@@ -46,9 +46,6 @@ class ActividadAnadirFactura : AppCompatActivity() {
     private lateinit var db: AppDataBase
 
 
-
-
-
     /**
      * Método onCreate() de la actividad, se llama al crear la actividad.
      * @param savedInstanceState estado de la actividad si se restaura.

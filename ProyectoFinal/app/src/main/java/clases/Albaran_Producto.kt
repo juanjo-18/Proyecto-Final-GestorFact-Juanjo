@@ -28,9 +28,13 @@ data class Albaran_Producto(
      * Nombre del producto que se añade al albaran
      */
     @ColumnInfo("nombreProducto") var nombreProducto: String?,
-
+    /**
+     * Nombre del cliente que se vincula el albaran
+     */
     @ColumnInfo("nombreCliente") var nombreCliente: String?,
-
+    /***
+     * Tipo de albaran que puede ser albaran,presupuesto o pedido.
+     */
     @ColumnInfo("tipoAlbaran") var tipoAlbaran: String?,
     /**
      * Precio que cuesta el producto

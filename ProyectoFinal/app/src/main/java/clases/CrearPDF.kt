@@ -188,7 +188,7 @@ class CrearPDF {
         var numeroDeCuenta = TextPaint()
         numeroDeCuenta.textSize = 15f
         numeroDeCuenta.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD))
-       // canvas.drawText(numeroDeCuentaTexto, 45f, 375f, numeroDeCuenta)
+        canvas.drawText(numeroDeCuentaTexto, 45f, 375f, numeroDeCuenta)
 
 
         //Linea vertical al lado de datos de factura
@@ -282,18 +282,19 @@ class CrearPDF {
         //Aqui cierro el documento
         pdfDocument.finishPage(pagina1)
 
+
         //Aqui es donde se pone el nombre y donde se va a guardar el pdf
-        var file = File(Environment.getExternalStorageDirectory(), numeroFacturaTexto.toString()+"Archivo.pdf")
+        var file = File(Environment.getExternalStorageDirectory(), nombreArchivo+".pdf")
         if (file.exists()) {
             file.delete()
         }
-
-
         //El pdf se va a guardar en descargas
         file = File(
             Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
             nombreArchivo+".pdf"
         )
+
+
 
         try {
             pdfDocument.writeTo(FileOutputStream(file))

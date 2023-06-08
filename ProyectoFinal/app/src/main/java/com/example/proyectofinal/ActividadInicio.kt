@@ -23,7 +23,7 @@ import java.time.LocalDate
 class ActividadInicio : AppCompatActivity() {
 
     /**
-     * Variable para la instancia de la base de datos.
+     * Variable para el binding del layout.
      */
     private lateinit var binding: LayoutInicioBinding
 

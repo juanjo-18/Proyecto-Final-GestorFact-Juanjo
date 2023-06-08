@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 
 /**
  * Esta es la clase que representa la actividad para añadir un nuevo producto.
- *
+ * se encarga de comprobar que los valores esten rellenos y correctos, para despues insertarlos en la base de datos.
  * @author Juanjo Medina
  */
 class ActividadAnadirProducto : AppCompatActivity() {

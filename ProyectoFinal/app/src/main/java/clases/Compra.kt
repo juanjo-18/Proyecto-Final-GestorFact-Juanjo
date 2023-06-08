@@ -7,6 +7,11 @@ import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 import java.time.LocalDate
 
+/**
+ * Esta es la clase compra donde se encuentran los datos que lo componen en la base de datos
+ * Aqui es donde guardaran todas las combras en la base de datos
+ * @author Juanjo medina
+ */
 @Parcelize
 @Entity
 data class Compra(

@@ -23,7 +23,8 @@ import kotlin.collections.ArrayList
 
 /**
  * Esta es la clase que representa la actividad para añadir una nueva venta.
- *
+ * Esta clase se encarga de poder rellenar todos los campos de la venta  y comprobar que los datos esten correctos.
+ * Ademas de guardar la venta en la base de datos.
  * @author Juanjo Medina
  */
 class ActividadAnadirVenta : AppCompatActivity() {

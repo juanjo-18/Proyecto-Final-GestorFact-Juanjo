@@ -23,7 +23,13 @@ import java.text.DecimalFormat
 import kotlin.math.roundToInt
 
 class ActividadInformes : AppCompatActivity() {
+    /**
+     * Variable para el binding del layout.
+     */
     private lateinit var binding: LayoutInformesBinding
+    /**
+     * Variable para la instancia de la base de datos.
+     */
     private lateinit var db: AppDataBase
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +45,8 @@ class ActividadInformes : AppCompatActivity() {
         var totalFacturado=0f
         var totalCobradoFactura=0f
         var totalComprado=0f
+
+
         GlobalScope.launch {
             facturas = db.facturaDAO().getAll() as ArrayList<Factura>
             compras = db.compraDAO().getAll() as ArrayList<Compra>
@@ -65,18 +73,17 @@ class ActividadInformes : AppCompatActivity() {
 
             }
 
-            val totalF = totalFacturado.toString().replace(",", ".").toFloat()
-            val totalC =totalComprado.toString().replace(",", ".").toFloat()
-            val totalCF =totalCobradoFactura.toString().replace(",", ".").toFloat()
             val formato = DecimalFormat("#.##")
+            val totalF = formato.format(totalFacturado.toString().replace(",", ".").toFloat()).toString().replace(",", ".").toFloat()
+            val totalC = formato.format(totalComprado.toString().replace(",", ".").toFloat()).toString().replace(",", ".").toFloat()
+            val totalCF =formato.format(totalCobradoFactura.toString().replace(",", ".").toFloat()).toString().replace(",", ".").toFloat()
 
 
             val puntos =ArrayList<Bar>()
-            graficarBarras(puntos,formato.format(totalF).toFloat(),formato.format(totalC).toFloat())
+            graficarBarras(puntos,totalF,totalC)
 
             val puntos1 =ArrayList<Bar>()
-            graficarBarras1(puntos1,formato.format(totalF).toFloat(),formato.format(totalCF).toFloat())
-
+            graficarBarras1(puntos1,totalF,totalCF)
         }
 
 

@@ -22,7 +22,12 @@ import kotlinx.coroutines.withContext
 import recyclers.anadirProductosVenta.LineaVentaAdapter
 import java.time.LocalDate
 import java.util.*
-
+/**
+ * Esta es la clase que representa la actividad para añadir una nueva compra.
+ * Esta clase se encarga de poder rellenar todos los campos de la compra  y comprobar que los datos esten correctos.
+ * Ademas de guardar la compra en la base de datos.
+ * @author Juanjo Medina
+ */
 class ActividadAnadirCompra : AppCompatActivity() {
     /**
      * Variable para el binding del layout.

@@ -6,6 +6,11 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 
+/**
+ * Esta es la clase compra_producto donde se encuentran los datos que lo componen en la base de datos
+ * Aqui es donde guardaran todos los productos de la compra y el titulo de la compra
+ * @author Juanjo medina
+ */
 @Parcelize
 @Entity
 data class Compra_Producto(
@@ -21,7 +26,6 @@ data class Compra_Producto(
      * Nombre del producto que se añade al compra
      */
     @ColumnInfo("nombreProducto") var nombreProducto: String?,
-
     /**
      * Precio que cuesta el producto
      */
